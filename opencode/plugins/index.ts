@@ -12,8 +12,6 @@ import { CodingStylePlugin } from './coding-style'
 import { TestingPlugin } from './testing'
 import { WorkflowPlugin } from './workflow'
 import { GitWorkflowPlugin } from './git-workflow'
-import { FormattingPlugin } from './formatting'
-import { LintingPlugin } from './linting'
 import { EnvProtectionPlugin } from './env-protection'
 
 export const plugins: Plugin[] = [
@@ -22,7 +20,5 @@ export const plugins: Plugin[] = [
   TestingPlugin,
   WorkflowPlugin,
   GitWorkflowPlugin,
-  FormattingPlugin,
-  LintingPlugin,
   EnvProtectionPlugin,
 ]
