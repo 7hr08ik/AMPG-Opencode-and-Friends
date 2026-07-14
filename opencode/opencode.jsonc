@@ -2,6 +2,12 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   "lsp": true,
+  "permission": {
+    "todowrite": "allow",
+    "lsp": "allow",
+    "skill": "allow",
+    "question": "allow"
+  },
   "instructions": [
     "AGENTS.md",
     "instructions/INSTRUCTIONS.md",

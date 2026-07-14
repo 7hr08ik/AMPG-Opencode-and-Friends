@@ -16,10 +16,10 @@ Before ANY commit:
 
 ## Secret Management
 
-- NEVER hardcode secrets in source code
-- ALWAYS use environment variables or a secret manager
-- Validate that required secrets are present at startup
-- Rotate any secrets that may have been exposed
+- NEVER hardcode secrets in source code.
+- ALWAYS use environment variables or a secret manager.
+- Validate that required secrets are present at startup.
+- Rotate any secrets that may have been exposed and inform the user.
 
 ## Security Response Protocol
 
@@ -35,9 +35,7 @@ If security issue found:
 ## `tool.execute.before` Hooks
 
 - **Secret Pattern Check**: Before writing any file, scan content for leaked secrets (AWS keys, GitHub tokens, private keys, connection strings with passwords). Block the write if detected. Triggers: all write operations
-
 - **Input Validation Guard**: Before processing any user-provided input, verify it passes validation rules. Block tool execution if validation fails. Triggers: all tool executions involving user input
-
 - **Error Leak Prevention**: Before returning error responses, strip any sensitive data (stack traces, internal paths, PII). Triggers: all HTTP/error responses
 
 ## `tool.execute.after` Hooks

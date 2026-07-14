@@ -24,91 +24,43 @@ Rationale: Immutable data prevents hidden side effects, makes debugging easier, 
 - **Return Value Checking**: Always check return values of non-void functions. Validate parameters inside each function. Ignored errors lead to silent failures and hard-to-debug issues.
 - **Static Analysis**: Compile with all warnings enabled. Zero warnings policy. Run static analysis daily. Rewrite confusing code instead of suppressing warnings.
 
-### StackOverflow Comment guildlines
+### StackOverflow Comment guidelines
 
 Comment well, and often. Following these rules:
 
-- Rule 1: Comments should not duplicate the code.
-- Rule 2: Good comments do not excuse unclear code.
-- Rule 3: If you can't write a clear comment, there may be a problem with the code.
-- Rule 4: Comments should dispel confusion, not cause it.
-- Rule 5: Explain unidiomatic code in comments.
-- Rule 6: Provide links to the original source of copied code.
-- Rule 7: Include links to external references where they will be most helpful.
-- Rule 8: Add comments when fixing bugs.
-- Rule 9: Use comments to mark incomplete implementations.
-
-### KISS (Keep It Simple)
-
-- Prefer the simplest solution that actually works
-- Avoid premature optimization
-- Optimize for clarity over cleverness
-
-### DRY (Don't Repeat Yourself)
-
-- Extract repeated logic into shared functions or utilities
-- Avoid copy-paste implementation drift
-- Introduce abstractions when repetition is real, not speculative
-
-### YAGNI (You Aren't Gonna Need It)
-
-- Do not build features or abstractions before they are needed
-- Avoid speculative generality
-- Start simple, then refactor when the pressure is real
+- Comments should not duplicate the code. Good comments do not excuse unclear code.
+- Comments should dispel confusion, not cause it. Explain unidiomatic code in comments.
+- Provide links to the original code and external references.
+- Add comments when fixing bugs.
+- Use comments to mark incomplete implementations.
 
 ## File Organization
 
 MANY SMALL FILES > FEW LARGE FILES:
-- High cohesion, low coupling
-- Extract utilities from large modules
-- Organize by feature/domain, not by type
+- High cohesion, low coupling.
+- Extract utilities from large modules.
+- Organize by feature/domain, not by type.
 
 ## Error Handling
 
 ALWAYS handle errors comprehensively:
-- Handle errors explicitly at every level
-- Provide user-friendly error messages in UI-facing code
-- Log detailed error context on the server side
-- Never silently swallow errors
-
-## Input Validation
-
-ALWAYS validate at system boundaries:
-- Validate all user input before processing
-- Use schema-based validation where available
-- Fail fast with clear error messages
-- Never trust external data (API responses, user input, file content)
-
-## Naming Conventions
-
-- Variables and functions: `camelCase` with descriptive names
-- Booleans: prefer `is`, `has`, `should`, or `can` prefixes
-- Interfaces, types, and components: `PascalCase`
-- Constants: `UPPER_SNAKE_CASE`
-- Custom hooks: `camelCase` with a `use` prefix
-
-## Code Smells to Avoid
-
-- **Deep Nesting**: Prefer early returns over nested conditionals once the logic starts stacking.
-- **Magic Numbers**: Use named constants for meaningful thresholds, delays, and limits.
-- **Long Functions**: Split large functions into focused pieces with clear responsibilities.
+- Handle errors explicitly at every level.
+- Provide user-friendly error messages in UI-facing code.
+- Log detailed error context on the server side.
+- Never silently swallow errors.
 
 ## Code Quality Checklist
 
 Before marking work complete:
-- [ ] Code is readable and well-named
-- [ ] Functions are small (<=60 lines)
-- [ ] Files are focused
-- [ ] No deep nesting (>4 levels)
-- [ ] Proper error handling
-- [ ] No hardcoded secrets (use environment variables)
-- [ ] No mutation (immutable patterns used)
-- [ ] All loops have fixed upper-bound
-- [ ] Functions have >=2 assertions
-- [ ] Return values are checked
-- [ ] Variables declared at smallest scope
-
----
+- [ ] Code is readable and well-named.
+- [ ] Functions are small (<=60 lines).
+- [ ] Files are focused.
+- [ ] No deep nesting (>4 levels).
+- [ ] Proper error handling.
+- [ ] All loops have fixed upper-bound.
+- [ ] Functions have >=2 assertions.
+- [ ] Return values are checked.
+- [ ] Variables declared at smallest scope.
 
 # Coding Style Hooks
 

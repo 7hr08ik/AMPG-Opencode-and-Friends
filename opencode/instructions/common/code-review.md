@@ -22,10 +22,6 @@ Before requesting review, ensure:
 - Merge conflicts are resolved
 - Branch is up to date with target branch
 
-## Review Checklist
-
-Before marking code complete, see [coding-style.md](instructions/common/coding-style.md) for the full quality checklist.
-
 ## Security Review Triggers
 
 **STOP and use `security-reviewer` agent when:**
@@ -49,14 +45,12 @@ Before marking code complete, see [coding-style.md](instructions/common/coding-s
 
 ## Review Workflow
 
-```
 1. Run git diff to understand changes
 2. Check security checklist first
 3. Review code quality checklist
 4. Run relevant tests
-5. Verify test coverage meets requirements (see [testing.md](instructions/common/testing.md))
+5. Verify test coverage meets [# Testing Requirements](instructions/common/testing.md)
 6. Use appropriate agent for detailed review
-```
 
 ## Common Issues to Catch
 

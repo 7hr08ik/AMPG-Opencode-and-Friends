@@ -15,7 +15,6 @@ Note: AI Generated Commit
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci, build, style
 
-- No emojis or Em Dash (—) in code, comments, or documentation.
 - Always add `Note: AI Generated Commit`
 
 ## Pull Request Workflow
@@ -32,5 +31,4 @@ When creating PRs:
 ## `session.idle` Hooks
 
 - **Commit Convention Check**: Before any commit, verify conventional commit format (`feat:`, `fix:`, `docs:`). Log warnings if format violated. Triggers: all git commit operations
-
 - **Secret in Commit Scan**: Before any commit, scan staged files for secrets. Block commit if secrets detected. Triggers: all git commit operations
