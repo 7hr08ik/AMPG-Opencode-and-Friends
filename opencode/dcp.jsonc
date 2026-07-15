@@ -17,6 +17,8 @@
 		// Additional tools to protect from pruning via commands (e.g., /dcp sweep)
 		"protectedTools": [
 			"compress",
+			"todowrite",
+			"todoread",
 			"background_output"
 		]
 	},
@@ -140,6 +142,8 @@
 			// Additional tools to protect from pruning
 			"protectedTools": [
 				"compress",
+				"todowrite",
+				"todoread",
 				"background_output"
 			]
 		},
@@ -149,7 +153,12 @@
 			// Number of turns before errored tool inputs are pruned
 			"turns": 4,
 			// Additional tools to protect from pruning
-			"protectedTools": []
+			"protectedTools": [
+				"compress",
+				"todowrite",
+				"todoread",
+				"background_output"
+			]
 		}
 	}
 }
