@@ -18,6 +18,7 @@
     "opencode-tps-meter@latest",
     "@tarquinen/opencode-dcp@latest",
     "opencode-ignore",
+    "@mohak34/opencode-notifier@latest",
     "true-mem"
   ],
   "provider": {
@@ -31,7 +32,7 @@
         "Ornith-1.0-35B": {
           "name": "[Coding]_Ornith-1.0",
           "limit": {
-            "context": 131072,
+            "context": 262144,
             "output": 32768
           },
           "options": {
@@ -47,7 +48,7 @@
         "Qwen3.6-35B-A3B": {
           "name": "[Thinking]_Qwen3.6:35B-A3B",
           "limit": {
-            "context": 131072,
+            "context": 262144,
             "output": 32768
           },
           "options": {
