@@ -4,7 +4,7 @@
 
 This config is made for 1 GPU, on 1 PC, with 1 moron hammering at the keyboard.
 
-## Preamble
+## 1. Preamble
 
  - This is made by me, for me, because of me. 
  - I am fully AMD, and Linux (Arch/Manjaro btw!).
@@ -22,7 +22,7 @@ This repo is my personal setup, filled with everything I am using. I have turned
 
 Help is always appreciated. If i've done something wrong, please tell me so I can fix it.
 
-## About
+## 2. About
 Merged various sources of .md files:
 
 Incorporates:
@@ -34,10 +34,11 @@ Incorporates:
     - Merged into INSTRUCTIONS.md
   - [Stackoverflow commenting guidelines](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/)
     - Merged into INSTRUCTIONS.md
-  - [Parts of Everything Claude Code](https://github.com/affaan-m/ECC)
+  - Parts of [Everything Claude Code](https://github.com/affaan-m/ECC)
     - Some Agents, Skills, Commands
-    - *Plugin hooks:* Used [Opencode](https://opencode.ai/)/[Ornith-1.0](https://huggingface.co/collections/deepreinforce-ai/ornith-10) to help me convert them into Opencode compatible .ts plugins.
-    - *Rules:* Common used in main config. Other used as basis for language templates.
+    - *Plugin hooks:* Converted them into Opencode compatible .ts plugins.
+    - *Rules:* Common used in main config. 
+    - *Template Rules* Individual per language/environment project level templates.
 
 My theory is 3 main files:
   - AGENTS.md - Who are you, what do you do.
@@ -52,7 +53,7 @@ A collection of language specific rules, for use at the project level. Taken dir
   - Templates/`environment`/.opencode/[agents/commands/rules/skills]
 > Project level folders are hidden `/.opencode/` not `/opencode/`. Remember to `Show Hidden Files`
 
-## Features
+## 3. Features
 
   - **[Open Agent Control](https://github.com/darrenhinde/OpenAgentsControl)** - Main Agent Harness/Workflow/Architect.
   - **[Dynamic Context Pruning](https://github.com/Opencode-DCP/opencode-dynamic-context-pruning)** - Prunes context ... Dynamically.
@@ -65,9 +66,9 @@ A collection of language specific rules, for use at the project level. Taken dir
   (Yes I know about opencode-mem. But it keeps giving me problems, not starting, corrupting etc.)
   - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** Search Github repos
 
-## Installation
+## 4. Installation
 
-### Requirements
+### 4.1. Requirements
 
 1. API access to some sort of AI model.
     - Locally:
@@ -83,46 +84,46 @@ A collection of language specific rules, for use at the project level. Taken dir
 3. Run opencode
 
 5. Install plugins (Below)
+
 6. Copy my files into ~/.config/opencode
   Overwriting everything.
+  
 7. Login to Providers
 
-### 1. Install Opencode
+### 4.2. Install Opencode
 
 ```bash
 curl -fsSL https://opencode.ai/install | bash
 ```
 
-### 2. Plugins
+### 4.3. Plugins
 
-#### Manual Installs
+#### 4.3.1. Manual Installs
 ```bash
 # Codegraph
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 # Context7
 npx ctx7 setup --opencode
 # OpenAgentControl
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
-# Dynamic Context Pruning
-opencode plug -g -f @tarquinen/opencode-dcp@latest
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer --install-dir ~/.config/opencode
 # MarkItDown
 pip install 'markitdown[all]'
 pip install markitdown-mcp
 ```
 The other features, are automatically installed at runtime, thanks to Opencode plugins features.
 
-### 3. Copy over the Opencode setup
+### 4.4. Copy over the Opencode setup
 
   - Download this repo.
   - Copy/paste the `Opencode` folder contents into `~/.config/opencode`.
   - Overwrite everything when asked.
   - Enjoy your new Opencode setup.
 
-## Usage
+## 5. Usage
 
 [Here](Project_Timeline.md)
 
-## Updating
+## 6. Updating
 
 Most updates occur automatically:
   - Opencode autoupdate activated in config
@@ -137,7 +138,13 @@ curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/
 codegraph upgrade
 ```
 
-## Notes / Fixes / Workarounds
+## 7. Recommended Additions
+
+Opencode-RAG
+spec-kit
+
+
+## 8. Notes / Fixes / Workarounds
 **ALT + Enter** = Next Line, not send
 
 **Full Reset:** Delete all files. Start again from scratch

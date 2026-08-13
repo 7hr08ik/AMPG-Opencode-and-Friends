@@ -47,7 +47,7 @@ lemonade config set auto_evict true
 lemonade config set auto_evict_threshold_pct 1
 lemonade config set ctx_size 132000
 lemonade config set global_timeout=1800
-lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on --parallel 1 -b 2048 -ub 512 --mlock --reasoning-budget 8192 --reasoning-budget-message 'I have reached my reasoning budget. I should now provide my best complete answer using the reasoning already performed.'"
+lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on --parallel 1 -b 2048 -ub 512 --reasoning-budget 8192 --reasoning-budget-message 'I have reached my reasoning budget. I should now provide my best complete answer using the reasoning already performed.'"
 ```
 
 ## Desktop UI Config
@@ -69,7 +69,3 @@ Thinking/Reasoning:
 VSCode Completion:
  - [Qwopus3.5-9B-Coder-MTP](https://huggingface.co/Jackrong/Qwopus3.5-9B-Coder-MTP-GGUF)
     - (Q8_0)
-
-General Tasks/Odysseus:
- - [Gemma-4-26B-A4B-it-MTP-GGUF](https://huggingface.co/unsloth/gemma-4-26B-A4B-it-GGUF)
-    - Built in option from Lemonade is Q4_0
