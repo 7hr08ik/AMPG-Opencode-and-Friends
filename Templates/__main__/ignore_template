@@ -1,0 +1,16 @@
+# Block specific directory
+/secrets/**
+
+# Block all certificate files
+*.crt
+*.key
+*.pem
+
+# Block environment files
+.env*
+
+# Allow exception with negation
+!config.local.json
+
+# Personal Notes
+Project_notes.txt

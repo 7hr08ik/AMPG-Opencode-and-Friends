@@ -1,15 +1,58 @@
-# AGENTS.md - OpenCode Ruby Template
+# AGENTS.md
 
-## Who you are
-You are OpenCode configured with the **Ruby** template for projects using Ruby.
 
-## Rules
-Language-specific rules are loaded from `.opencode/rules/ruby/`.
-Common rules from the global installation provide additional cross-cutting checks.
 
-## Required Tooling
+## Product/Feature Name
+Project name: <name-me>
 
-OpenCode runs auto-formatting and linting hooks after every file edit. These tools must be installed for the hooks to work. Run the **Verify** command for each tool -- if it prints a path or version, it is installed. If it prints nothing or an error, run the **Install** command.
+
+### Architecture
+```
+Project_Folder/
+├── .opencode/              # Project level configs and extra files for opencode.
+├── openspec/               # Config files for OpenSpec
+├── Project_notes.txt       # User notes, etc
+├── .env                    # Environment variables. Keys etc. -- Make sure its ignored where necessary
+├── .gitignore              # The git ignore file
+├── .ignore                 # For opencode-ignore plugin
+├── AGENTS.md               # Basic template. Complete form, then run /init
+└── opencode.jsonc          # Required for loading additional tools
+```
+
+---
+
+## **Objective**
+
+## **Success metrics**
+| **Goal** | **Metric** |
+| --- | --- |
+|  |  |
+|  |  |
+
+## **Assumptions**
+
+## **Milestones**
+
+## **Requirements**
+| **Requirement** | **User Story** | **Importance** | **Jira Issue** | **Notes** |
+| --- | --- | --- | --- | --- |
+|  |  | **HIGH** |  |  |
+|  |  |  |  |  |
+
+## **User interaction and design**
+
+## **Open Questions**
+| **Question** | **Answer** | **Date Answered** |
+| --- | --- | --- |
+|  |  |  |
+
+## **Out of Scope**
+
+- 
+
+## **Reference materials**
+
+---
 
 ### Formatter / Linter: `rubocop` (Ruby)
 

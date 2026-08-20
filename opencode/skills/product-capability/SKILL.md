@@ -104,7 +104,7 @@ If useful, point to the next ECC-native lane:
 - `workspace-surface-audit`
 - `api-connector-builder`
 - `dashboard-builder`
-- `tdd-workflow`
+- `tdd` skill
 - `verification-loop`
 
 ## Output Format

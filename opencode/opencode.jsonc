@@ -16,9 +16,10 @@
   ],
   "plugin": [
     "opencode-tps-meter@latest",
-    "@tarquinen/opencode-dcp@latest",
+    "opencode-acp@stable",
     "opencode-ignore",
     "@mohak34/opencode-notifier@latest",
+    "superpowers@git+https://github.com/obra/superpowers.git",
     "true-mem"
   ],
   "provider": {
@@ -32,7 +33,7 @@
         "Ornith-1.0-35B": {
           "name": "[Coding]_Ornith-1.0",
           "limit": {
-            "context": 262144,
+            "context": 260000,
             "output": 32768
           },
           "options": {
@@ -48,7 +49,7 @@
         "Qwen3.6-35B-A3B": {
           "name": "[Thinking]_Qwen3.6:35B-A3B",
           "limit": {
-            "context": 262144,
+            "context": 260000,
             "output": 32768
           },
           "options": {
@@ -101,7 +102,7 @@
         "Qwopus3.5-9B-Coder-MTP": {
           "name": "[Multi]_Qwopus3.5:9B",
           "limit": {
-            "context": 131072,
+            "context": 130000,
             "output": 16384
           },
           "options": {
@@ -154,7 +155,7 @@
         "Gemma-4-26B-A4B-it-MTP-GGUF": {
           "name": "[General]_Gemma4:26B-A4B",
           "limit": {
-            "context": 131072,
+            "context": 130000,
             "output": 32768
           },
           "options": {
@@ -171,7 +172,7 @@
     },
   },
   "compaction": {
-    "auto": true,
+    "auto": false,
     "prune": true,
     "reserved": 10000
   },

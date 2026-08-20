@@ -18,3 +18,16 @@ These laws are **immutable** and **must** be followed!
 ## Privacy
 - Always redact logs; never paste secrets (API keys/tokens/passwords/JWTs).
 - Review output before sharing - remove any sensitive data.
+
+## Loop Prevention
+
+Never perform the same action twice unless new information has appeared.
+
+Examples:
+
+- Do not read the same file repeatedly.
+- Do not update the same TODO list repeatedly.
+- Do not rerun identical verification commands.
+- Do not repeatedly announce that the task is complete.
+
+If you notice you are repeating previous actions, stop immediately and return control to the user.

@@ -1,7 +1,116 @@
-# AGENTS.md - Java Chess
+# AGENTS.md
 
-## Who you are
-You are OpenCode configured with the **Java** template for projects using Java.
+
+
+## Product/Feature Name
+Project name: <name-me>
+
+
+### Architecture
+```
+Project_Folder/
+├── .opencode/              # Project level configs and extra files for opencode.
+├── openspec/               # Config files for OpenSpec
+├── Project_notes.txt       # User notes, etc
+├── .env                    # Environment variables. Keys etc. -- Make sure its ignored where necessary
+├── .gitignore              # The git ignore file
+├── .ignore                 # For opencode-ignore plugin
+├── AGENTS.md               # Basic template. Complete form, then run /init
+└── opencode.jsonc          # Required for loading additional tools
+```
+
+---
+
+## **Objective**
+
+## **Success metrics**
+| **Goal** | **Metric** |
+| --- | --- |
+|  |  |
+|  |  |
+
+## **Assumptions**
+
+## **Milestones**
+
+## **Requirements**
+| **Requirement** | **User Story** | **Importance** | **Jira Issue** | **Notes** |
+| --- | --- | --- | --- | --- |
+|  |  | **HIGH** |  |  |
+|  |  |  |  |  |
+
+## **User interaction and design**
+
+## **Open Questions**
+| **Question** | **Answer** | **Date Answered** |
+| --- | --- | --- |
+|  |  |  |
+
+## **Out of Scope**
+
+- 
+
+## **Reference materials**
+
+---
+
+## Product/Feature Name
+Project name: <name-me>
+
+
+### Architecture
+```
+Project_Folder/
+├── __The Project__ (Rename)                    #   Placeholder. The user will rename, and place their main project folder in here. This will be the working folder that contains the active project.
+├── .opencode/                  # Project level configs and extra files for opencode.
+├── Context/                    # Information pertinent to the current project.
+│   ├── about-me.md                 # Simple files explaining me, and my requirements/style etc.
+│   ├── the-customer.md                 # Details about the customer hiring you for the work.
+│   └── the-user.md                 # Details about the intended userbase of the program/feature.
+├── Project_Docs/                   # Mostly human centric files. User notes, etc
+├── Scripted_Tools/                 # Just somewhere to keep any repeated scripts/tools used in the project
+├── .env                    # Environment variables. Keys etc. -- Make sure its ignored where necessary
+├── .gitignore                 # Preset
+├── .ignore                 # Preset (for opencode-ignore plugin)
+├── AGENTS.md                   # Default preset. Designed to be filled out, before running /init
+├── TOOLS.md                    # Details of connected apps, sessions, outside programs.
+└── opencode.jsonc                  # Basic opencode config files, required for loading additional tools
+```
+
+---
+
+## **Objective**
+
+## **Success metrics**
+| **Goal** | **Metric** |
+| --- | --- |
+|  |  |
+|  |  |
+
+## **Assumptions**
+
+## **Milestones**
+
+## **Requirements**
+| **Requirement** | **User Story** | **Importance** | **Jira Issue** | **Notes** |
+| --- | --- | --- | --- | --- |
+|  |  | **HIGH** |  |  |
+|  |  |  |  |  |
+
+## **User interaction and design**
+
+## **Open Questions**
+| **Question** | **Answer** | **Date Answered** |
+| --- | --- | --- |
+|  |  |  |
+
+## **Out of Scope**
+
+- 
+
+## **Reference materials**
+
+---
 
 ## Language-specific Agents
 In addition to all common agents, this template provides:

@@ -1,12 +1,58 @@
-# AGENTS.md - OpenCode React Template
+# AGENTS.md
 
-## Who you are
-You are OpenCode configured with the **React** template for projects using React.
 
-## Language-specific Agents
-In addition to all common agents, this template provides:
-- react-reviewer — React/JSX review
-- react-build-resolver — React build failures
+
+## Product/Feature Name
+Project name: <name-me>
+
+
+### Architecture
+```
+Project_Folder/
+├── .opencode/              # Project level configs and extra files for opencode.
+├── openspec/               # Config files for OpenSpec
+├── Project_notes.txt       # User notes, etc
+├── .env                    # Environment variables. Keys etc. -- Make sure its ignored where necessary
+├── .gitignore              # The git ignore file
+├── .ignore                 # For opencode-ignore plugin
+├── AGENTS.md               # Basic template. Complete form, then run /init
+└── opencode.jsonc          # Required for loading additional tools
+```
+
+---
+
+## **Objective**
+
+## **Success metrics**
+| **Goal** | **Metric** |
+| --- | --- |
+|  |  |
+|  |  |
+
+## **Assumptions**
+
+## **Milestones**
+
+## **Requirements**
+| **Requirement** | **User Story** | **Importance** | **Jira Issue** | **Notes** |
+| --- | --- | --- | --- | --- |
+|  |  | **HIGH** |  |  |
+|  |  |  |  |  |
+
+## **User interaction and design**
+
+## **Open Questions**
+| **Question** | **Answer** | **Date Answered** |
+| --- | --- | --- |
+|  |  |  |
+
+## **Out of Scope**
+
+- 
+
+## **Reference materials**
+
+---
 
 ## Language-specific Skills
 In addition to all common skills, this template provides:

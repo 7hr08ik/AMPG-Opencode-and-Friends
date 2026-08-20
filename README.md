@@ -39,9 +39,18 @@ Incorporates:
     - *Plugin hooks:* Converted them into Opencode compatible .ts plugins.
     - *Rules:* Common used in main config. 
     - *Template Rules* Individual per language/environment project level templates.
+  - [OpenSpec Driven Development](https://intent-driven.dev/blog/2026/05/10/spec-driven-development-openspec-opencode/)
+  - [Intent Driven Template](https://github.com/intent-driven-dev/intent-driven-template)
+
+Included skills:
+  - [Matt Pococks Skills](https://github.com/mattpocock/skills)
+    - grill-me
+    - handoff
+    - diagnosing-bugs
+    - tdd
+    - teach
 
 My theory is 3 main files:
-  - AGENTS.md - Who are you, what do you do.
   - INSTRUCTIONS.md - Operational Instructions.
   - LAWS.md - Immutable laws.
 
@@ -65,6 +74,9 @@ A collection of language specific rules, for use at the project level. Taken dir
   - **[true-mem](https://github.com/rizal72/true-mem)** - Opencode, Local first, long term memory. 
   (Yes I know about opencode-mem. But it keeps giving me problems, not starting, corrupting etc.)
   - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** Search Github repos
+  - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** A lightweight framework for Spec Driven Development
+
+
 
 ## 4. Installation
 
@@ -96,32 +108,36 @@ A collection of language specific rules, for use at the project level. Taken dir
 curl -fsSL https://opencode.ai/install | bash
 ```
 
-### 4.3. Plugins
+### 4.3. Copy over the Opencode setup
 
-#### 4.3.1. Manual Installs
+  - Download this repo.
+  - Copy/paste the `Opencode` folder contents into `~/.config/opencode`.
+  - Overwrite everything when asked.
+
+### 4.4. Plugins
+
+Most features are automatically installed at runtime, thanks to Opencode plugins features.
+
+The following are required to be installed manually:
 ```bash
 # Codegraph
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 # Context7
 npx ctx7 setup --opencode
 # OpenAgentControl
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer --install-dir ~/.config/opencode
+# Keep this at default install location. Otherwise makes the ~/.config/opencode folder messy
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
 # MarkItDown
 pip install 'markitdown[all]'
 pip install markitdown-mcp
+# OpenSpec
+npm install -g @fission-ai/openspec@latest
 ```
-The other features, are automatically installed at runtime, thanks to Opencode plugins features.
-
-### 4.4. Copy over the Opencode setup
-
-  - Download this repo.
-  - Copy/paste the `Opencode` folder contents into `~/.config/opencode`.
-  - Overwrite everything when asked.
-  - Enjoy your new Opencode setup.
 
 ## 5. Usage
 
-[Here](Project_Timeline.md)
+[Quickstart Guide](Quick-Start.md)
+[Full Spec Driven Dev Walkthrough](SDD_Workflow.md)
 
 ## 6. Updating
 
@@ -138,18 +154,13 @@ curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/
 codegraph upgrade
 ```
 
-## 7. Recommended Additions
+## 7. Notes / Fixes / Workarounds
 
-Opencode-RAG
-spec-kit
-
-
-## 8. Notes / Fixes / Workarounds
 **ALT + Enter** = Next Line, not send
 
 **Full Reset:** Delete all files. Start again from scratch
 ```bash
-rm -rf ~/.config/opencode ~/.cache/opencode ~/.opencode
+rm -rf ~/.config/opencode ~/.cache/opencode ~/.opencode ~/.local/share/opencode/
 ```
 Then re-install everything
 
