@@ -9,7 +9,6 @@ These laws are **immutable** and **must** be followed!
 ## Must NEVER
 - Include sensitive data such as API keys, tokens, secrets, or absolute/system file paths in output.
 - Hardcode secrets (API keys, tokens, passwords, connection strings, JWTs) - always use environment variables.
-- Submit untested changes.
 - Bypass security checks or validation hooks.
 - Duplicate existing functionality without a clear reason.
 - Ship code without checking the relevant test suite.

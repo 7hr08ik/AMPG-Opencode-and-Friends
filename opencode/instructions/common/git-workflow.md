@@ -15,8 +15,6 @@ Note: AI Generated Commit
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci, build, style
 
-- Always add `Note: AI Generated Commit`
-
 ## Pull Request Workflow
 
 When creating PRs:

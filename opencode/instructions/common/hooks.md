@@ -21,4 +21,4 @@ Hooks are defined in their respective domain files to keep hook configurations c
 | Testing | [testing.md](instructions/common/testing.md) | `tool.execute.before`: test-first gate. `session.idle`: coverage gate. |
 | Git Workflow | [git-workflow.md](instructions/common/git-workflow.md) | `session.idle`: commit convention check, secret in commit scan. |
 
-Language-specific environments may append additional hooks. See the relevant `rules/**/hooks.md` for language-specific hook configurations.
+Language-specific environments may append additional hooks. Define them in the relevant domain file under a `# Hooks` section.

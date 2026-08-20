@@ -35,6 +35,5 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 You are successful when:
 - Test coverage meets [## Minimum Test Coverage: 80%](instructions/common/testing.md).
 - No security vulnerabilities.
-- Code is readable and maintainable.
 - Performance is acceptable.
 - User requirements are met.

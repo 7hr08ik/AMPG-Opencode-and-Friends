@@ -16,11 +16,11 @@ Rationale: Immutable data prevents hidden side effects, makes debugging easier, 
 
 ### NASA Coding Rules (The Power of Ten)
 
-- **Loop Bounds**: All loops must have a fixed upper-bound that can be statically proven. Unbounded loops can cause runaway code and make verification impossible.
+- **Loop Bounds**: Prefer bounded loops. Unbounded loops must have an explicit termination condition.
 - **Bounded Memory**: Avoid unbounded heap growth. Set limits on data structures that grow during execution. Use bounded collections, streaming processing, or explicit cleanup for long-running operations.
 - **Function Size**: No function should exceed 60 lines (one page). Each function should be a logical unit understandable and verifiable as a unit.
-- **Assertion Density**: Minimum 2 assertions per function. Assertions should be side-effect free Boolean tests with recovery actions. Use assertions to verify pre-conditions, post-conditions, and invariants.
-- **Variable Scope**: Declare variables at the smallest possible scope. Smaller scope makes code easier to reason about and less prone to corruption.
+- **Assertion Density**: Use assertions to verify pre-conditions, post-conditions, and invariants where idiomatic.
+- **Variable Scope**: Prefer narrow variable scope where it improves readability.
 - **Return Value Checking**: Always check return values of non-void functions. Validate parameters inside each function. Ignored errors lead to silent failures and hard-to-debug issues.
 - **Static Analysis**: Compile with all warnings enabled. Zero warnings policy. Run static analysis daily. Rewrite confusing code instead of suppressing warnings.
 
@@ -57,10 +57,9 @@ Before marking work complete:
 - [ ] Files are focused.
 - [ ] No deep nesting (>4 levels).
 - [ ] Proper error handling.
-- [ ] All loops have fixed upper-bound.
-- [ ] Functions have >=2 assertions.
+- [ ] Loops are bounded or have explicit termination.
 - [ ] Return values are checked.
-- [ ] Variables declared at smallest scope.
+- [ ] Variables use narrow scope where it helps readability.
 
 # Coding Style Hooks
 
