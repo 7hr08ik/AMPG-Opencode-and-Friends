@@ -40,17 +40,21 @@ When you know what you want to build and just need to execute:
 
 ## Building - Workflow
 
-1. Have idea! Go! Think now!
+[KISS](Keep It Simple Stupid)
+    Small itterative changes. No building a new DLC in 1 prompt.
+
+- Have idea! Go! Think now!
     - Just jot things down in notepad
     - Refine the idea (Optional)
         - `/idea-refine` - Make AI figure shit out first. 
         - Debate the pro's and con's of the idea/project/feature
 
-2. Explore idea properly
-    - Be in project `main` to begin
+- New branch
+        
+- Explore idea properly
     - /opsx-explore "your idea"
 
-3. Build the spec
+- Build the spec
     - /opsx-propose "your idea"
     - Go more granular if you want:
         - /opsx:new                        # scaffold only
@@ -59,15 +63,20 @@ When you know what you want to build and just need to execute:
         - /opsx:update add-dark-mode - we're storing the theme in a cookie now
         - /opsx:sync                       # Merge changes to main specs
 
-4. Apply changes - Build the thing
-    - Be in `main`
+- Apply tasks - Build the thing
     - /opsx:apply <name>                   # (Optional) Set <name> for individual tasks
+
+- Checks - Tests 
+
+    - /code-review
+    - Language Specific Review/Testing
+    - /optimize
     - /opsx:verify                         # Check its correct
 
-5. Testing?
-
-6. Done.
-    - git merge - before archive
+- git
+    - Commit/Push/PR
+    
+- Done.
     - /opsx:archive                        # Move to archive when done
 
 

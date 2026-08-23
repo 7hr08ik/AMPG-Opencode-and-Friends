@@ -49,6 +49,7 @@ Included skills:
     - diagnosing-bugs
     - tdd
     - teach
+  - The Unslop skill from Cursor - https://www.skills.sh/cursor/plugins/unslop
 
 My theory is 3 main files:
   - INSTRUCTIONS.md - Operational Instructions.
@@ -76,34 +77,27 @@ A collection of language specific rules, for use at the project level. Taken dir
   - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** Search Github repos
   - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** A lightweight framework for Spec Driven Development
 
-
-
 ## 4. Installation
 
 ### 4.1. Requirements
 
-1. API access to some sort of AI model.
-    - Locally:
-      - [Lemonade Server](https://lemonade-server.ai/)
-      - [Ollama](https://ollama.com/)
-      - [vLLM](https://docs.vllm.ai/en/stable/)
-    - Cloud
+API access to some sort of AI model.
+- Locally:
+  - [Lemonade Server](https://lemonade-server.ai/)
+  - [Ollama](https://ollama.com/)
+  - [vLLM](https://docs.vllm.ai/en/stable/)
+- Cloud
 
-2. Installed on the system
-    - OpenCode
-    - Bun
-
-3. Run opencode
-
-5. Install plugins (Below)
-
-6. Copy my files into ~/.config/opencode
-  Overwriting everything.
-  
-7. Login to Providers
+Installed on the system:
+- Bun
+- pip
+- npm
 
 ### 4.2. Install Opencode
 
+[OpenCode Docs](https://opencode.ai/docs/)
+
+Install with
 ```bash
 curl -fsSL https://opencode.ai/install | bash
 ```
@@ -120,6 +114,8 @@ Most features are automatically installed at runtime, thanks to Opencode plugins
 
 The following are required to be installed manually:
 ```bash
+# TPS Meter
+npx @guard22/opencode-tps-meter install
 # Codegraph
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 # Context7

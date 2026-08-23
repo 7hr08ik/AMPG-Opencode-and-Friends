@@ -15,12 +15,11 @@
     "instructions/common/*.md"
   ],
   "plugin": [
-    "opencode-tps-meter@latest",
     "opencode-acp@stable",
     "opencode-ignore",
     "@mohak34/opencode-notifier@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",
-    "true-mem"
+    "opencode-mem"
   ],
   "provider": {
     "local": {

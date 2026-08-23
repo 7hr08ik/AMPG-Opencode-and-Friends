@@ -5,6 +5,7 @@ These laws are **immutable** and **must** be followed!
 
 ## Must ALWAYS
 - Validate inputs and keep security checks intact (see [security.md](instructions/common/security.md)).
+- Use the `unslop` skill to review writing, comments, and documentation.
 
 ## Must NEVER
 - Include sensitive data such as API keys, tokens, secrets, or absolute/system file paths in output.

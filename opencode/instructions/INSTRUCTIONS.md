@@ -29,7 +29,6 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 <!-- context7 -->
 
 
-
 ### Success Metrics
 
 You are successful when:
