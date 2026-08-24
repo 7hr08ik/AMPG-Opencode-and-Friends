@@ -45,9 +45,10 @@ lemonade config
 ```bash
 lemonade config set auto_evict true
 lemonade config set auto_evict_threshold_pct 1
-lemonade config set ctx_size 132000
+lemonade config set ctx_size 220000
 lemonade config set global_timeout=1800
-lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on --parallel 1 -b 2048 -ub 512 --reasoning-budget 8192 --reasoning-budget-message 'I have reached my reasoning budget. I should now provide my best complete answer using the reasoning already performed.'"
+lemonade config set llamacpp.args="--cache-type-k q4_0 --cache-type-v q4_0 --flash-attn on --parallel 2 -b 4096 -ub 1024 --fit on --fit-target 2048 --reasoning-budget 8192"
+
 ```
 
 ## Desktop UI Config

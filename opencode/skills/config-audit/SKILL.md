@@ -1,6 +1,8 @@
 ---
 name: config-audit
 description: This skill should be used when the user wants to audit, optimize, or trim their OpenCode config files. It performs cross-file consistency checks, redundancy detection, contradiction analysis, quality scoring, and proposes consolidations across all config surfaces. Run periodically (e.g., monthly) to prevent config drift.
+
+Updated with instructions spread across multiple files. Aimed at improving support, accuracy and performance of locally hosted smaller (27B - 36BMoE) AI coding agents.
 ---
 
 # Config Auditor
@@ -8,6 +10,9 @@ description: This skill should be used when the user wants to audit, optimize, o
 Audit, optimize, and trim OpenCode global configuration surfaces:
 - **Global Config**: `~/.config/opencode/`
 - **Config files**: Only `AGENTS.md`, `instructions/INSTRUCTIONS.md`, `instructions/LAWS.md`,`instructions/common/*.md`
+
+Improve performance and accuracy in locally hosted LLMs used as AI coding agents in Opencode.
+Minimize the instructions without losing scope.
 
 ## Writing Effective Instructions
 
