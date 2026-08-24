@@ -2,8 +2,6 @@
 
 This document dictates a set of operational instructions.
 
-## Operating Principles
-
 <!-- CODEGRAPH_START -->
 ## CodeGraph
 
@@ -28,11 +26,14 @@ Do not use for: refactoring, writing scripts from scratch, debugging business lo
 4. Answer using the fetched docs
 <!-- context7 -->
 
-
 ### Success Metrics
 
-You are successful when:
-- Test coverage meets [## Minimum Test Coverage: 80%](instructions/common/testing.md).
-- No security vulnerabilities.
-- Performance is acceptable.
-- User requirements are met.
+Before reporting completion. You are successful when:
+- Confirm the requested behavior is implemented.
+- Confirm tests and relevant verification pass.
+- Test coverage meets minimum 80% coverage as per [testing.md](common/testing.md).
+- Review the diff for unnecessary changes.
+- Remove artifacts introduced by your own changes.
+- Check for accidental formatting or unrelated edits.
+- Confirm the implementation follows project conventions.
+- Consider whether the solution can be simplified without losing correctness.

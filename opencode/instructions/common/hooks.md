@@ -16,9 +16,9 @@ Hooks are defined in their respective domain files to keep hook configurations c
 
 | Domain | File | Hook Types |
 |--------|------|------------|
-| Security | [security.md](instructions/common/security.md) | `tool.execute.before`: secret pattern check, input validation, error leak prevention. `tool.execute.after`: secret scan. `session.idle`: security audit. |
-| Coding Style | [coding-style.md](instructions/common/coding-style.md) | `tool.execute.after`: immutability, nesting depth, file size, function size enforcers. `session.idle`: code quality audit. |
-| Testing | [testing.md](instructions/common/testing.md) | `tool.execute.before`: test-first gate. `session.idle`: coverage gate. |
-| Git Workflow | [git-workflow.md](instructions/common/git-workflow.md) | `session.idle`: commit convention check, secret in commit scan. |
+| Security | [security.md](security.md) | `tool.execute.before`: secret pattern check, input validation, error leak prevention. `tool.execute.after`: secret scan. `session.idle`: security audit. |
+| Coding Style | [coding-style.md](coding-style.md) | `tool.execute.after`: immutability, nesting depth, file size, function size enforcers. `session.idle`: code quality audit. |
+| Testing | [testing.md](testing.md) | `tool.execute.before`: test-first gate. `session.idle`: coverage gate. |
+| Git Workflow | [git-workflow.md](git-workflow.md) | `session.idle`: commit convention check, secret in commit scan. |
 
 Language-specific environments may append additional hooks. Define them in the relevant domain file under a `# Hooks` section.

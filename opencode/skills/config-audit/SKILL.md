@@ -1,8 +1,6 @@
 ---
 name: config-audit
-description: This skill should be used when the user wants to audit, optimize, or trim their OpenCode config files. It performs cross-file consistency checks, redundancy detection, contradiction analysis, quality scoring, and proposes consolidations across all config surfaces. Run periodically (e.g., monthly) to prevent config drift.
-
-Updated with instructions spread across multiple files. Aimed at improving support, accuracy and performance of locally hosted smaller (27B - 36BMoE) AI coding agents.
+description: This skill should be used when the user wants to audit, optimize, or trim their OpenCode config files. It performs cross-file consistency checks, redundancy detection, contradiction analysis, quality scoring, and proposes consolidations across all config surfaces. Run periodically (e.g., monthly) to prevent config drift.Updated with instructions spread across multiple files. Aimed at improving support, accuracy and performance of locally hosted smaller (27B - 36BMoE) AI coding agents.
 ---
 
 # Config Auditor

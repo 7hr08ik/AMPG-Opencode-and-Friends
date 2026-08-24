@@ -49,7 +49,7 @@ Before requesting review, ensure:
 2. Check security checklist first
 3. Review code quality checklist
 4. Run relevant tests
-5. Verify test coverage meets [# Testing Requirements](instructions/common/testing.md)
+5. Verify test coverage meets [# Testing Requirements](testing.md)
 6. Use appropriate agent for detailed review
 
 ## Common Issues to Catch
@@ -87,6 +87,6 @@ Before requesting review, ensure:
 
 This rule works with:
 
-- [testing.md](instructions/common/testing.md) - Test coverage requirements
-- [security.md](instructions/common/security.md) - Security checklist
-- [git-workflow.md](instructions/common/git-workflow.md) - Commit standards
+- [testing.md](testing.md) - Test coverage requirements
+- [security.md](security.md) - Security checklist
+- [git-workflow.md](git-workflow.md) - Commit standards

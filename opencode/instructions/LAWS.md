@@ -3,8 +3,12 @@
 This document contains the core laws OpenCode will live by.
 These laws are **immutable** and **must** be followed!
 
+## Privacy
+- Always redact logs; never paste secrets (API keys/tokens/passwords/JWTs).
+- Review output before sharing - remove any sensitive data.
+
 ## Must ALWAYS
-- Validate inputs and keep security checks intact (see [security.md](instructions/common/security.md)).
+- Validate inputs and keep security checks intact (see [security.md](common/security.md)).
 - Use the `unslop` skill to review writing, comments, and documentation.
 
 ## Must NEVER
@@ -15,9 +19,6 @@ These laws are **immutable** and **must** be followed!
 - Ship code without checking the relevant test suite.
 - Use emojis or Em Dash (—) in code, comments, or documentation.
 
-## Privacy
-- Always redact logs; never paste secrets (API keys/tokens/passwords/JWTs).
-- Review output before sharing - remove any sensitive data.
 
 ## Loop Prevention
 

@@ -19,7 +19,7 @@ Rationale: Immutable data prevents hidden side effects, makes debugging easier, 
 - **Loop Bounds**: Prefer bounded loops. Unbounded loops must have an explicit termination condition.
 - **Bounded Memory**: Avoid unbounded heap growth. Set limits on data structures that grow during execution. Use bounded collections, streaming processing, or explicit cleanup for long-running operations.
 - **Function Size**: No function should exceed 60 lines (one page). Each function should be a logical unit understandable and verifiable as a unit.
-- **Assertion Density**: Use assertions to verify pre-conditions, post-conditions, and invariants where idiomatic.
+- **Assertion Density**: Use assertions to verify pre-conditions, post-conditions, and invariants.
 - **Variable Scope**: Prefer narrow variable scope where it improves readability.
 - **Return Value Checking**: Always check return values of non-void functions. Validate parameters inside each function. Ignored errors lead to silent failures and hard-to-debug issues.
 - **Static Analysis**: Compile with all warnings enabled. Zero warnings policy. Run static analysis daily. Rewrite confusing code instead of suppressing warnings.

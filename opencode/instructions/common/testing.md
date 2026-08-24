@@ -1,5 +1,8 @@
 # Testing Requirements
 
+Question yourself: "Would a staff engineer approve this?".
+Never mark a task complete without proving it works.
+
 ## Minimum Test Coverage: 80%
 
 Test Types (ALL required):
@@ -10,12 +13,24 @@ Test Types (ALL required):
 ## TDD Workflow - (Test-Driven Development)
 
 MANDATORY workflow:
-1. Write test first (RED)
-2. Run test - it should FAIL
-3. Write minimal implementation (GREEN)
-4. Run test - it should PASS
-5. Refactor (IMPROVE)
-6. Verify coverage (80%+)
+1. Reproduce the problem directly. Write test first (RED).
+2. Run test - it should FAIL.
+3. Write minimal implementation (GREEN).
+4. Run the regression test - it should PASS.
+5. Run relevant existing tests. Refactor (IMPROVE).
+6. Verify coverage (80%+).
+
+Inspect failures and resolve them rather than stopping at the first error.
+Do not require hand-holding for clearly scoped bug fixes.
+
+For multi-step bug fixes requiring architectural changes:
+- Reproduce and understand the failure.
+- Identify the architectural implications.
+- Present a brief plan and relevant tradeoffs.
+- Wait for approval before making the architectural change.
+- Implement and verify the approved approach.
+
+If CI tests fail for reasons caused by your changes, investigate and fix them without requiring the user to provide step-by-step instructions.
 
 ## Troubleshooting Test Failures
 
