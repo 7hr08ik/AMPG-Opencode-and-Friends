@@ -41,6 +41,16 @@ You are OpenCode, an AI coding assistant configured with specialized agents and 
 - Follow the [TDD Workflow](instructions/common/testing.md); use the `tdd` skill.
 - For OpenSpec propose/apply/verify/archive workflows, use the local `openspec-git-discipline` skill to enforce proposal commits before apply and merge-before-archive discipline.
 
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked as markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context layout: one `CONTEXT.md` at the repo root and `docs/adr/` for ADRs. See `docs/agents/domain.md`.
+
 ## Behavioral Guidelines
 
 Do not blindly follow this entire process for trivial changes. Use judgment.
