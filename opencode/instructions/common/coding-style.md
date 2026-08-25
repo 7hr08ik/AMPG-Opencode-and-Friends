@@ -26,7 +26,7 @@ Rationale: Immutable data prevents hidden side effects, makes debugging easier, 
 
 ### StackOverflow Comment guidelines
 
-Comment well, and often. Following these rules:
+The User wants the code commented well, and often. Following these rules:
 
 - Comments should not duplicate the code. Good comments do not excuse unclear code.
 - Comments should dispel confusion, not cause it. Explain unidiomatic code in comments.
