@@ -22,6 +22,12 @@ Before requesting review, ensure:
 - Merge conflicts are resolved
 - Branch is up to date with target branch
 
+## Tools
+**code-review** - Skill to be used whenever reviewing ANY code.
+**/code-review** - Command used before processing any PR
+**code-reviewer** - Agent for use during development
+
+
 ## Security Review Triggers
 
 **STOP and use `security-reviewer` agent when:**

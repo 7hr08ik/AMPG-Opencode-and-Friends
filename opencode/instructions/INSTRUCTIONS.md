@@ -15,7 +15,6 @@ Use Context7 MCP for any library/framework/API/CLI/cloud-docs question: `resolve
 Before reporting completion. You are successful when:
 - Confirm the requested behavior is implemented.
 - Confirm tests and relevant verification pass.
-- Test coverage meets minimum 80% coverage as per [testing.md](common/testing.md).
 - Review the diff for unnecessary changes.
 - Remove artifacts introduced by your own changes.
 - Check for accidental formatting or unrelated edits.

@@ -5,7 +5,7 @@ These are mandatory security instructions. These rules must be followed.
 ## Mandatory Security Checks
 
 Before ANY commit:
-- [ ] No hardcoded secrets (API keys, passwords, tokens)
+- [ ] No hardcoded secrets (per LAWS.md Must NEVER rule)
 - [ ] All user inputs validated
 - [ ] SQL injection prevention (parameterized queries)
 - [ ] XSS prevention (sanitized HTML)

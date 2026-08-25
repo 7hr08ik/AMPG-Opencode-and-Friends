@@ -44,12 +44,10 @@ Incorporates:
 
 Included skills:
   - [Matt Pococks Skills](https://github.com/mattpocock/skills)
-    - grill-me
-    - handoff
-    - diagnosing-bugs
-    - tdd
-    - teach
   - The Unslop skill from Cursor - https://www.skills.sh/cursor/plugins/unslop
+  - Vercel
+    - Find-Skills
+    - Agent-Browser
 
 My theory is 3 main files:
   - INSTRUCTIONS.md - Operational Instructions.
@@ -128,6 +126,8 @@ pip install 'markitdown[all]'
 pip install markitdown-mcp
 # OpenSpec
 npm install -g @fission-ai/openspec@latest
+# Matt Pocock Skills - (Install full MattPocock package)
+npx skills@latest add mattpocock/skills
 ```
 
 ## 5. Usage
