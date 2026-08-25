@@ -148,6 +148,8 @@ Some plugins require manually updating:
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash
 # Codegraph
 codegraph upgrade
+# Skills
+npx skills@latest update
 ```
 
 ## 7. Notes / Fixes / Workarounds
