@@ -30,6 +30,24 @@ If security issue found:
 4. Rotate any exposed secrets
 5. Review entire codebase for similar issues
 
+## Common Issues to Catch
+
+### Security
+
+- SQL injection (string concatenation in queries)
+- XSS vulnerabilities (unescaped user input)
+- Path traversal (unsanitized file paths)
+- CSRF protection missing
+- Authentication bypasses
+
+### Code Quality
+
+- Large functions (>60 lines) - split into smaller
+- Deep nesting (>4 levels) - use early returns
+- Missing error handling - handle explicitly
+- Mutation patterns - prefer immutable operations
+- Missing tests - add test coverage
+
 # Security Hooks
 
 ## `tool.execute.before` Hooks
