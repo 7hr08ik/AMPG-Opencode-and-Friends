@@ -34,7 +34,13 @@
     "**/*.pem",
     "**/*.key",
     "**/credentials.json",
-    "**/secrets.*"
+    "**/secrets.*",
+		"**/opencode.jsonc",
+		"**/AGENTS.md",
+		"**/instructions/INSTRUCTIONS.md",
+		"**/instructions/LAWS.md",
+		"**/instructions/common/*.md",
+		"**/rules/*/*.md"
   ],
   // Unified context compression tool and behavior settings
   "compress": {
