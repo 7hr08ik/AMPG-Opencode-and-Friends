@@ -20,6 +20,8 @@ MANDATORY workflow:
 5. Run relevant existing tests. Refactor (IMPROVE).
 6. Verify coverage (80%+).
 
+Prefer Arrange-Act-Assert structure. Use descriptive names that explain the behavior under test.
+
 Inspect failures and resolve them rather than stopping at the first error.
 Do not require hand-holding for clearly scoped bug fixes.
 
@@ -44,10 +46,6 @@ If CI tests fail for reasons caused by your changes, investigate and fix them wi
 ## `tool.execute.before` Hooks
 
 - **Test-First Gate**: Before implementing any feature, verify a corresponding test exists or is being written. Block implementation if test is missing. Triggers: all implementation tool calls
-
-Prefer Arrange-Act-Assert structure for tests. 
-
-Use descriptive names that explain the behavior under test.
 
 ## `session.idle` Hooks
 

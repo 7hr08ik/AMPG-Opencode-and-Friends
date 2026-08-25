@@ -54,7 +54,7 @@ If security issue found:
 
 - **Secret Pattern Check**: Before writing any file, scan content for leaked secrets (AWS keys, GitHub tokens, private keys, connection strings with passwords). Block the write if detected. Triggers: all write operations
 - **Input Validation Guard**: Before processing any user-provided input, verify it passes validation rules. Block tool execution if validation fails. Triggers: all tool executions involving user input
-- **Error Leak Prevention**: Before returning error responses, strip any sensitive data (stack traces, internal paths, PII). Triggers: all HTTP/error responses
+- **Error Leak Prevention**: Before returning errors to the user, strip stack traces, internal paths, and PII. Triggers: error outputs from any tool
 
 ## `tool.execute.after` Hooks
 

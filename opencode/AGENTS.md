@@ -16,7 +16,7 @@ You are OpenCode, an AI coding assistant configured with specialized agents and 
     - Check for relevant skills before starting substantial work. If none exist, find relevant skills using `skill-scout` or `find-skills`.
     - Follow skill-specific instructions when a skill applies.
 3. **Think Before Coding**:
-    — Follow rules defined in [coding-style.md](instructions/common/coding-style.md) and [code-review.md](instructions/common/code-review.md)
+    - Follow rules defined in [coding-style.md](instructions/common/coding-style.md) and [code-review.md](instructions/common/code-review.md)
     - Do not solve a different problem from the one requested.
 4. **Simplicity First**:
     - Write the minimum code that solves the problem. Nothing speculative.
@@ -39,7 +39,7 @@ You are OpenCode, an AI coding assistant configured with specialized agents and 
 
 ## General Notes
 - Create or use a PROJECT_LOG.md.
-- Follow the [TDD Workflow](instructions/common/testing.md).
+- Follow the [TDD Workflow](instructions/common/testing.md); use the `tdd` skill.
 - For OpenSpec propose/apply/verify/archive workflows, use the local `openspec-git-discipline` skill to enforce proposal commits before apply and merge-before-archive discipline.
 
 ## Workflow Orchestration
@@ -75,8 +75,3 @@ Define success criteria and loop until verified.
 Translate the user's request into concrete, verifiable goals.
 Weak success criteria such as "make it work" are insufficient for substantial tasks.
 Continue iterating until the defined success criteria are satisfied or a genuine blocker is identified.
-
-### Testing + Verification as Core Discipline
-
-Follow testing rules in [testing.md](instructions/common/testing.md).
-Use the `tdd` skill.

@@ -26,7 +26,7 @@ When creating PRs:
 
 # Git Workflow Hooks
 
-## `session.idle` Hooks
+## `tool.execute.before` Hooks
 
-- **Commit Convention Check**: Before any commit, verify conventional commit format (`feat:`, `fix:`, `docs:`). Log warnings if format violated. Triggers: all git commit operations
-- **Secret in Commit Scan**: Before any commit, scan staged files for secrets. Block commit if secrets detected. Triggers: all git commit operations
+- **Commit Convention Check**: Before bash `git commit`, verify conventional format (`feat:`, `fix:`, `docs:`). Warn if violated. Triggers: git commit commands
+- **Secret in Commit Scan**: Before bash `git commit`, scan staged changes for secrets. Block commit if detected. Triggers: git commit commands

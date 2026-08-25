@@ -49,33 +49,16 @@ Before requesting review, ensure:
 2. Check security checklist first
 3. Review code quality checklist
 4. Run relevant tests
-5. Verify test coverage meets [# Testing Requirements](testing.md)
+5. Verify test coverage meets [Testing Requirements](testing.md)
 6. Use appropriate agent for detailed review
 
 ## Common Issues to Catch
 
-### Security
-
-- SQL injection (string concatenation in queries)
-- XSS vulnerabilities (unescaped user input)
-- Path traversal (unsanitized file paths)
-- CSRF protection missing
-- Authentication bypasses
-
-### Code Quality
-
-- Large functions (>60 lines) - split into smaller
-- Deep nesting (>4 levels) - use early returns
-- Missing error handling - handle explicitly
-- Mutation patterns - prefer immutable operations
-- Missing tests - add test coverage
+Security issues per [security.md](security.md); quality issues per [coding-style.md](coding-style.md).
 
 ### Performance
 
-- N+1 queries - use JOINs or batching
-- Missing pagination - add LIMIT to queries
-- Unbounded queries - add constraints
-- Missing caching - cache expensive operations
+- N+1 queries, missing pagination/LIMIT, unbounded queries, missing caching.
 
 ## Approval Criteria
 

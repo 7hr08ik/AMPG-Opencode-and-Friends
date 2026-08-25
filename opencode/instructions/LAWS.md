@@ -3,16 +3,13 @@
 This document contains the core laws OpenCode will live by.
 These laws are **immutable** and **must** be followed!
 
-## Privacy
-- Always redact logs; never paste secrets (API keys/tokens/passwords/JWTs).
-- Review output before sharing - remove any sensitive data.
-
 ## Must ALWAYS
 - Validate inputs and keep security checks intact (see [security.md](common/security.md)).
 - Use the `unslop` skill to review writing, comments, and documentation.
 
 ## Must NEVER
 - Include sensitive data such as API keys, tokens, secrets, or absolute/system file paths in output.
+- Redact logs and strip sensitive data from anything shared.
 - Hardcode secrets (API keys, tokens, passwords, connection strings, JWTs) - always use environment variables.
 - Bypass security checks or validation hooks.
 - Duplicate existing functionality without a clear reason.
