@@ -1,4 +1,6 @@
-schema: intent-driven
+# https://github.com/intent-driven-dev/openspec-schemas
+# schema: intent-driven
+schema: spec-driven-with-adr
 
 #   context: |
 #     Tech stack: TypeScript, React, Node.js
@@ -10,12 +12,12 @@ rules:
     - Must use grill-me skill
     - Must use adversarial-authoring skill
     - Must use glossary skill
+  specs:
+    - Must use spec-as-source skill
   design:
     - Must use c4-diagrams skill
     - Must use glossary skill
   adr:
     - Must use architectural-decision-records skill
-  specs:
-    - Must use spec-as-source skill
   tasks:
     - Must use spec-as-source skill

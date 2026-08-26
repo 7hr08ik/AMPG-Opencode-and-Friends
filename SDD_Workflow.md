@@ -28,10 +28,12 @@ When you know what you want to build and just need to execute:
 - Open Project folder in your IDE.
 - Copy in environment specific templates.
     - Merge the AGENTS.md with multiple environment details, if needed.
-- Configure templates
-    - AGENTS.md
-    - env_template
-    - gitignore_template
+- Configure:
+    - Templates
+        - AGENTS.md
+        - env_template
+        - gitignore_template
+    - Openspec config.yaml
 - Init all the things
     - git init && codegraph init && openspec init
     - opencode
