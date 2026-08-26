@@ -159,11 +159,11 @@ function checkAssertionDensity(content: string): Array<{ name: string; assertion
 export const CodingStylePlugin: Plugin = async (ctx: PluginInput) => {
   const client = ctx.client;
   const hooks: Hooks = {
-    // Check code quality after file writes
-    "tool.execute.after": async (input, output) => {
+    // Check code quality before file writes
+    "tool.execute.before": async (input, output) => {
       if (input.tool === "write" || input.tool === "edit") {
-        const content = output.output || '';
-        const filePath = input.args?.filePath || 'unknown';
+        const content = output.args?.content || output.args?.newString || '';
+        const filePath = output.args?.filePath || 'unknown';
 
         // Immutability Enforcer
         const immutabilityIssues = checkImmutability(content);

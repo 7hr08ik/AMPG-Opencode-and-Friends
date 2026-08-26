@@ -66,7 +66,13 @@ export const SecurityPlugin: Plugin = async (ctx: PluginInput) => {
 
         if (findings.length > 0) {
           const details = findings.map(f => `${f.name} (${f.match})`).join(', ');
-          throw new Error(`BLOCKED: Secret pattern detected in write content: ${details}. Remove secrets before writing.`);
+          throw new Error(`BLOCKED: Secret pattern detected in write content: ${details}. ` +
+            `Secrets must never be committed to code. ` +
+            `DO NOT proceed silently. Ask the user how to handle this:\n` +
+            `  - Move the secret to a .env file (ensure it is in .gitignore)?\n` +
+            `  - Use a secrets manager?\n` +
+            `  - Something else?\n` +
+            `Wait for the user's instruction before rewriting the file.`);
         }
       }
 
@@ -77,7 +83,13 @@ export const SecurityPlugin: Plugin = async (ctx: PluginInput) => {
 
         if (findings.length > 0) {
           const details = findings.map(f => `${f.name} (${f.match})`).join(', ');
-          throw new Error(`BLOCKED: Secret pattern detected in command: ${details}. Remove secrets before executing.`);
+          throw new Error(`BLOCKED: Secret pattern detected in command: ${details}. `  +
+            `Secrets must never be committed to code. ` +
+            `DO NOT proceed silently. Ask the user how to handle this:\n` +
+            `  - Move the secret to a .env file (ensure it is in .gitignore)?\n` +
+            `  - Use a secrets manager?\n` +
+            `  - Something else?\n` +
+            `Wait for the user's instruction before rewriting the file.`);
         }
 
         // Block dangerous commands
@@ -85,7 +97,7 @@ export const SecurityPlugin: Plugin = async (ctx: PluginInput) => {
           /\brm\s+-rf\s+[\/~]/,
           /\bmkfs\b/,
           /\bdd\s+if=/,
-          /\b:\(\)\s*\{/,
+          /(^|[^\w]):\(\)\s*\{/,
           /\bshutdown\b/,
           /\breboot\b/,
           /\binit\s+[06]/,
@@ -99,34 +111,6 @@ export const SecurityPlugin: Plugin = async (ctx: PluginInput) => {
       }
     },
 
-    // Block writes containing secrets detected after the fact
-    "tool.execute.after": async (input, output) => {
-      if (input.tool === "write" || input.tool === "edit") {
-        const content = output.output || '';
-        const filePath = input.args?.filePath || 'unknown';
-        const findings = scanForSecrets(content);
-
-        if (findings.length > 0) {
-          for (const finding of findings) {
-            sessionSecretsFound.push({
-              file: filePath,
-              secret: finding.name,
-            });
-          }
-
-          const details = findings.map(f => `${f.name} (${f.match})`).join(', ');
-          throw new Error(
-            `BLOCKED: Secret pattern(s) detected in ${filePath}: ${details}. ` +
-            `Secrets must never be committed to code. ` +
-            `DO NOT proceed silently. Ask the user how to handle this:\n` +
-            `  - Move the secret to a .env file (ensure it is in .gitignore)?\n` +
-            `  - Use a secrets manager?\n` +
-            `  - Something else?\n` +
-            `Wait for the user's instruction before rewriting the file.`
-          );
-        }
-      }
-    },
 
     // Report secrets found during session
     event: async (input) => {

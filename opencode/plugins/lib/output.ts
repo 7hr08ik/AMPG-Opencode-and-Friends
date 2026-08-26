@@ -11,7 +11,7 @@
 /** Minimal client shape from OpenCode's PluginInput. */
 interface PluginClient {
   tui: {
-    showToast(input: { body: { title?: string; message: string; variant: "info" | "success" | "error" | "warning"; duration?: number } }): Promise<void>
+    showToast(input: { body: { title?: string; message: string; variant: "info" | "success" | "error" | "warning"; duration?: number } }): Promise<any>
   }
 }
 

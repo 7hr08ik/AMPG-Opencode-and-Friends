@@ -40,7 +40,7 @@ export const WorkflowPlugin: Plugin = async () => {
     // Per-tool search budget enforcer
     "tool.execute.before": async (input, output) => {
       // codegraph_explore: unlimited (local, fast, returns source + call paths)
-      if (input.tool === "codegraph_explore") {
+      if (input.tool.startsWith("codegraph")) {
         return; // No limit
       }
 
@@ -55,7 +55,7 @@ export const WorkflowPlugin: Plugin = async () => {
 
       // grep: GitHub repos only (external searches)
       if (input.tool === "grep") {
-        const args = input.args || {};
+        const args = output.args || {};
         const path = args.path || '';
         
         // Allow grep if searching within a GitHub URL or repo path
