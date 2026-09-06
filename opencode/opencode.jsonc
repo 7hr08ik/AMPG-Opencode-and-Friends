@@ -26,14 +26,14 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "[local] Lemonade",
       "options": {
-        "baseURL": "http://127.0.0.1:13305/v1"
+        "baseURL": "http://10.69.30.23:13305/v1"
       },
       "models": {
-        "Ornith-1.0-35B": {
-          "name": "[Coding]_Ornith-1.0",
+        "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
+          "name": "[Coding]_Ornith-1.5",
           "limit": {
-            "context": 220000,
-            "output": 8192
+            "context": 200000,
+            "output": 16384
           },
           "options": {
             "thinking": {
@@ -45,11 +45,11 @@
             "top_p": 0.95
           }
         },
-        "Qwen3.6-35B-A3B": {
+        "Qwen3.6-35B-A3B-MTP-GGUF": {
           "name": "[Thinking]_Qwen3.6:35B-A3B",
           "limit": {
-            "context": 220000,
-            "output": 8192
+            "context": 200000,
+            "output": 16384
           },
           "options": {
             "thinking": {
@@ -98,63 +98,11 @@
             }
           }
         },
-        "Qwen3.8-27B": {
-          "name": "[Testing]_Qwen3.8",
-          "limit": {
-            "context": 220000,
-            "output": 8192
-          },
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 2048,
-            },
-            "temperature": 1.0,
-            "top_p": 0.95,
-            "top_k": 20,
-            "min_p": 0,
-            "presence_penalty": 0,
-            "repeat_penalty": 1
-          },
-          "variants": {
-            "thinking": {
-              "textVerbosity": "low",
-              "options": {
-                "thinking": {
-                  "type": "enabled",
-                  "budgetTokens": 2048,
-                },
-                "temperature": 1.0,
-                "top_p": 0.95,
-                "top_k": 20,
-                "min_p": 0,
-                "presence_penalty": 0,
-                "repeat_penalty": 1
-              }
-            },
-            "fast": {
-              "reasoningEffort": "none",
-              "textVerbosity": "low",
-              "options": {
-                "thinking": {
-                  "type": "disabled",
-                  "budgetTokens": 2048,
-                },
-                "temperature": 0.7,
-                "top_p": 0.80,
-                "top_k": 20,
-                "min_p": 0,
-                "presence_penalty": 1.5,
-                "repeat_penalty": 1
-              }
-            }
-          }
-        },
         "Qwopus3.5-9B-Coder-MTP": {
           "name": "[Multi]_Qwopus3.5:9B",
           "limit": {
-            "context": 130000,
-            "output": 8192
+            "context": 120000,
+            "output": 16384
           },
           "options": {
             "thinking": {
@@ -203,22 +151,6 @@
             }
           }
         },
-        "Gemma-4-26B-A4B-it-MTP-GGUF": {
-          "name": "[General]_Gemma4:26B-A4B",
-          "limit": {
-            "context": 130000,
-            "output": 8192
-          },
-          "options": {
-            "thinking": {
-              "type": "enabled",
-              "budgetTokens": 2048,
-            },
-            "temperature": 1,
-            "top_p": 0.95,
-            "top_k": 64
-          }
-        }
       }
     },
   },
@@ -233,6 +165,14 @@
       "command": [
         "npx",
         "@playwright/mcp@latest"
+      ],
+      "enabled": true
+    },
+    "drawio": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@drawio/mcp"
       ],
       "enabled": true
     },

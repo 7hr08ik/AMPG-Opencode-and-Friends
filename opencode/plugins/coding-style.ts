@@ -1,5 +1,11 @@
 import type { Plugin, Hooks, PluginInput } from "@opencode-ai/plugin"
 import { warn, error } from "./lib/output.js"
+import { appendFileSync } from "fs"
+const _CSD_LOG = "/tmp/coding-style-debug.log"
+function _csd(msg: string): void {
+  try { appendFileSync(_CSD_LOG, `[CodingStyle Debug] ${new Date().toISOString()} ${msg}\n`) } catch (e) {}
+}
+_csd("MODULE IMPORTED")
 
 /**
  * Coding Style Plugin - Enforces code quality rules inspired by NASA software standards
@@ -51,13 +57,49 @@ function checkImmutability(content: string): string[] {
 function checkNestingDepth(content: string): number {
   let maxDepth = 0;
   let currentDepth = 0;
+  let i = 0;
+  const n = content.length;
+  let quoteChar = '';
+  // 'code' | 'line-comment' | 'block-comment' | 'string' | 'template'
+  let mode: 'code' | 'line-comment' | 'block-comment' | 'string' | 'template' = 'code';
 
-  for (const char of content) {
-    if (char === '{' || char === '(' || char === '[') {
-      currentDepth++;
-      maxDepth = Math.max(maxDepth, currentDepth);
-    } else if (char === '}' || char === ')' || char === ']') {
-      currentDepth--;
+  while (i < n) {
+    const c = content[i];
+    const next = content[i + 1];
+
+    if (mode === 'code') {
+      if (c === '/' && next === '/') { mode = 'line-comment'; i += 2; continue; }
+      if (c === '/' && next === '*') { mode = 'block-comment'; i += 2; continue; }
+      if (c === '"' || c === "'") { mode = 'string'; quoteChar = c; i++; continue; }
+      if (c === '`') { mode = 'template'; i++; continue; }
+      if (c === '{') { currentDepth++; maxDepth = Math.max(maxDepth, currentDepth); i++; continue; }
+      if (c === '}') { if (currentDepth > 0) currentDepth--; }
+      i++;
+      continue;
+    }
+    if (mode === 'line-comment') {
+      if (c === '\n') { mode = 'code'; }
+      i++;
+      continue;
+    }
+    if (mode === 'block-comment') {
+      if (c === '*' && next === '/') { mode = 'code'; i += 2; continue; }
+      i++;
+      continue;
+    }
+    if (mode === 'string') {
+      if (c === '\\') { i += 2; continue; }
+      if (c === quoteChar) { mode = 'code'; i++; continue; }
+      i++;
+      continue;
+    }
+    if (mode === 'template') {
+      if (c === '\\') { i += 2; continue; }
+      if (c === '`') { mode = 'code'; i++; continue; }
+      // ${ ... } re-enters code; the following '{' counts as a real block brace.
+      if (c === '$' && next === '{') { mode = 'code'; i += 2; continue; }
+      i++;
+      continue;
     }
   }
 
@@ -158,10 +200,13 @@ function checkAssertionDensity(content: string): Array<{ name: string; assertion
 
 export const CodingStylePlugin: Plugin = async (ctx: PluginInput) => {
   const client = ctx.client;
+  _csd(`PLUGIN FN ran; client=${!!client}, tui=${!!(client as any)?.tui}`)
   const hooks: Hooks = {
     // Check code quality before file writes
     "tool.execute.before": async (input, output) => {
-      if (input.tool === "write" || input.tool === "edit") {
+      try {
+        _csd(`HOOK FIRED: tool=${input.tool}`)
+        if (input.tool === "write" || input.tool === "edit") {
         const content = output.args?.content || output.args?.newString || '';
         const filePath = output.args?.filePath || 'unknown';
 
@@ -219,6 +264,9 @@ export const CodingStylePlugin: Plugin = async (ctx: PluginInput) => {
           });
           await warn(client, `[Coding Style] Assertion density violation in ${filePath}: ${func.name} has ${func.assertions} assertion(s) (min 2)`);
         }
+        }
+      } catch (e) {
+        process.stderr.write(`[CodingStyle Debug] hook body error: ${(e as Error).message}\n`)
       }
     },
 

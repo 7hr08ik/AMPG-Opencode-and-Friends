@@ -29,12 +29,12 @@ const SECRET_PATTERNS = [
   { re: /sk-[a-zA-Z0-9]{32,}/g, name: 'Secret Key' },
   { re: /gh[pousr]_[a-zA-Z0-9]{36,}/g, name: 'GitHub Token' },
   { re: /-----BEGIN.*PRIVATE KEY-----/g, name: 'Private Key' },
-  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*['"][^'"]{8,}/gi, name: 'Plaintext Credential (quoted)' },
-  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*[^\s'"<>]{8,}/gi, name: 'Plaintext Credential (unquoted)' },
-  { re: /mongodb(\+srv)?:\/\/[^"'\s]+/g, name: 'MongoDB Connection String' },
-  { re: /postgres(ql)?:\/\/[^"'\s]+/g, name: 'PostgreSQL Connection String' },
-  { re: /mysql:\/\/[^"'\s]+/g, name: 'MySQL Connection String' },
-  { re: /redis:\/\/[^"'\s]+/g, name: 'Redis Connection String' },
+  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*['"](?!\$)[^'"]{8,}/gi, name: 'Plaintext Credential (quoted)' },
+   { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*(?!\$)(?!\-)[^\s'"<>]{8,}/gi, name: 'Plaintext Credential (unquoted)' },
+  { re: /mongodb(\+srv)?:\/\/[^"'\s$]+/g, name: 'MongoDB Connection String' },
+  { re: /postgres(ql)?:\/\/[^"'\s$]+/g, name: 'PostgreSQL Connection String' },
+  { re: /mysql:\/\/[^"'\s$]+/g, name: 'MySQL Connection String' },
+  { re: /redis:\/\/[^"'\s$]+/g, name: 'Redis Connection String' },
 ];
 
 // Track secrets found during session for audit
