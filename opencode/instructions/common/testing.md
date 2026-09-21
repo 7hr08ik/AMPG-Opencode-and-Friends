@@ -45,7 +45,7 @@ If CI tests fail for reasons caused by your changes, investigate and fix them wi
 
 ## `tool.execute.before` Hooks
 
-- **Test-First Gate**: Before implementing any feature, verify a corresponding test exists or is being written. Block implementation if test is missing. Triggers: all implementation tool calls
+- **Test-First Gate**: Before implementing any feature, verify a corresponding test exists or is being written. Warn if test is missing; do not block. Triggers: all implementation tool calls
 
 ## `session.idle` Hooks
 

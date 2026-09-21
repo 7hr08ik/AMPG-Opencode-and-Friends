@@ -97,7 +97,8 @@ Installed on the system:
 
 Install with
 ```bash
-curl -fsSL https://opencode.ai/install | bash
+# curl -fsSL https://opencode.ai/install | bash
+curl -fsSL https://opencode.ai/v2/install | bash
 ```
 
 ### 4.3. Copy over the Opencode setup
@@ -122,12 +123,21 @@ npx ctx7 setup --opencode
 # Keep this at default install location. Otherwise makes the ~/.config/opencode folder messy
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
 # MarkItDown
-pip install 'markitdown[all]'
-pip install markitdown-mcp
+pip install 'markitdown[all]' && pip install markitdown-mcp
 # OpenSpec
-npm install -g @fission-ai/openspec@latest
+bun add --global @fission-ai/openspec@latest
 # Matt Pocock Skills - (Install full MattPocock package)
 npx skills@latest add mattpocock/skills
+```
+
+```bash
+npx ctx7 setup --opencode && \
+npx @guard22/opencode-tps-meter install && \
+npx skills@latest add mattpocock/skills && \
+pip install 'markitdown[all]' && pip install markitdown-mcp && \
+bun add --global @fission-ai/openspec@latest && \
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
 ```
 
 ## 5. Usage

@@ -40,19 +40,11 @@ If security issue found:
 - CSRF protection missing
 - Authentication bypasses
 
-### Code Quality
-
-- Large functions (>60 lines) - split into smaller
-- Deep nesting (>4 levels) - use early returns
-- Missing error handling - handle explicitly
-- Mutation patterns - prefer immutable operations
-- Missing tests - add test coverage
-
 # Security Hooks
 
 ## `tool.execute.before` Hooks
 
-- **Secret Pattern Check**: Before writing any file, scan content for leaked secrets (AWS keys, GitHub tokens, private keys, connection strings with passwords). Block the write if detected. Triggers: all write operations
+- **Secret Pattern Check**: Before writing any file, scan content for leaked secrets (AWS keys, GitHub tokens, private keys, connection strings with passwords). Log violations; do not block writes (allows .env.example, test fixtures). Triggers: all write operations
 - **Input Validation Guard**: Before processing any user-provided input, verify it passes validation rules. Block tool execution if validation fails. Triggers: all tool executions involving user input
 - **Error Leak Prevention**: Before returning errors to the user, strip stack traces, internal paths, and PII. Triggers: error outputs from any tool
 
@@ -62,4 +54,4 @@ If security issue found:
 
 ## `session.idle` Hooks
 
-- **Security Audit**: Before session ends, verify no secrets were written in this session. Block session close if violations found. Triggers: session end
+- **Security Audit**: Before session ends, verify no secrets were written in this session. Log violations; do not block session close. Triggers: session end

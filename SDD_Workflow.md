@@ -50,6 +50,7 @@ When you know what you want to build and just need to execute:
     - Refine the idea (Optional)
         - `/idea-refine` - Make AI figure shit out first. 
         - Debate the pro's and con's of the idea/project/feature
+    - `/create-specification` - Makes a full AI opt'd Spec sheet 
 
 - New branch
         
@@ -58,12 +59,12 @@ When you know what you want to build and just need to execute:
 
 - Build the spec
     - /opsx-propose "your idea"
-    - Go more granular if you want:
-        - /opsx:new                        # scaffold only
-        - /opsx:continue                   # create one artifact at a time
-        - /opsx:ff add-dark-mode           # create all planning artifacts at once
-        - /opsx:update add-dark-mode - we're storing the theme in a cookie now
-        - /opsx:sync                       # Merge changes to main specs
+        - Go more granular if you want:
+            - /opsx:new                        # scaffold only
+            - /opsx:continue                   # create one artifact at a time
+            - /opsx:ff add-dark-mode           # create all planning artifacts
+            - /opsx:update add-dark-mode - we're storing the theme in a cookie now
+            - /opsx:sync                       # Merge changes to main specs
 
 - Apply tasks - Build the thing
     - /opsx:apply <name>                   # (Optional) Set <name> for individual tasks
@@ -71,7 +72,7 @@ When you know what you want to build and just need to execute:
 - Checks - Tests 
 
     - /code-review
-    - Language Specific Review/Testing
+    - Language/ENV Specific Review/Testing
     - /optimize
     - /opsx:verify                         # Check its correct
 

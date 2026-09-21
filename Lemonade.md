@@ -43,13 +43,27 @@ lemonade config
     - mlock - Stop the PC from swapping data out of RAM and onto Disk
 
 ```bash
-lemonade config set auto_evict true
-lemonade config set auto_evict_threshold_pct 1
-lemonade config set ctx_size 220000
+lemonade config set models_dir="/home/rob/Programs/LLM_Models/Lemonade/"
+lemonade config set auto_evict=true
+lemonade config set auto_evict_threshold_pct=0.98
+lemonade config set ctx_size=200000
 lemonade config set global_timeout=1800
-lemonade config set llamacpp.args="--cache-type-k q4_0 --cache-type-v q4_0 --flash-attn on --parallel 2 -b 4096 -ub 1024 --fit on --fit-target 2048 --reasoning-budget 8192"
+lemonade config set llamacpp.args="--cache-type-k q4_0 --cache-type-v q4_0 --flash-attn on --parallel 1 -b 4096 -ub 1024 --fit on --fit-target 2048 --reasoning-budget 4096"
 
 ```
+
+[!NOTE] Keep `parallel` at 1. It seems that the server will divide your stated context length by this amount. So a context of 200k with parallel 2 == context of 100k per.
+
+### Change Models Dir
+
+lemonade config set models_dir="/home/rob/Programs/LLM_Models/Lemonade/"
+Give the new folder group permissions lemonade:lemonade
+sudo systemctl edit lemond
+[Service]
+     ProtectHome=no
+
+(Must put [Service] or it'll fail)
+sudo systemctl restart lemond
 
 ## Desktop UI Config
 

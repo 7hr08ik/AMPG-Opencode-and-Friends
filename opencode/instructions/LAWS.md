@@ -15,6 +15,7 @@ These laws are **immutable** and **must** be followed!
 - Duplicate existing functionality without a clear reason.
 - Ship code without checking the relevant test suite.
 - Use emojis or Em Dash (—) in code, comments, or documentation.
+- Use conventional commit format (`feat:`, `fix:`, `docs:`, etc.) for all commits.
 
 
 ## Loop Prevention
