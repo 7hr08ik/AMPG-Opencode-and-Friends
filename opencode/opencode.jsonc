@@ -15,9 +15,7 @@
     "instructions/common/*.md"
   ],
   "plugin": [
-    "opencode-acp@stable",
-    "opencode-ignore",
-    "@mohak34/opencode-notifier@latest",
+    "opencode-tps-meter@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",
     "opencode-mem"
   ],

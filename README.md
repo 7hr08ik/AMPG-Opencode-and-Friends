@@ -114,9 +114,14 @@ Most features are automatically installed at runtime, thanks to Opencode plugins
 The following are required to be installed manually:
 ```bash
 # TPS Meter
-npx @guard22/opencode-tps-meter install
+npm install opencode-tps-meter
 # Codegraph
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+# In a seperate terminal!!!
+codegraph install
+# Billion Context
+npm install -g billion-context
+bili plugin install opencode
 # Context7
 npx ctx7 setup --opencode
 # OpenAgentControl
@@ -130,10 +135,14 @@ bun add --global @fission-ai/openspec@latest
 npx skills@latest add mattpocock/skills
 ```
 
+
+Or all-together
 ```bash
 npx ctx7 setup --opencode && \
-npx @guard22/opencode-tps-meter install && \
 npx skills@latest add mattpocock/skills && \
+npm install opencode-tps-meter && \
+npm install -g billion-context && \
+bili plugin install opencode && \
 pip install 'markitdown[all]' && pip install markitdown-mcp && \
 bun add --global @fission-ai/openspec@latest && \
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
