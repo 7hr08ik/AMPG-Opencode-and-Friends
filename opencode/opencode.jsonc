@@ -1,4 +1,5 @@
 {
+  "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
   "lsp": true,
   "permission": {
@@ -14,6 +15,7 @@
     "instructions/common/*.md"
   ],
   "plugins": [
+    "opencode/plugins/*.ts",
     "billion-context",
     "opencode-tps-meter@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",
