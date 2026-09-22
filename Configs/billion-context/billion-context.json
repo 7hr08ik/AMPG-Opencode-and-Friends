@@ -1,0 +1,41 @@
+{
+  "port": 8787,
+  "host": "127.0.0.1",
+  "providers": {
+    "http://10.69.30.23:13305/v1": {
+      "models": {
+        "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
+          "context": 200000,
+          "output": 8192
+        },
+        "Qwen3.6-35B-A3B-MTP-GGUF": {
+          "context": 200000,
+          "output": 8192
+        },
+        "Qwopus3.5-9B-Coder-MTP": {
+          "context": 200000,
+          "output": 8192
+        }
+      }
+    }
+  },
+  "compressProtocol": "tools",
+  "compress": {
+    "maxContextLimit": "80%",
+    "emergencyThresholdPercent": "95%",
+    "preserveRecentMessages": "5",
+    "protectedLatestTools": [
+      "todo_list",
+      "TodoWrite"
+    ],
+    "protectedTools": [
+      "skill",
+      "compress",
+		  "**/AGENTS.md",
+      "**/instructions/INSTRUCTIONS.md",
+      "**/instructions/LAWS.md",
+      "**/instructions/common/*.md",
+      "**/rules/*/*.md"
+    ]
+  }
+}
