@@ -11,5 +11,9 @@
     "scrollbar": false,
     "thinking": "hide"
   },
-  "animations": true
+  "animations": true,
+  "attention": {
+    "sound": true,
+    "notifications": true
+  }
 }
