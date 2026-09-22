@@ -12,10 +12,10 @@
     "AGENTS.md",
     "instructions/INSTRUCTIONS.md",
     "instructions/LAWS.md",
-    "instructions/common/*.md"
+    "instructions/common/*.md",
+    "rules/*/*.md"
   ],
   "plugins": [
-    "opencode/plugins/*.ts",
     "billion-context",
     "opencode-tps-meter@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",

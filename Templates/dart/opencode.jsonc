@@ -1,5 +1,0 @@
-{
-  "instructions": [
-    ".opencode/rules/**/*.md"
-  ]
-}

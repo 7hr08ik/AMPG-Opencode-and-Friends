@@ -30,7 +30,7 @@
     ],
     "protectedTools": [
       "skill",
-      "compress",
+      "skill_*",
 		  "**/AGENTS.md",
       "**/instructions/INSTRUCTIONS.md",
       "**/instructions/LAWS.md",

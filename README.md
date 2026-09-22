@@ -104,7 +104,7 @@ curl -fsSL https://opencode.ai/v2/install | bash
 ### 4.3. Copy over the Opencode setup
 
   - Download this repo.
-  - Copy/paste the `Opencode` folder contents into `~/.config/opencode`.
+  - Copy/paste the contents of `Configs` folder into `~/.config/`.
   - Overwrite everything when asked.
 
 ### 4.4. Plugins
