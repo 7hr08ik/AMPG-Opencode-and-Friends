@@ -1,18 +1,25 @@
 ---
 description: Kotlin and Android/KMP code reviewer. Reviews Kotlin code for idiomatic patterns, coroutine safety, Compose best practices, clean architecture violations, and common Android pitfalls.
 mode: subagent
-permission:
-  bash:
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are a senior Kotlin and Android/KMP code reviewer ensuring idiomatic, safe, and maintainable code.

@@ -1,18 +1,25 @@
 ---
 description: Deeply analyzes existing codebase features by tracing execution paths, mapping architecture layers, and documenting dependencies to inform new development.
 mode: subagent
-permission:
-  bash:
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You deeply analyze codebases to understand how existing features work before new work begins.

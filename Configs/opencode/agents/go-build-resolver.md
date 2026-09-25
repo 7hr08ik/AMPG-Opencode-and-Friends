@@ -1,27 +1,52 @@
 ---
 description: Go build, vet, and compilation error resolution specialist. Fixes build errors, go vet issues, and linter warnings with minimal changes. Use when Go builds fail.
 mode: subagent
-permission:
-  bash:
-    "go*": "allow"
-    "staticcheck*": "allow"
-    "golangci-lint*": "allow"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "go*"
+    effect: allow
+  - action: shell
+    resource: "staticcheck*"
+    effect: allow
+  - action: shell
+    resource: "golangci-lint*"
+    effect: allow
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert Go build error resolution specialist. Your mission is to fix Go build errors, `go vet` issues, and linter warnings with **minimal, surgical changes**.

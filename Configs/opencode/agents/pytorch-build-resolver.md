@@ -1,28 +1,55 @@
 ---
 description: PyTorch runtime, CUDA, and training error resolution specialist. Fixes tensor shape mismatches, device errors, gradient issues, DataLoader problems, and mixed precision failures with minimal changes. Use when PyTorch training or inference crashes.
 mode: subagent
-permission:
-  bash:
-    "python*": "allow"
-    "pip*": "allow"
-    "nvidia-smi*": "allow"
-    "pip install*": "ask"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "python*"
+    effect: allow
+  - action: shell
+    resource: "pip*"
+    effect: allow
+  - action: shell
+    resource: "nvidia-smi*"
+    effect: allow
+  - action: shell
+    resource: "pip install*"
+    effect: ask
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert PyTorch error resolution specialist. Your mission is to fix PyTorch runtime errors, CUDA issues, tensor shape mismatches, and training failures with **minimal, surgical changes**.

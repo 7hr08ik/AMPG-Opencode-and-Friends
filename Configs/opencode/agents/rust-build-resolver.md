@@ -1,26 +1,49 @@
 ---
 description: Rust build, compilation, and dependency error resolution specialist. Fixes cargo build errors, borrow checker issues, and Cargo.toml problems with minimal changes. Use when Rust builds fail.
 mode: subagent
-permission:
-  bash:
-    "cargo*": "allow"
-    "rustc*": "allow"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "cargo*"
+    effect: allow
+  - action: shell
+    resource: "rustc*"
+    effect: allow
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert Rust build error resolution specialist. Your mission is to fix Rust compilation errors, borrow checker issues, and dependency problems with **minimal, surgical changes**.

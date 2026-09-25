@@ -1,26 +1,49 @@
 ---
 description: Kotlin/Gradle build, compilation, and dependency error resolution specialist. Fixes build errors, Kotlin compiler errors, and Gradle issues with minimal changes. Use when Kotlin builds fail.
 mode: subagent
-permission:
-  bash:
-    "./gradlew*": "allow"
-    "gradle*": "allow"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "./gradlew*"
+    effect: allow
+  - action: shell
+    resource: "gradle*"
+    effect: allow
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert Kotlin/Gradle build error resolution specialist. Your mission is to fix Kotlin build errors, Gradle configuration issues, and dependency resolution failures with **minimal, surgical changes**.

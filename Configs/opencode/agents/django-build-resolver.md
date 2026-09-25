@@ -1,29 +1,58 @@
 ---
 description: Django/Python build, migration, and dependency error resolution specialist. Fixes pip/Poetry errors, migration conflicts, import errors, Django configuration issues, and collectstatic failures with minimal changes. Use when Django setup or startup fails.
 mode: subagent
-permission:
-  bash:
-    "python*": "allow"
-    "pip*": "allow"
-    "poetry*": "allow"
-    "pip install*": "ask"
-    "pip install --system*": "deny"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "python*"
+    effect: allow
+  - action: shell
+    resource: "pip*"
+    effect: allow
+  - action: shell
+    resource: "poetry*"
+    effect: allow
+  - action: shell
+    resource: "pip install*"
+    effect: ask
+  - action: shell
+    resource: "pip install --system*"
+    effect: deny
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert Django/Python error resolution specialist. Your mission is to fix build errors, migration conflicts, import failures, dependency issues, and Django startup errors with **minimal, surgical changes**.

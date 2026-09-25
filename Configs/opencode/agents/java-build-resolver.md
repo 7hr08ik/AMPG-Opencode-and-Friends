@@ -1,29 +1,58 @@
 ---
 description: Java/Maven/Gradle build, compilation, and dependency error resolution specialist. Automatically detects Spring Boot or Quarkus and applies framework-specific fixes. Fixes build errors, Java compiler errors, and Maven/Gradle issues with minimal changes. Use when Java builds fail.
 mode: subagent
-permission:
-  bash:
-    "./mvnw*": "allow"
-    "mvn*": "allow"
-    "./gradlew*": "allow"
-    "gradle*": "allow"
-    "java*": "allow"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "./mvnw*"
+    effect: allow
+  - action: shell
+    resource: "mvn*"
+    effect: allow
+  - action: shell
+    resource: "./gradlew*"
+    effect: allow
+  - action: shell
+    resource: "gradle*"
+    effect: allow
+  - action: shell
+    resource: "java*"
+    effect: allow
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert Java/Maven/Gradle build error resolution specialist. Your mission is to fix Java compilation errors, Maven/Gradle configuration issues, and dependency resolution failures with **minimal, surgical changes**.

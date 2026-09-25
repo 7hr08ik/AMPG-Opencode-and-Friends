@@ -1,42 +1,97 @@
 ---
 description: Documentation and codemap specialist. Use PROACTIVELY for updating codemaps and documentation. Runs /update-codemaps and /update-docs, generates docs/CODEMAPS/*, updates READMEs and guides.
 mode: subagent
-permission:
-  bash:
-    "npx tsc*": "allow"
-    "npx eslint*": "allow"
-    "npx prettier*": "allow"
-    "npx madge*": "allow"
-    "npx jsdoc2md*": "allow"
-    "npx tsx*": "allow"
-    "next build*": "allow"
-    "vite build*": "allow"
-    "webpack*": "allow"
-    "npm run build*": "allow"
-    "npm run typecheck*": "allow"
-    "npm run lint*": "allow"
-    "npm run format*": "allow"
-    "npm run*": "allow"
-    "npm ls*": "allow"
-    "npm dedupe*": "allow"
-    "npm install*": "ask"
-    "npm install -g *": "deny"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "npx tsc*"
+    effect: allow
+  - action: shell
+    resource: "npx eslint*"
+    effect: allow
+  - action: shell
+    resource: "npx prettier*"
+    effect: allow
+  - action: shell
+    resource: "npx madge*"
+    effect: allow
+  - action: shell
+    resource: "npx jsdoc2md*"
+    effect: allow
+  - action: shell
+    resource: "npx tsx*"
+    effect: allow
+  - action: shell
+    resource: "next build*"
+    effect: allow
+  - action: shell
+    resource: "vite build*"
+    effect: allow
+  - action: shell
+    resource: "webpack*"
+    effect: allow
+  - action: shell
+    resource: "npm run build*"
+    effect: allow
+  - action: shell
+    resource: "npm run typecheck*"
+    effect: allow
+  - action: shell
+    resource: "npm run lint*"
+    effect: allow
+  - action: shell
+    resource: "npm run format*"
+    effect: allow
+  - action: shell
+    resource: "npm run*"
+    effect: allow
+  - action: shell
+    resource: "npm ls*"
+    effect: allow
+  - action: shell
+    resource: "npm dedupe*"
+    effect: allow
+  - action: shell
+    resource: "npm install*"
+    effect: ask
+  - action: shell
+    resource: "npm install -g *"
+    effect: deny
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are a documentation specialist focused on keeping codemaps and documentation current with the codebase. Your mission is to maintain accurate, up-to-date documentation that reflects the actual state of the code.

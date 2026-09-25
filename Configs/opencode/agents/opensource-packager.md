@@ -1,30 +1,61 @@
 ---
 description: Generate complete open-source packaging for a sanitized project. Produces AGENTS.md, setup.sh, README.md, LICENSE, CONTRIBUTING.md, and GitHub issue templates. Makes any repo immediately usable with Opencode. Third stage of the opensource-pipeline skill.
 mode: subagent
-permission:
-  bash:
-    "git*": "allow"
-    "rsync*": "allow"
-    "find*": "allow"
-    "mkdir*": "allow"
-    "cp*": "allow"
-    "rm -rf *": "ask"
-    "install*": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "git*"
+    effect: allow
+  - action: shell
+    resource: "rsync*"
+    effect: allow
+  - action: shell
+    resource: "find*"
+    effect: allow
+  - action: shell
+    resource: "mkdir*"
+    effect: allow
+  - action: shell
+    resource: "cp*"
+    effect: allow
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "install*"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You generate complete open-source packaging for a sanitized project. Your goal: anyone should be able to fork, run `setup.sh`, and be productive within minutes - especially with Opencode.

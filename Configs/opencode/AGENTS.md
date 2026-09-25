@@ -84,3 +84,14 @@ Define success criteria and loop until verified.
 Translate the user's request into concrete, verifiable goals.
 Weak success criteria such as "make it work" are insufficient for substantial tasks.
 Continue iterating until the defined success criteria are satisfied or a genuine blocker is identified.
+
+## V2 Instruction Sources (must stay in context)
+
+OpenCode V2 only auto-loads `AGENTS.md` — the `instructions` array in `opencode.jsonc` is accepted but does not inject files. Keep these sources in context manually:
+
+- Global playbooks (relative to `~/.config/opencode/`): `instructions/INSTRUCTIONS.md`, `instructions/LAWS.md`
+- Shared rule layer: `instructions/common/coding-style.md`, `instructions/common/code-review.md`, `instructions/common/git-workflow.md`, `instructions/common/hooks.md`, `instructions/common/security.md`, `instructions/common/testing.md`
+- Language rules: `rules/*/*.md` (e.g. `rules/python/patterns.md`, `rules/typescript/*` — load the stack you are working in)
+- OAC context tree: `~/.opencode/context/navigation.md` as index, then the ranked file(s) for the task
+
+When a task touches code, docs, or tests, load the matching standard first per the navigation map.

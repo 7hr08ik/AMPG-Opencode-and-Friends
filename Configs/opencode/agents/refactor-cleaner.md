@@ -1,32 +1,67 @@
 ---
 description: Dead code cleanup and consolidation specialist. Use PROACTIVELY for removing unused code, duplicates, and refactoring. Runs analysis tools (knip, depcheck, ts-prune) to identify dead code and safely removes it.
 mode: subagent
-permission:
-  bash:
-    "npx knip*": "allow"
-    "npx depcheck*": "allow"
-    "npx ts-prune*": "allow"
-    "npx lighthouse*": "allow"
-    "npx bundle-analyzer*": "allow"
-    "npx webpack-bundle-analyzer*": "allow"
-    "npm audit*": "allow"
-    "npm install*": "ask"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "npx knip*"
+    effect: allow
+  - action: shell
+    resource: "npx depcheck*"
+    effect: allow
+  - action: shell
+    resource: "npx ts-prune*"
+    effect: allow
+  - action: shell
+    resource: "npx lighthouse*"
+    effect: allow
+  - action: shell
+    resource: "npx bundle-analyzer*"
+    effect: allow
+  - action: shell
+    resource: "npx webpack-bundle-analyzer*"
+    effect: allow
+  - action: shell
+    resource: "npm audit*"
+    effect: allow
+  - action: shell
+    resource: "npm install*"
+    effect: ask
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert refactoring specialist focused on code cleanup and consolidation. Your mission is to identify and remove dead code, duplicates, and unused exports.

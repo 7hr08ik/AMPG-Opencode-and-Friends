@@ -1,42 +1,97 @@
 ---
 description: Build and TypeScript error resolution specialist. Use PROACTIVELY when build fails or type errors occur. Fixes build/type errors only with minimal diffs, no architectural edits. Focuses on getting the build green quickly.
 mode: subagent
-permission:
-  bash:
-    "npx tsc*": "allow"
-    "npx eslint*": "allow"
-    "npx prettier*": "allow"
-    "npx madge*": "allow"
-    "npx jsdoc2md*": "allow"
-    "npx tsx*": "allow"
-    "next build*": "allow"
-    "vite build*": "allow"
-    "webpack*": "allow"
-    "npm run build*": "allow"
-    "npm run typecheck*": "allow"
-    "npm run lint*": "allow"
-    "npm run format*": "allow"
-    "npm run*": "allow"
-    "npm ls*": "allow"
-    "npm dedupe*": "allow"
-    "npm install*": "ask"
-    "npm install -g *": "deny"
-    "rm -rf *": "ask"
-    "sudo *": "deny"
-    "*": "deny"
-  edit:
-    "*": "allow"
-    "**/*.env*": "deny"
-    "**/*.key": "deny"
-    "**/*.secret": "deny"
-    "node_modules/**": "deny"
-    ".git/**": "deny"
-  glob:
-    "*": "allow"
-  grep:
-    "*": "allow"
-  read:
-    "*": "allow"
+permissions:
+  - action: shell
+    resource: "npx tsc*"
+    effect: allow
+  - action: shell
+    resource: "npx eslint*"
+    effect: allow
+  - action: shell
+    resource: "npx prettier*"
+    effect: allow
+  - action: shell
+    resource: "npx madge*"
+    effect: allow
+  - action: shell
+    resource: "npx jsdoc2md*"
+    effect: allow
+  - action: shell
+    resource: "npx tsx*"
+    effect: allow
+  - action: shell
+    resource: "next build*"
+    effect: allow
+  - action: shell
+    resource: "vite build*"
+    effect: allow
+  - action: shell
+    resource: "webpack*"
+    effect: allow
+  - action: shell
+    resource: "npm run build*"
+    effect: allow
+  - action: shell
+    resource: "npm run typecheck*"
+    effect: allow
+  - action: shell
+    resource: "npm run lint*"
+    effect: allow
+  - action: shell
+    resource: "npm run format*"
+    effect: allow
+  - action: shell
+    resource: "npm run*"
+    effect: allow
+  - action: shell
+    resource: "npm ls*"
+    effect: allow
+  - action: shell
+    resource: "npm dedupe*"
+    effect: allow
+  - action: shell
+    resource: "npm install*"
+    effect: ask
+  - action: shell
+    resource: "npm install -g *"
+    effect: deny
+  - action: shell
+    resource: "rm -rf *"
+    effect: ask
+  - action: shell
+    resource: "sudo *"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: edit
+    resource: "**/*.env*"
+    effect: deny
+  - action: edit
+    resource: "**/*.key"
+    effect: deny
+  - action: edit
+    resource: "**/*.secret"
+    effect: deny
+  - action: edit
+    resource: "node_modules/**"
+    effect: deny
+  - action: edit
+    resource: ".git/**"
+    effect: deny
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
 ---
 
 You are an expert build error resolution specialist. Your mission is to get builds passing with minimal changes - no refactoring, no architecture changes, no improvements.
