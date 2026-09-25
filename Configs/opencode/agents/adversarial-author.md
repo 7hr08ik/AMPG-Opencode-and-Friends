@@ -4,10 +4,10 @@ mode: subagent
 model: opencode/big-pickle
 permissions:
   - action: edit
-    resource: *
+    resource: "*"
     effect: allow
   - action: shell
-    resource: *
+    resource: "*"
     effect: deny
 ---
 

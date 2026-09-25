@@ -5,7 +5,7 @@
 
 ---
 
-## Executive Summary
+## 1. Executive Summary
 
 This proposal maps 7 of the 10 NASA safety-critical coding rules to specific locations within the OpenCode template. Rules 1 (no recursion), 8 (preprocessor limits), and 9 (pointer restrictions) are excluded as they are personal preferences out of scope for this template project.
 
@@ -20,9 +20,9 @@ The implementation strategy uses a **hybrid approach**:
 
 ---
 
-## Rule-by-Rule Analysis
+## 2. Rule-by-Rule Analysis
 
-### Rule 2: All Loops Must Have Fixed Upper-Bound
+### 2.1. Rule 2: All Loops Must Have Fixed Upper-Bound
 
 **What**: Loops must have statically provable iteration bounds.
 
@@ -64,7 +64,7 @@ function checkLoopBounds(content: string): string[] {
 
 ---
 
-### Rule 3: No Dynamic Memory Allocation After Initialization
+### 2.2. Rule 3: No Dynamic Memory Allocation After Initialization
 
 **What**: No malloc/free after init. Use stack or pre-allocated memory.
 
@@ -107,7 +107,7 @@ function checkUnboundedGrowth(content: string): string[] {
 
 ---
 
-### Rule 4: Functions ≤60 Lines (One Page)
+### 2.3. Rule 4: Functions ≤60 Lines (One Page)
 
 **What**: No function longer than what fits on one page (≈60 lines).
 
@@ -131,7 +131,7 @@ const funcsize = 60;  // NASA standard: one page
 
 ---
 
-### Rule 5: Minimum 2 Assertions Per Function
+### 2.4. Rule 5: Minimum 2 Assertions Per Function
 
 **What**: Each function should have ≥2 assertions (side-effect free Boolean tests with recovery).
 
@@ -182,7 +182,7 @@ function checkAssertionDensity(content: string): string[] {
 
 ---
 
-### Rule 6: Data at Smallest Possible Scope
+### 2.5. Rule 6: Data at Smallest Possible Scope
 
 **What**: Declare variables at the smallest scope possible.
 
@@ -228,7 +228,7 @@ function checkVariableScope(content: string): string[] {
 
 ---
 
-### Rule 7: Check Return Values, Validate Parameters
+### 2.6. Rule 7: Check Return Values, Validate Parameters
 
 **What**: Always check return values of non-void functions; validate parameters inside functions.
 
@@ -271,7 +271,7 @@ function checkIgnoredReturnValues(content: string): string[] {
 
 ---
 
-### Rule 10: Zero Warnings, Daily Static Analysis
+### 2.7. Rule 10: Zero Warnings, Daily Static Analysis
 
 **What**: Compile with all warnings enabled. Zero warnings. Daily static analysis.
 
@@ -289,7 +289,7 @@ function checkIgnoredReturnValues(content: string): string[] {
 **Implementation Details**:
 ```typescript
 // In development-workflow.md
-## Static Analysis
+## 3. Static Analysis
 
 - Run language-specific compiler with strict warnings before commits
 - Use language-appropriate linter with strict ruleset
@@ -306,7 +306,7 @@ function checkIgnoredReturnValues(content: string): string[] {
 
 ---
 
-## Implementation Priority
+## 4. Implementation Priority
 
 | Priority | Rule | Location | Effort |
 |----------|------|----------|--------|
@@ -320,12 +320,12 @@ function checkIgnoredReturnValues(content: string): string[] {
 
 ---
 
-## Proposed File Changes
+## 5. Proposed File Changes
 
-### 1. `AGENTS.md` — Add NASA Rules Section
+### 5.1. `AGENTS.md` — Add NASA Rules Section
 
 ```markdown
-## Safety-Critical Coding Rules (NASA Power of Ten)
+#### 5.1.1. Safety-Critical Coding Rules (NASA Power of Ten)
 
 For safety-critical code, follow these additional rules:
 
@@ -338,38 +338,38 @@ For safety-critical code, follow these additional rules:
 10. **Zero warnings** — Compile strict; run static analysis daily
 ```
 
-### 2. `instructions/common/coding-style.md` — Add NASA Sections
+### 5.2. `instructions/common/coding-style.md` — Add NASA Sections
 
 ```markdown
-## Loop Bounds
+#### 5.2.1. Loop Bounds
 - All loops must have fixed upper-bound
 - Statically provable iteration limits
 
-## Function Size
+#### 5.2.2. Function Size
 - Maximum 60 lines (one page)
 - One logical unit per function
 
-## Assertion Density
+#### 5.2.3. Assertion Density
 - Minimum 2 assertions per function
 - Side-effect free Boolean tests
 - Recovery actions on failure
 
-## Variable Scope
+#### 5.2.4. Variable Scope
 - Declare at smallest possible scope
 - Avoid reusing variables for multiple purposes
 
-## Return Value Checking
+#### 5.2.5. Return Value Checking
 - Always check return values of non-void functions
 - Validate parameters inside each function
-- Cast to (void) only when response is identical to success
+- Cast to (void) only when response is ident##ical to success
 
-## Static Analysis
+#### 5.2.6. Static Analysis
 - Compile with all warnings enabled
 - Zero warnings policy
 - Daily static analysis with state-of-the-art tools
 ```
 
-### 3. `opencode/plugins/coding-style.ts` — Add New Checks
+### 5.3. `opencode/plugins/coding-style.ts` — Add New Checks
 
 ```typescript
 // Add to checkFunctions or create new check functions (language-agnostic patterns):
@@ -381,17 +381,17 @@ For safety-critical code, follow these additional rules:
 const funcsize = 60;
 ```
 
-### 4. `opencode/plugins/linting.ts` — Add Return Value Check
+### 5.4. `opencode/plugins/linting.ts` — Add Return Value Check
 
 ```typescript
 // Add rule to detect ignored return values
 function checkIgnoredReturnValues(content: string): string[]
 ```
 
-### 5. `instructions/common/development-workflow.md` — Add Static Analysis
+### 5.5. `instructions/common/development-workflow.md` — Add Static Analysis
 
 ```markdown
-## Static Analysis
+#### 5.5.1. Static Analysis
 
 - Run before every commit: `npx tsc --strict --noEmit`
 - Run daily: `npx eslint src/ --max-warnings 0`
@@ -401,7 +401,7 @@ function checkIgnoredReturnValues(content: string): string[]
 
 ---
 
-## Testing Strategy
+## 6. Testing Strategy
 
 Add tests to `opencode/plugins/__tests__/behavioral.test.ts`:
 
@@ -432,69 +432,3 @@ describe("NASA Rule 7: Return Value Checking", () => {
 ```
 
 ---
-
-## Migration Path
-
-### Phase 1 (Immediate)
-- [ ] Update `funcsize` from 50 to 60
-- [ ] Add NASA Rules section to AGENTS.md
-- [ ] Update coding-style.md with NASA sections
-
-### Phase 2 (This Week)
-- [ ] Implement `checkLoopBounds()` in coding-style.ts
-- [ ] Implement `checkAssertionDensity()` in coding-style.ts
-- [ ] Implement `checkIgnoredReturnValues()` in linting.ts
-- [ ] Add tests for new checks
-
-### Phase 3 (Next Week)
-- [ ] Implement `checkVariableScope()` in coding-style.ts
-- [ ] Add static analysis workflow to development-workflow.md
-- [ ] Update funcsize from 50 to 60
-
-### Phase 4 (Ongoing)
-- [ ] Monitor violation rates
-- [ ] Adjust thresholds based on team feedback
-- [ ] Add more sophisticated AST-based checks
-
----
-
-## Expected Benefits
-
-1. **Improved verifiability** — Simpler control flow enables better static analysis
-2. **Fewer defects** — Assertions and return value checking catch issues early
-3. **Better maintainability** — Small functions and variables are easier to understand
-4. **Faster debugging** — Smaller scope = fewer places to look for bugs
-5. **Higher confidence** — Zero warnings + static analysis = fewer surprises
-
----
-
-## Trade-offs
-
-| Trade-off | Mitigation |
-|-----------|------------|
-| Stricter rules may slow development | Focus on critical code first; relax for prototypes |
-| Assertion overhead in production | Use conditional compilation to disable assertions |
-| Loop bound checking may be complex | Start with simple patterns; use AST for accuracy |
-| Zero warnings may require suppressing false positives | Rewrite confusing code; document exceptions |
-
----
-
-## Conclusion
-
-The NASA Power of Ten rules provide a proven foundation for safety-critical code. By integrating 7 of the 10 rules into the OpenCode template, we can:
-
-1. **Enforce** key safety principles automatically via plugins
-2. **Document** expectations clearly in AGENTS.md and instructions
-3. **Measure** compliance via test coverage and violation tracking
-
-Rules 1 (no recursion), 8 (preprocessor limits), and 9 (pointer restrictions) are excluded as they are personal preferences out of scope for this template project.
-
-The implementation is language-agnostic and applies to any programming language supported by OpenCode. The implementation is incremental — start with P0/P1 rules and expand based on team adoption and feedback.
-
----
-
-**Next Steps**:
-1. Review this proposal with the team
-2. Approve P0/P1 implementation
-3. Schedule Phase 2-3 implementation
-4. Monitor violation rates and adjust

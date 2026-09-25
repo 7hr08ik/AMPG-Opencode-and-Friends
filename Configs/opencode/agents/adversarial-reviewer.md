@@ -4,10 +4,10 @@ mode: subagent
 model: openai/gpt-5.5
 permissions:
   - action: edit
-    resource: *
+    resource: "*"
     effect: allow
   - action: shell
-    resource: *
+    resource: "*"
     effect: deny
 ---
 

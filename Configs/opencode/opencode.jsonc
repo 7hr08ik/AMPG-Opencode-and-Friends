@@ -24,13 +24,6 @@
   ],
   "snapshots": true,
   "media": { "image": { "auto_resize": true } },
-  "instructions": [
-    "AGENTS.md",
-    "instructions/INSTRUCTIONS.md",
-    "instructions/LAWS.md",
-    "instructions/common/*.md",
-    "rules/*/*.md"
-  ],
   "plugins": [
     "billion-context",
     "opencode-tps-meter@latest",
