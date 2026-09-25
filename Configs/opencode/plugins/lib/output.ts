@@ -1,19 +1,31 @@
 /**
  * Plugin output utility - writes warnings and errors as toast notifications.
  *
- * Uses the same approach as the true-mem plugin:
- * https://github.com/rizal72/true-mem/blob/main/src/utils/toast.ts
+ * V2-compatible: accepts either a V1 client, a V2 plugin context, or
+ * undefined. Toast shapes from `client.tui` (V1) and `ctx.tui` (V2) are
+ * both attempted before falling back to stdout/stderr.
  *
- * When a client is provided, routes through toast notifications.
- * Falls back to process.stdout.write when no client is available.
+ * When no toast API is available, routes through process stdout/stderr.
  */
 
-/** Minimal client shape from OpenCode's PluginInput. */
-interface PluginClient {
-  tui: {
-    showToast(input: { body: { title?: string; message: string; variant: "info" | "success" | "error" | "warning"; duration?: number } }): Promise<any>
+interface ToastInput {
+  body: {
+    title?: string
+    message: string
+    variant: "info" | "success" | "error" | "warning"
+    duration?: number
   }
 }
+
+interface ToastApi {
+  showToast(input: ToastInput): Promise<any>
+}
+
+/** Minimal shapes from V1 PluginInput and V2 plugin context. */
+type ToastClient =
+  | { tui: ToastApi }
+  | { client: { tui: ToastApi } }
+  | undefined
 
 const YELLOW = "\x1b[33m"
 const RESET = "\x1b[0m"
@@ -22,14 +34,24 @@ function formatMessage(prefix: string, message: string): string {
   return `${YELLOW}${prefix}${RESET} ${message}`
 }
 
+function resolveToast(client: unknown): ToastApi | undefined {
+  if (!client || typeof client !== "object") return undefined
+  const direct = (client as { tui?: ToastApi }).tui
+  if (direct && typeof direct.showToast === "function") return direct
+  const nested = (client as { client?: { tui?: ToastApi } }).client?.tui
+  if (nested && typeof nested.showToast === "function") return nested
+  return undefined
+}
+
 /**
  * Print a warning message as a toast notification.
  * When a client is provided, routes through toast notifications instead of stdout.
  */
-export async function warn(client: PluginClient | undefined, message: string): Promise<void> {
+export async function warn(client: ToastClient | unknown, message: string): Promise<void> {
   const formatted = formatMessage("[Plugin Warning]", message)
-  if (client) {
-    await client.tui.showToast({
+  const toast = resolveToast(client)
+  if (toast) {
+    await toast.showToast({
       body: {
         title: "Plugin Warning",
         message,
@@ -38,7 +60,7 @@ export async function warn(client: PluginClient | undefined, message: string): P
       },
     })
   } else {
-    process.stdout.write(formatted + "\n")
+    process.stdout.write(`${formatted}\n`)
   }
 }
 
@@ -46,10 +68,11 @@ export async function warn(client: PluginClient | undefined, message: string): P
  * Print an error message as a toast notification.
  * When a client is provided, routes through toast notifications instead of stdout.
  */
-export async function error(client: PluginClient | undefined, message: string): Promise<void> {
+export async function error(client: ToastClient | unknown, message: string): Promise<void> {
   const formatted = formatMessage("[Plugin Error]", message)
-  if (client) {
-    await client.tui.showToast({
+  const toast = resolveToast(client)
+  if (toast) {
+    await toast.showToast({
       body: {
         title: "Plugin Error",
         message,
@@ -58,6 +81,6 @@ export async function error(client: PluginClient | undefined, message: string): 
       },
     })
   } else {
-    process.stdout.write(formatted + "\n")
+    process.stdout.write(`${formatted}\n`)
   }
 }

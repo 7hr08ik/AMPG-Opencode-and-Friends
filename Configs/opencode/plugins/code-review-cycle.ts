@@ -1,49 +1,11 @@
+import type { Plugin } from "@opencode-ai/plugin"
 import { readFile } from "node:fs/promises"
+import { isWriteTool } from "./lib/guards.ts"
+import { warn } from "./lib/output.ts"
 
-/**
- * Code Review Cycle Plugin - OpenCode **V1** edition.
- * V2 original: ../plugins/code-review-cycle.ts (keep behavior in sync).
- *
- * Enforces the review policy from instructions/common/code-review.md
- *
- * Mandatory triggers covered:
- * - After writing or modifying code  -> tracked + nudged (warn-only for ordinary code)
- * - Before commit to shared branches -> commit gate below applies to every branch
- *    (branch detection would need subprocesses inside the hook; deferred)
- * - Security-sensitive code changed  -> HARD gate: commits are blocked until the
- *    commit message carries a review trailer
- * - Pre-review: conflicts resolved   -> HARD gate: session-modified files containing
- *    merge-conflict markers block the commit
- * - CI passing / branch up to date   -> NOT enforceable locally; left to real CI.
- *    `gh pr merge` / `git push` get a soft reminder nudge.
- *
- * Acknowledgment signal:
- *   A commit message containing the trailer  Code-Review: reviewed  (or "approved",
- *   case-insensitive) marks pending security-sensitive modifications as reviewed.
- *   Run the /code-review command before adding it.
- *
- * Strictness: hybrid.
- *   - HARD block: security-sensitive paths unreviewed, conflict markers present.
- *   - Soft nudge: ordinary modifications (every Nth edit + at commit time + idle audit).
- *
- * V1 API deltas vs the V2 version (do not "fix" these here):
- * - Registration: named-export async factory returning a Hooks object
- *   (V2 uses `export default Plugin.define({ id, setup })`).
- * - Shell tool id is `bash` (V2 renamed it to `shell`).
- * - File inputs arrive as `args.filePath` (V2 uses `args.path`).
- * - Session-end work rides the `event` hook (`session.idle`); V1 has no
- *   subscribe/dispose API, so no cleanup function is returned.
- * - Warnings go through the TUI toast when a client is available, falling back
- *   to stdout (self-contained; does not depend on ./lib/output.ts).
- */
-
-/** Commit-message trailer that acknowledges a completed review. */
-const TRAILER_PATTERN = /Code-Review:\s*(reviewed|approved)\b/i
-
-/** Emit an ordinary-modification reminder after this many unreviewed edits. */
+const TRAILER_PATTERN = /^Code-Review:\s*(reviewed|approved)\s*$/im
 const NUDGE_EVERY = 5
 
-/** Path fragments treated as security-sensitive (hard gate). Edit to taste. */
 const SECURITY_PATH_PATTERNS = [
   /auth/i,
   /login|logout|signin|signup|session/i,
@@ -54,98 +16,99 @@ const SECURITY_PATH_PATTERNS = [
   /(^|[\/\-_.])user(s)?([\/\-_.]|$)|customer|account|profile|gdpr|pii/i,
 ]
 
-function isSecuritySensitive(filePath) {
-  return SECURITY_PATH_PATTERNS.some((p) => p.test(filePath))
+const isSecuritySensitive = (filePath: string): boolean =>
+  SECURITY_PATH_PATTERNS.some((p) => p.test(filePath))
+
+const hasConflictMarkers = (content: string): boolean => {
+  const hasStart = /^<{7}( $| )/m.test(content)
+  const hasEnd = /^>{7}( $| )/m.test(content)
+  const hasSeparator = /^={7}( $| )/m.test(content)
+  return hasStart || hasEnd || hasSeparator
 }
 
-function hasConflictMarkers(content) {
-  // Both opening and closing markers somewhere at line starts - strong signal,
-  // avoids false positives from decorative `=======` underlines in markdown.
-  return /^<{7}($| )/m.test(content) && /^>{7}($| )/m.test(content)
-}
-
-/** Extract the full commit message across one or more -m flags. */
-function extractCommitMessage(command) {
+const extractCommitMessage = (command: string): string => {
   let message = ""
-  for (const m of command.matchAll(/-m\s+(["'])([\s\S]+?)\1/g)) {
-    message += `${m[2]}\n`
+  for (const m of command.matchAll(
+    /(-m\s+(?:"([\s\S]*?)"|'([\s\S]*?'|[^\s]*'?))|--message=([\s\S]*?)|-F\s+([\s\S]*?)|-C|-c)\s*/g,
+  )) {
+    if (m[2]) message += `${m[2]}\n`
+    if (m[3]) message += `${m[3]}\n`
+    if (m[4]) message += `${m[4]}\n`
+    if (m[5]) message += `${m[5]}\n`
   }
-  return message
+  return message.trim()
 }
 
-/** Toast via the V1 TUI client when available, otherwise stdout. */
-async function notify(client, message) {
-  try {
-    if (client?.tui && typeof client.tui.showToast === "function") {
-      await client.tui.showToast({
-        body: { title: "Code Review", message, variant: "warning", duration: 5000 },
-      })
-      return
-    }
-  } catch {
-    // Toast unavailable - fall through to stdout.
-  }
-  process.stdout.write(`[Code Review] ${message}\n`)
+const isShellTool = (tool: string): boolean => tool === "bash" || tool === "shell"
+const isCommitCommand = (command: string): boolean => /git\s+commit/.test(command)
+const isPushOrPrCommand = (command: string): boolean =>
+  /git\s+push|gh\s+pr\s+(merge|create)/.test(command)
+
+interface TrackedFile {
+  securitySensitive: boolean
+  reviewed: boolean
 }
 
-export const CodeReviewCyclePlugin = async (ctx) => {
-  const client = ctx.client
-
-  // Files modified this session via write/edit (per plugin instance).
-  const modified = new Map()
+export const CodeReviewCyclePlugin: Plugin = async (ctx, options) => {
+  const modified = new Map<string, TrackedFile>()
   let ordinaryEditsSinceReminder = 0
+  const defaults = {
+    NUDGE_EVERY: 5,
+    extraSecurityPatterns: [] as RegExp[],
+    maxStateSize: 500,
+  }
+  const opts = { ...defaults, ...((options ?? {}) as Partial<typeof defaults>) }
 
-  const track = (filePath) => {
-    // Re-editing a previously reviewed file makes it unreviewed again.
-    const entry = {
+  const track = (filePath: string): TrackedFile => {
+    const entry: TrackedFile = {
       securitySensitive: isSecuritySensitive(filePath),
       reviewed: false,
     }
     modified.set(filePath, entry)
+    if (modified.size > opts.maxStateSize) {
+      const oldest = modified.keys().next().value
+      if (oldest) modified.delete(oldest)
+    }
     return entry
   }
 
-  const hooks = {
-    "tool.execute.after": async (input, output) => {
-      if (input.tool !== "write" && input.tool !== "edit") return
-
-      // V1 file inputs use `filePath` (V2 renamed it to `path`).
-      const filePath = output.args?.filePath
+  return {
+    "tool.execute.after": async (input) => {
+      const tool = String(input.tool ?? "")
+      if (!isWriteTool(tool)) return
+      const args = ((input as Record<string, any>).args ?? {}) as Record<string, any>
+      const filePath = String(args.filePath ?? args.path ?? "")
       if (!filePath) return
 
       const entry = track(filePath)
-
       if (entry.securitySensitive) {
-        await notify(
-          client,
+        await warn(
+          ctx,
           `[Code Review] Security-sensitive file modified: ${filePath}. ` +
-            `Run /code-review before committing, then add the commit message trailer ` +
-            `"Code-Review: reviewed".`,
+            `Run /code-review before committing, then add the commit message trailer "Code-Review: reviewed".`,
         )
         return
       }
 
       ordinaryEditsSinceReminder++
-      if (ordinaryEditsSinceReminder >= NUDGE_EVERY) {
+      if (ordinaryEditsSinceReminder >= opts.NUDGE_EVERY) {
         ordinaryEditsSinceReminder = 0
-        await notify(
-          client,
-          `[Code Review] ${modified.size} file(s) modified this session without a recorded review. ` +
-            `Consider running /code-review.`,
+        await warn(
+          ctx,
+          `[Code Review] ${modified.size} file(s) modified this session without a recorded review. Consider running /code-review.`,
         )
       }
     },
-
     "tool.execute.before": async (input, output) => {
-      // V1 shell tool id is `bash` (V2 renamed it to `shell`).
-      if (input.tool !== "bash") return
-      const command = String(output.args?.command ?? "")
+      const tool = String(input.tool ?? "")
+      if (!isShellTool(tool)) return
+      const args = (output?.args ?? {}) as Record<string, any>
+      const command = String(args.command ?? "")
 
-      // ---- Soft reminders for push / PR operations -----------------------
-      if (/git\s+push|gh\s+pr\s+(merge|create)/.test(command)) {
+      if (isPushOrPrCommand(command)) {
         if (modified.size > 0) {
-          await notify(
-            client,
+          await warn(
+            ctx,
             `[Code Review] Reminder: ${modified.size} file(s) modified this session. ` +
               `Pre-merge requirements: CI passing, conflicts resolved, branch up to date, review complete.`,
           )
@@ -153,13 +116,11 @@ export const CodeReviewCyclePlugin = async (ctx) => {
         return
       }
 
-      // ---- Hard gates for commits ----------------------------------------
-      if (!/git\s+commit/.test(command)) return
+      if (!isCommitCommand(command)) return
 
       const message = extractCommitMessage(command)
       const reviewed = TRAILER_PATTERN.test(message)
 
-      // Gate 1 (sync): reviewed commits acknowledge pending security work.
       const pendingSecurity = [...modified.entries()].filter(
         ([, f]) => f.securitySensitive && !f.reviewed,
       )
@@ -177,9 +138,7 @@ export const CodeReviewCyclePlugin = async (ctx) => {
         }
       }
 
-      // Gate 2 (async I/O): conflict markers in session-modified files.
-      // Awaited inline so a rejection blocks the commit under V1 as well.
-      const conflicted = []
+      const conflicted: string[] = []
       for (const [p] of modified) {
         try {
           const content = await readFile(p, "utf8")
@@ -195,23 +154,19 @@ export const CodeReviewCyclePlugin = async (ctx) => {
         )
       }
 
-      // Soft nudge for ordinary (non-security) commits without a review trailer.
       if (!reviewed && modified.size > 0) {
-        await notify(
-          client,
-          `[Code Review] Committing ${modified.size} session-modified file(s) without a ` +
-            `"Code-Review: reviewed" trailer. Consider running /code-review first.`,
+        await warn(
+          ctx,
+          `[Code Review] Committing ${modified.size} session-modified file(s) without a "Code-Review: reviewed" trailer. Consider running /code-review first.`,
         )
       }
     },
-
     event: async ({ event }) => {
       if (event.type !== "session.idle") return
       if (modified.size === 0) return
-
       const security = [...modified.entries()].filter(([, f]) => f.securitySensitive)
-      await notify(
-        client,
+      await warn(
+        ctx,
         `[Code Review Audit] ${modified.size} file(s) modified this session` +
           (security.length > 0
             ? `, including ${security.length} security-sensitive (${security.map(([p]) => p).join(", ")})`
@@ -222,6 +177,14 @@ export const CodeReviewCyclePlugin = async (ctx) => {
       ordinaryEditsSinceReminder = 0
     },
   }
+}
 
-  return hooks
+// Default export satisfies the V2 PluginSupervisor, which requires a
+// default definition with an id and an effect or setup function.
+// Tool interception lives in `server` (SDK Hooks shape); setup is a
+// no-op because this plugin registers no skills or session hooks.
+export default {
+  id: "code-review-cycle",
+  server: CodeReviewCyclePlugin,
+  setup: async () => {},
 }

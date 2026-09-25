@@ -1,130 +1,140 @@
-import type { Plugin, Hooks, PluginInput } from "@opencode-ai/plugin"
-import { error, warn } from "./lib/output.js"
+import type { Plugin } from "@opencode-ai/plugin"
+import { isWriteTool } from "./lib/guards.ts"
 
-/**
- * Security Plugin - Prevents secret leakage and blocks dangerous commands
- *
- * Behavior:
- * - tool.execute.before: Scans write/edit content and bash commands for secret patterns
- *   (cloud provider keys, platform tokens, private keys, database URIs, plaintext
- *   credentials). Also blocks destructive shell commands such as recursive force-remove
- *   of root, disk formatting, disk overwrite, fork bombs, and system shutdown/reboot.
- * - tool.execute.after: Re-scans written content as a second line of defense. If secrets
- *   are found post-write, blocks further execution and prompts the user for handling
- *   (move to .env, use a secrets manager, etc.).
- * - session.idle: Emits an audit report listing all files and secret types detected during
- *   the session, then clears the tracker.
- *
- * Secret categories detected:
- *   - Cloud provider access keys
- *   - Platform API tokens
- *   - PEM-encoded private keys
- *   - Plaintext credentials assigned to recognizable variable names
- *   - Database and cache connection URIs
- */
-
-// Patterns that indicate leaked secrets
 const SECRET_PATTERNS = [
-  { re: /AKIA[0-9A-Z]{16}/g, name: 'AWS Access Key' },
-  { re: /sk-[a-zA-Z0-9]{32,}/g, name: 'Secret Key' },
-  { re: /gh[pousr]_[a-zA-Z0-9]{36,}/g, name: 'GitHub Token' },
-  { re: /-----BEGIN.*PRIVATE KEY-----/g, name: 'Private Key' },
-  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*['"](?!\$)[^'"]{8,}/gi, name: 'Plaintext Credential (quoted)' },
-   { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*(?!\$)(?!\-)[^\s'"<>]{8,}/gi, name: 'Plaintext Credential (unquoted)' },
-  { re: /mongodb(\+srv)?:\/\/[^"'\s$]+/g, name: 'MongoDB Connection String' },
-  { re: /postgres(ql)?:\/\/[^"'\s$]+/g, name: 'PostgreSQL Connection String' },
-  { re: /mysql:\/\/[^"'\s$]+/g, name: 'MySQL Connection String' },
-  { re: /redis:\/\/[^"'\s$]+/g, name: 'Redis Connection String' },
-];
+  { re: /AKIA[0-9A-Z]{16}/g, name: "AWS Access Key" },
+  { re: /sk-[a-zA-Z0-9]{32,}/g, name: "Secret Key" },
+  { re: /gh[pousr]_[a-zA-Z0-9]{36,}/g, name: "GitHub Token" },
+  { re: /-----BEGIN.*PRIVATE KEY-----/g, name: "Private Key" },
+  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*['"](?!\$)[^'"]{8,}/gi, name: "Plaintext Credential (quoted)" },
+  { re: /(password|pwd|secret|api[_-]?key)\s*[:=]\s*(?!\$)(?!\-)[^\s'"<>]{8,}/gi, name: "Plaintext Credential (unquoted)" },
+  { re: /mongodb(\+srv)?:\/\/[^"'\s$]+/g, name: "MongoDB Connection String" },
+  { re: /postgres(ql)?:\/\/[^"'\s$]+/g, name: "PostgreSQL Connection String" },
+  { re: /mysql:\/\/[^"'\s$]+/g, name: "MySQL Connection String" },
+  { re: /redis:\/\/[^"'\s$]+/g, name: "Redis Connection String" },
+]
 
-// Track secrets found during session for audit
-let sessionSecretsFound: Array<{ file: string; secret: string }> = [];
+const DANGEROUS_PATTERNS = [
+  /\brm\s+-rf\b/,
+  /\brm\s+-/,
+  /\brm\s+-r\s+\//,
+  /\brm\s+-rf\s+\./,
+  /\brm\s+-rf\s+\$HOME\b/,
+  /\bshutdown\b/,
+  /\breboot\b/,
+  /\binit\s+[0-6]\b/,
+  /\bchmod\s+-R\s+777\s+\//,
+  /\bchown\s+-R\b/,
+  /:\(\{:\|\:&\)\};:/,
+  /\bcurl\s+|\|\s*sh\b/,
+  /\bwget\s+|\|\s*sh\b/,
+  /eyJ[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+\.[A-Za-z0-9_\-]+/,
+  /sk_live_[A-Za-z0-9_]+/,
+  /xox[b-p][a-z]-[0-9]/,
+]
 
-function scanForSecrets(content: string): Array<{ name: string; match: string }> {
-  const findings: Array<{ name: string; match: string }> = [];
-
+const scanForSecrets = (content: string): Array<{ name: string }> => {
+  const findings: Array<{ name: string }> = []
   for (const pattern of SECRET_PATTERNS) {
-    const matches = content.match(pattern.re);
+    pattern.re.lastIndex = 0
+    const matches = content.match(pattern.re)
     if (matches) {
-      for (const match of matches) {
-        findings.push({ name: pattern.name, match: match.substring(0, 20) + '...' });
+      for (const _match of matches) {
+        findings.push({ name: pattern.name })
       }
     }
   }
-
-  return findings;
+  return findings
 }
 
-export const SecurityPlugin: Plugin = async (ctx: PluginInput) => {
-  const client = ctx.client;
-  const hooks: Hooks = {
-    // Block writes containing secrets
-    "tool.execute.before": async (input, output) => {
-      if (input.tool === "write" || input.tool === "edit") {
-        const content = output.args.content || output.args.newString || '';
-        const findings = scanForSecrets(content);
+const getWriteContent = (args: Record<string, any>): string => {
+  if (typeof args.patchText === "string") return args.patchText
+  if (typeof args.content === "string") return args.content
+  if (typeof args.newString === "string") return args.newString
+  if (typeof args.text === "string") return args.text
+  if (typeof args.input === "string") return args.input
+  return ""
+}
 
+export const SecurityPlugin: Plugin = async (_ctx, options) => {
+  const defaults = {
+    extraSecurityPatterns: [] as RegExp[],
+    maxAuditEntries: 500,
+  }
+  const opts = { ...defaults, ...((options ?? {}) as Partial<typeof defaults>) }
+
+  let sessionSecretsFound: Array<{ file: string; nameCounts: Record<string, number>; total: number }> = []
+
+  const recordFinding = (file: string, findings: Array<{ name: string }>) => {
+    const nameCounts = findings.reduce(
+      (acc, f) => {
+        acc[f.name] = (acc[f.name] || 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    )
+    sessionSecretsFound.push({ file, nameCounts, total: findings.length })
+    if (sessionSecretsFound.length > opts.maxAuditEntries) {
+      sessionSecretsFound = sessionSecretsFound.slice(-opts.maxAuditEntries)
+    }
+    return Object.entries(nameCounts)
+      .map(([name, count]) => `${name}: ${count}`)
+      .join(", ")
+  }
+
+  return {
+    "tool.execute.before": async (input, output) => {
+      const tool = String(input.tool ?? "")
+      const args = (output?.args ?? {}) as Record<string, any>
+
+      if (isWriteTool(tool)) {
+        const content = getWriteContent(args)
+        const findings = scanForSecrets(content)
         if (findings.length > 0) {
-          const details = findings.map(f => `${f.name} (${f.match})`).join(', ');
-          throw new Error(`BLOCKED: Secret pattern detected in write content: ${details}. ` +
-            `Secrets must never be committed to code. ` +
-            `DO NOT proceed silently. Ask the user how to handle this:\n` +
-            `  - Move the secret to a .env file (ensure it is in .gitignore)?\n` +
-            `  - Use a secrets manager?\n` +
-            `  - Something else?\n` +
-            `Wait for the user's instruction before rewriting the file.`);
+          const summary = recordFinding(String(args.filePath ?? args.path ?? "unknown"), findings)
+          throw new Error(
+            `BLOCKED: Secret pattern(s) detected in write content: ${summary}. ` +
+              `Secrets must never be committed to code.`,
+          )
         }
       }
 
-      // Block bash commands containing secrets
-      if (input.tool === "bash") {
-        const command = output.args.command || '';
-        const findings = scanForSecrets(command);
-
+      if (tool === "bash" || tool === "shell") {
+        const command = String(args.command ?? "")
+        const findings = scanForSecrets(command)
         if (findings.length > 0) {
-          const details = findings.map(f => `${f.name} (${f.match})`).join(', ');
-          throw new Error(`BLOCKED: Secret pattern detected in command: ${details}. `  +
-            `Secrets must never be committed to code. ` +
-            `DO NOT proceed silently. Ask the user how to handle this:\n` +
-            `  - Move the secret to a .env file (ensure it is in .gitignore)?\n` +
-            `  - Use a secrets manager?\n` +
-            `  - Something else?\n` +
-            `Wait for the user's instruction before rewriting the file.`);
+          const summary = recordFinding(`command:${input.sessionID || "unknown"}`, findings)
+          throw new Error(
+            `BLOCKED: Secret pattern(s) detected in command: ${summary}. ` +
+              `Secrets must never be committed to code.`,
+          )
         }
-
-        // Block dangerous commands
-        const dangerousPatterns = [
-          /\brm\s+-rf\s+[\/~]/,
-          /\bmkfs\b/,
-          /\bdd\s+if=/,
-          /(^|[^\w]):\(\)\s*\{/,
-          /\bshutdown\b/,
-          /\breboot\b/,
-          /\binit\s+[06]/,
-        ];
-
-        for (const pattern of dangerousPatterns) {
+        for (const pattern of DANGEROUS_PATTERNS) {
           if (pattern.test(command)) {
-            throw new Error(`BLOCKED: Dangerous command detected: ${command}. This command could cause system damage.`);
+            throw new Error(`BLOCKED: Dangerous command detected.`)
           }
         }
       }
     },
+    event: async ({ event }) => {
+      if (event.type !== "session.idle") return
+      if (sessionSecretsFound.length === 0) return
+      const total = sessionSecretsFound.length
+      const details = sessionSecretsFound
+        .map((s) => `  - ${s.file}: ${Object.keys(s.nameCounts || {}).join(", ")}`)
+        .join("\n")
+      process.stderr.write(`[Security Audit] ${total} secret pattern(s) found during session:\n${details}\n`)
+      sessionSecretsFound = []
+    },
+  }
+}
 
-
-    // Report secrets found during session
-    event: async (input) => {
-      if (input.event.type === "session.idle") {
-        if (sessionSecretsFound.length > 0) {
-          const report = sessionSecretsFound.map(s =>
-            `  - ${s.secret} in ${s.file}`
-          ).join('\n');
-
-          await error(client, `[Security Audit] ${sessionSecretsFound.length} secret(s) found during session:\n${report}`);
-          sessionSecretsFound = [];
-        }
-      }
-    }
-  };
-  return hooks;
-};
+// Default export satisfies the V2 PluginSupervisor, which requires a
+// default definition with an id and an effect or setup function.
+// Tool interception lives in `server` (SDK Hooks shape); setup is a
+// no-op because this plugin registers no skills or session hooks.
+export default {
+  id: "security",
+  server: SecurityPlugin,
+  setup: async () => {},
+}
