@@ -6,8 +6,6 @@ paths:
 ---
 # Dart/Flutter Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with Dart and Flutter-specific content.
-
 ## `tool.execute.after` Hooks
 
 Configure via OpenCode hooks plugin or project-local tooling:

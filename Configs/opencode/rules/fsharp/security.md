@@ -7,8 +7,6 @@ paths:
 ---
 # F# Security
 
-> This file extends [common/security.md](../common/security.md) with F#-specific content.
-
 ## Secret Management
 
 - Never hardcode API keys, tokens, or connection strings in source code

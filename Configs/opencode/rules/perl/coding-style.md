@@ -8,8 +8,6 @@ paths:
 ---
 # Perl Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Perl-specific content.
-
 ## Standards
 
 - Always `use v5.36` (enables `strict`, `warnings`, `say`, subroutine signatures)

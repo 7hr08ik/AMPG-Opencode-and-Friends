@@ -5,8 +5,6 @@ paths:
 ---
 # Swift Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with Swift specific content.
-
 ## `tool.execute.after` Hooks
 
 Configure via OpenCode hooks plugin or project-local tooling:

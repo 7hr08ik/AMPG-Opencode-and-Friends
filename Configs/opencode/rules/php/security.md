@@ -6,8 +6,6 @@ paths:
 ---
 # PHP Security
 
-> This file extends [common/security.md](../common/security.md) with PHP specific content.
-
 ## Input and Output
 
 - Validate request input at the framework boundary (`FormRequest`, Symfony Validator, or explicit DTO validation).

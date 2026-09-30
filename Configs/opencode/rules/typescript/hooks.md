@@ -7,8 +7,6 @@ paths:
 ---
 # TypeScript/JavaScript Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with TypeScript/JavaScript specific content.
-
 ## `tool.execute.before` Hooks
 
 ### File Size Guard (TS/JS Specific)

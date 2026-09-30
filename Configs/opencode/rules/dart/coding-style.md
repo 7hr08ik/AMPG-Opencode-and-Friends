@@ -6,8 +6,6 @@ paths:
 ---
 # Dart/Flutter Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Dart and Flutter-specific content.
-
 ## Formatting
 
 - **dart format** for all `.dart` files - enforced in CI (`dart format --set-exit-if-changed .`)

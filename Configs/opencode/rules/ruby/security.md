@@ -9,8 +9,6 @@ paths:
 ---
 # Ruby Security
 
-> This file extends [common/security.md](../common/security.md) with Ruby and Rails specific content.
-
 ## Rails Defaults
 
 - Keep CSRF protection enabled for state-changing browser requests.

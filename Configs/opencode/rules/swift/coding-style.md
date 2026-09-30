@@ -5,8 +5,6 @@ paths:
 ---
 # Swift Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Swift specific content.
-
 ## Formatting
 
 - **SwiftFormat** for auto-formatting, **SwiftLint** for style enforcement

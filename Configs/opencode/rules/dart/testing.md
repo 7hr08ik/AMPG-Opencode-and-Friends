@@ -6,8 +6,6 @@ paths:
 ---
 # Dart/Flutter Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Dart and Flutter-specific content.
-
 ## Test Framework
 
 - **flutter_test** / **dart:test** - built-in test runner

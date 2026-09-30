@@ -1,5 +1,3 @@
-> This file extends [common/coding-style.md](../common/coding-style.md) with web-specific frontend content.
-
 # Web Coding Style
 
 ## File Organization

@@ -7,8 +7,6 @@ paths:
 ---
 # PHP Testing
 
-> This file extends [common/testing.md](../common/testing.md) with PHP specific content.
-
 ## Framework
 
 Use **PHPUnit** as the default test framework. If **Pest** is configured in the project, prefer Pest for new tests and avoid mixing frameworks.

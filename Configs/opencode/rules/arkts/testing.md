@@ -6,8 +6,6 @@ paths:
 ---
 # HarmonyOS / ArkTS Testing
 
-> This file extends [common/testing.md](../common/testing.md) with HarmonyOS-specific testing practices.
-
 ## Test Framework
 
 HarmonyOS uses the built-in test framework with `@ohos.test` capabilities:

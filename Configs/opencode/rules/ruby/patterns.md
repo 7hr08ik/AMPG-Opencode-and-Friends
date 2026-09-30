@@ -8,8 +8,6 @@ paths:
 ---
 # Ruby Patterns
 
-> This file extends [common/patterns.md](../common/patterns.md) with Ruby and Rails specific content.
-
 ## Rails Way First
 
 - Start with plain Rails MVC and Active Record conventions for small and medium features.

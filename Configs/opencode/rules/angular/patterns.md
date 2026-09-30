@@ -8,8 +8,6 @@ paths:
 ---
 # Angular Patterns
 
-> This file extends [common/patterns.md](../common/patterns.md) with Angular specific content.
-
 ## Smart / Dumb Component Split
 
 Smart (container) components own data fetching and state. Dumb (presentational) components receive inputs and emit outputs only - no service injection.

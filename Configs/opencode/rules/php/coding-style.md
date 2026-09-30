@@ -5,8 +5,6 @@ paths:
 ---
 # PHP Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with PHP specific content.
-
 ## Standards
 
 - Follow **PSR-12** formatting and naming conventions.

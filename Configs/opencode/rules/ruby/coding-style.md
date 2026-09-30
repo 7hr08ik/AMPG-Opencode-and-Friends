@@ -8,8 +8,6 @@ paths:
 ---
 # Ruby Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Ruby and Rails specific content.
-
 ## Standards
 
 - Target **Ruby 3.3+** for new Rails work unless the project already pins an older supported runtime.

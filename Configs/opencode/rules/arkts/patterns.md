@@ -5,8 +5,6 @@ paths:
 ---
 # HarmonyOS / ArkTS Patterns
 
-> This file extends [common/patterns.md](../common/patterns.md) with HarmonyOS and ArkTS-specific patterns.
-
 ## State Management: V2 Only
 
 **MUST use** ArkUI State Management V2. V1 decorators are deprecated and must not be used.

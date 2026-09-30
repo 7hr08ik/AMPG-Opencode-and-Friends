@@ -9,8 +9,6 @@ paths:
 ---
 # Ruby Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Ruby and Rails specific content.
-
 ## Framework
 
 - Use **Minitest** when the Rails app follows the default Rails test stack.

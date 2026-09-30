@@ -9,8 +9,6 @@ paths:
 ---
 # Angular Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with Angular specific content.
-
 ## `tool.execute.before` Hooks
 
 ### File Size Guard

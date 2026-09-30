@@ -10,8 +10,6 @@ paths:
 ---
 # C++ Security
 
-> This file extends [common/security.md](../common/security.md) with C++ specific content.
-
 ## Memory Safety
 
 - Never use raw `new`/`delete` - use smart pointers

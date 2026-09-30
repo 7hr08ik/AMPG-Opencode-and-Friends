@@ -8,8 +8,6 @@ paths:
 ---
 # Perl Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Perl-specific content.
-
 ## Framework
 
 Use **Test2::V0** for new projects (not Test::More):

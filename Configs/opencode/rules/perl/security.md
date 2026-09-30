@@ -8,8 +8,6 @@ paths:
 ---
 # Perl Security
 
-> This file extends [common/security.md](../common/security.md) with Perl-specific content.
-
 ## Taint Mode
 
 - Use `-T` flag on all CGI/web-facing scripts

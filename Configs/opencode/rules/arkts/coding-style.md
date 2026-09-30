@@ -8,8 +8,6 @@ paths:
 ---
 # HarmonyOS / ArkTS Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with HarmonyOS and ArkTS-specific content.
-
 ## ArkTS Language Constraints
 
 ArkTS is a strict, statically-typed subset of TypeScript. Violating these constraints causes **compilation failures**.

@@ -5,8 +5,6 @@ paths:
 ---
 # Kotlin Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Kotlin and Android/KMP-specific content.
-
 ## Test Framework
 
 - **kotlin.test** for multiplatform (KMP) - `@Test`, `assertEquals`, `assertTrue`

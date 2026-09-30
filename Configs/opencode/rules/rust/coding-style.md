@@ -4,8 +4,6 @@ paths:
 ---
 # Rust Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Rust-specific content.
-
 ## Formatting
 
 - **rustfmt** for enforcement - always run `cargo fmt` before committing

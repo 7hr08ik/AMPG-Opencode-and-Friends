@@ -4,8 +4,6 @@ paths:
 ---
 # Java Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Java-specific content.
-
 ## Test Framework
 
 - **JUnit 5** (`@Test`, `@ParameterizedTest`, `@Nested`, `@DisplayName`)

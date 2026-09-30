@@ -11,8 +11,6 @@ paths:
 ---
 # Angular Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Angular specific content.
-
 ## Version Awareness
 
 Always check the project's Angular version before writing code - features differ significantly between versions. Run `ng version` or inspect `package.json`. When creating a new project, do not pin a version unless the user specifies one.

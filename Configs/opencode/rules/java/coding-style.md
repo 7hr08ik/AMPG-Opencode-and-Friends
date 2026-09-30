@@ -4,8 +4,6 @@ paths:
 ---
 # Java Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with Java-specific content.
-
 ## Formatting
 
 - **google-java-format** or **Checkstyle** (Google or Sun style) for enforcement

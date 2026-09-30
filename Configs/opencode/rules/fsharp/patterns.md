@@ -5,8 +5,6 @@ paths:
 ---
 # F# Patterns
 
-> This file extends [common/patterns.md](../common/patterns.md) with F#-specific content.
-
 ## Result Type for Error Handling
 
 Use `Result<'T, 'TError>` with railway-oriented programming instead of exceptions for expected failures.

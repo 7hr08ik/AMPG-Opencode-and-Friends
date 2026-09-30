@@ -7,8 +7,6 @@ paths:
 ---
 # Angular Security
 
-> This file extends [common/security.md](../common/security.md) with Angular specific content.
-
 ## XSS Prevention
 
 Angular auto-sanitizes bound values. Never bypass the sanitizer on user-controlled input.

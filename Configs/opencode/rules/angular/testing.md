@@ -5,8 +5,6 @@ paths:
 ---
 # Angular Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Angular specific content.
-
 ## Test Runner
 
 Use the test runner configured by the project. Check `angular.json` and `package.json`; Angular projects commonly use Vitest, Jest, or Jasmine + Karma.

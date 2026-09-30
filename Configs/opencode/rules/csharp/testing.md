@@ -6,8 +6,6 @@ paths:
 ---
 # C# Testing
 
-> This file extends [common/testing.md](../common/testing.md) with C#-specific content.
-
 ## Test Framework
 
 - Prefer **xUnit** for unit and integration tests

@@ -8,8 +8,6 @@ paths:
 ---
 # Ruby Hooks
 
-> This file extends [common/hooks.md](../common/hooks.md) with Ruby and Rails specific content.
-
 ## `tool.execute.after` Hooks
 
 Configure project-local hooks to prefer binstubs and checked-in tooling:

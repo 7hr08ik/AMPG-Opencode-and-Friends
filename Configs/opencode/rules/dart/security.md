@@ -7,8 +7,6 @@ paths:
 ---
 # Dart/Flutter Security
 
-> This file extends [common/security.md](../common/security.md) with Dart, Flutter, and mobile-specific content.
-
 ## Secrets Management
 
 - Never hardcode API keys, tokens, or credentials in Dart source

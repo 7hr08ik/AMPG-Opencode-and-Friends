@@ -7,8 +7,6 @@ paths:
 ---
 # C# Security
 
-> This file extends [common/security.md](../common/security.md) with C#-specific content.
-
 ## Secret Management
 
 - Never hardcode API keys, tokens, or connection strings in source code

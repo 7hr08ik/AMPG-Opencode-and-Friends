@@ -5,8 +5,6 @@ paths:
 ---
 # F# Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with F#-specific content.
-
 ## Standards
 
 - Follow standard F# conventions and leverage the type system for correctness

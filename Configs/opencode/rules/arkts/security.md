@@ -6,8 +6,6 @@ paths:
 ---
 # HarmonyOS / ArkTS Security
 
-> This file extends [common/security.md](../common/security.md) with HarmonyOS-specific security practices.
-
 ## Permission Management
 
 ### Declare Permissions in module.json5

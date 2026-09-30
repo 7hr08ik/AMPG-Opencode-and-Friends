@@ -4,8 +4,6 @@ paths:
 ---
 # Rust Testing
 
-> This file extends [common/testing.md](../common/testing.md) with Rust-specific content.
-
 ## Test Framework
 
 - **`#[test]`** with `#[cfg(test)]` modules for unit tests
