@@ -65,8 +65,8 @@ When you know what you want to build and just need to execute:
     - /opsx:apply <name>                   # (Optional) Set <name> for individual tasks
 
 - Checks - Tests
+    - Analyze the codes current comments/docstrings, and add new comments/docstrings where necessary to improve readability and user understanding.
     - /code-review
-    - Language/ENV Specific Review/Testing
     - /optimize
     - /opsx:verify                         # Check its correct
 
