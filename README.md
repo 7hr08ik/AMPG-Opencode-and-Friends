@@ -51,7 +51,7 @@ Additional Tools
   - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** - A lightweight framework for spec-driven development.
   - **[Opencode-mem](https://github.com/tickernelz/opencode-mem)** - A persistent memory system for AI coding agents.
   - **[Superpowers](https://github.com/obra/superpowers)** - An agentic skills framework.
-  - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pollock's .agents directory.
+  - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pocock's .agents directory.
 
 Background plugins
 
@@ -136,6 +136,20 @@ bun add --global @fission-ai/openspec@latest
 npx skills@latest add mattpocock/skills
 ```
 
+AIO
+```bash
+npm install -g billion-context && \
+bili plugin install opencode && \
+npx ctx7 setup --opencode && \
+npm install opencode-tps-meter && \
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
+codegraph install && \
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer && \
+pip install 'markitdown[all]' && pip install markitdown-mcp && \
+bun add --global @fission-ai/openspec@latest && \
+npx skills@latest add mattpocock/skills
+```
+
 ## 6. Usage
 
 - **[Quick-Start.md](Quick-Start.md)** - go from an empty folder to a running project.
@@ -155,6 +169,17 @@ curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/
 codegraph upgrade
 # Skills
 npx skills@latest update
+# Openspec
+openspec update
+```
+
+AIO
+```bash
+# OpenAgent Control
+curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash && \
+codegraph upgrade && \
+npx skills@latest update && \
+openspec update
 ```
 
 ## 8. Notes, fixes & how I un-break things
