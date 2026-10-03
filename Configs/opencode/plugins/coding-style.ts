@@ -2,6 +2,7 @@ import type { Plugin } from "@opencode-ai/plugin"
 import { isWriteTool } from "./lib/guards.ts"
 import { warn } from "./lib/output.ts"
 
+// Max function length (in lines) before CodingStylePlugin flags a violation.
 const FUNCSIZE = 60
 
 const checkImmutability = (content: string): string[] => {
@@ -171,12 +172,30 @@ const checkAssertionDensity = (filePath: string, content: string): Array<{ name:
   return out
 }
 
+/** A single coding-standards finding for one file, reported by `type`. */
 interface Violation {
   type: string
   file: string
   details: string
 }
 
+/**
+ * CodingStylePlugin — enforces the coding standards declared in the config's
+ * AGENTS.md by inspecting the content of every write/edit/patch tool call.
+ *
+ * For each new/changed file content it checks (and warns on):
+ *   - immutability      - mutation-prone calls (.shift/.unshift/index writes, etc.)
+ *   - nesting-depth     - deeper than 4 levels of braces
+ *   - function-size     - longer than 60 lines (see `FUNCSIZE`)
+ *   - loop-bounds       - infinite/for(;;)/unbounded while/do-while loops
+ *   - assertion-density - test files with fewer than 2 assertions per function
+ * Findings are aggregated and re-reported as a "Code Quality Audit" toast on the
+ * next "session.idle" event. Errors are swallowed here (logged only) so a bug in
+ * one heuristic can never crash a tool call.
+ *
+ * @param ctx  V2 plugin context (used for `warn`).
+ * @param _options Unused (reserved for future thresholds).
+ */
 export const CodingStylePlugin: Plugin = async (ctx, _options) => {
   let sessionViolations: Violation[] = []
 

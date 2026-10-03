@@ -17,6 +17,7 @@ const TEST_FILE_PATTERNS = [
 const isTestFile = (filePath: string): boolean =>
   TEST_FILE_PATTERNS.some((pattern) => pattern.test(filePath))
 
+// An "implementation" file is anything non-test that is a source file (.ts/.tsx/.js/.jsx).
 const isImplementationFile = (filePath: string): boolean =>
   !isTestFile(filePath) &&
   (filePath.endsWith(".ts") ||
@@ -24,6 +25,26 @@ const isImplementationFile = (filePath: string): boolean =>
     filePath.endsWith(".js") ||
     filePath.endsWith(".jsx"))
 
+/**
+ * TestingPlugin — nudges a TDD workflow by tracking implementation edits and
+ * reminding about missing test coverage.
+ *
+ * Tracks write/edit/patch tool calls:
+ *   - Writes to implementation files (.ts/.tsx/.js/.jsx) are counted. After
+ *     more than 3 impl edits in a rolling window (default 5 min,
+ *     `testEditWindowMinutes`) a "run your tests" warning fires.
+ *   - Writes to test files reset the impl-edit window for that file's basename.
+ * On the next "session.idle" it reports how many impl files changed this session
+ * and reminds the agent to run tests with coverage. When `enforceOnCommit` is
+ * true it THROWS on the next "session.idle" (not literally at the commit
+ * command) if impl files were changed without corresponding test edits.
+ *
+ * @param ctx  V2 plugin context (used for `warn`).
+ * @param options Overrides for the defaults below.
+ *   - `enforceOnCommit` and `testEditWindowMinutes` both apply.
+ *   - `testPatterns` is reserved but unused today; test-file matching uses the
+ *     module-level `TEST_FILE_PATTERNS` instead.
+ */
 export const TestingPlugin: Plugin = async (ctx, options) => {
   const defaults = {
     testPatterns: [
@@ -57,6 +78,9 @@ export const TestingPlugin: Plugin = async (ctx, options) => {
     })
   }
 
+  // Does every implementation file have a colocated test? We can't stat the
+  // filesystem from here, so we approximate: a test exists if the file lives
+  // under a /test/ or /tests/ directory. Returns false when coverage is missing.
   async function checkTestCoverage(implFiles: string[]): Promise<boolean> {
     for (const implFile of implFiles) {
       const basename = implFile.replace(/^.*\//, "").replace(/\.[^.]+$/, "")

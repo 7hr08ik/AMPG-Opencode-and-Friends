@@ -3,11 +3,15 @@
  *
  * V2-compatible: accepts either a V1 client, a V2 plugin context, or
  * undefined. Toast shapes from `client.tui` (V1) and `ctx.tui` (V2) are
- * both attempted before falling back to stdout/stderr.
+ * both attempted before falling back to a plain stdout write.
  *
- * When no toast API is available, routes through process stdout/stderr.
+ * When no toast API is available, both warn() and error() write to process.stdout.
  */
 
+/**
+ * The `body` payload of a toast notification, matching both the V1
+ * (`client.tui.showToast`) and V2 (`ctx.tui.showToast`) signatures.
+ */
 interface ToastInput {
   body: {
     title?: string
@@ -17,6 +21,7 @@ interface ToastInput {
   }
 }
 
+/** Minimal `showToast` surface shared by the V1 and V2 toast APIs. */
 interface ToastApi {
   showToast(input: ToastInput): Promise<any>
 }
@@ -30,10 +35,14 @@ type ToastClient =
 const YELLOW = "\x1b[33m"
 const RESET = "\x1b[0m"
 
+// Render a prefixed message in console yellow so plugin output stands out.
 function formatMessage(prefix: string, message: string): string {
   return `${YELLOW}${prefix}${RESET} ${message}`
 }
 
+// Find a usable `showToast` across the possible client shapes (direct, nested
+// under `.client`, or undefined). Returns undefined when none is available,
+// which makes warn/error fall back to stdout.
 function resolveToast(client: unknown): ToastApi | undefined {
   if (!client || typeof client !== "object") return undefined
   const direct = (client as { tui?: ToastApi }).tui

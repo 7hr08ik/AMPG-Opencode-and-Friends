@@ -1,5 +1,20 @@
 import type { Plugin } from "@opencode-ai/plugin"
 
+/**
+ * EnvProtectionPlugin — blocks the `read` tool from opening files that commonly
+ * hold secrets, before their contents ever reach the model.
+ *
+ * Inspects a read target's path: a read is THROWN (blocked) when the basename
+ * exactly matches a blocked name (.env, credentials.json) OR when the basename
+ * or full path matches any blocked regex (id_rsa/id_*.pem/*.key/.aws/
+ * credentials/secrets.yaml/...). Only the `read` tool is inspected.
+ *
+ * @param ctx  V2 plugin context (unused; kept for API parity).
+ * @param options Overrides for the defaults below.
+ *   - `extraSecurityPatterns` and `caseNormalize` both apply.
+ *   - `blockedEnvNames` is reserved but unused today; blocked names are
+ *     hardcoded in the `blockedNames`/`blockedRegex` arrays.
+ */
 export const EnvProtectionPlugin: Plugin = async (_ctx, options) => {
   const defaults = {
     blockedEnvNames: [".env"],
@@ -19,6 +34,7 @@ export const EnvProtectionPlugin: Plugin = async (_ctx, options) => {
       const normalized = opts.caseNormalize === "lower" ? basename.toLowerCase() : basename
       const haystacks = [normalized, filePath.toLowerCase()]
 
+      // Basenames that are always blocked, regardless of directory.
       const blockedNames = [
         ".env",
         ".ENV",

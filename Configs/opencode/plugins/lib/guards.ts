@@ -1,6 +1,10 @@
 /**
- * Shared guard functions used by all 7 opencode plugins.
+ * Shared guard functions used by several opencode plugins.
  * Centralizes common patterns to eliminate duplication and improve consistency.
+ *
+ * NOTE: actually imported by 4 of the 7 plugins (code-review-cycle, coding-style,
+ * security, testing). The others (env-protection, git-workflow, workflow) inline
+ * their own tool-state handling instead of using these helpers.
  */
 
 // Standardize args extraction from any tool event variant
@@ -13,7 +17,9 @@ export function isWriteTool(t: string): t is "write" | "edit" | "patch" {
   return t === "write" || t === "edit" || t === "patch"
 }
 
-// Extract content from any tool variant (V1 write/edit, V2 patch with patchText, etc.)
+// Extract write content from any tool event variant (V1 write/edit, V2 patch's
+// patchText, etc.). NOTE: security.ts keeps a near-identical copy that reads tool
+// `args` instead of an event; they're kept separate to avoid changing call sites.
 export function getWriteContent(event: any): string {
   const a = event
   if (typeof a.patchText === "string") return a.patchText

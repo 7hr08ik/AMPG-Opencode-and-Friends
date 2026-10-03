@@ -3,9 +3,13 @@ import { readFile } from "node:fs/promises"
 import { isWriteTool } from "./lib/guards.ts"
 import { warn } from "./lib/output.ts"
 
+// Commit-message trailer an agent appends once it has reviewed the change.
 const TRAILER_PATTERN = /^Code-Review:\s*(reviewed|approved)\s*$/im
+// Nudge (warn) toward /code-review once every this many ordinary edits.
 const NUDGE_EVERY = 5
 
+// Filepaths matching any of these are treated as security-sensitive and require
+// an explicit review before they can be committed (see the trailer below).
 const SECURITY_PATH_PATTERNS = [
   /auth/i,
   /login|logout|signin|signup|session/i,
@@ -19,6 +23,7 @@ const SECURITY_PATH_PATTERNS = [
 const isSecuritySensitive = (filePath: string): boolean =>
   SECURITY_PATH_PATTERNS.some((p) => p.test(filePath))
 
+// True when Git merge-conflict markers (<<<<<<< ======= >>>>>>>) are present.
 const hasConflictMarkers = (content: string): boolean => {
   const hasStart = /^<{7}( $| )/m.test(content)
   const hasEnd = /^>{7}( $| )/m.test(content)
@@ -44,11 +49,31 @@ const isCommitCommand = (command: string): boolean => /git\s+commit/.test(comman
 const isPushOrPrCommand = (command: string): boolean =>
   /git\s+push|gh\s+pr\s+(merge|create)/.test(command)
 
+/** Per-file review state tracked for the session, used to gate commits. */
 interface TrackedFile {
   securitySensitive: boolean
   reviewed: boolean
 }
 
+/**
+ * CodeReviewCyclePlugin — tracks modified files this session and drives a
+ * lightweight review-before-commit workflow.
+ *
+ * On each write/edit/patch tool *after* the call it:
+ *   - Records the file, flagging "security-sensitive" paths (auth, payment, PII,
+ *     tokens, encryption, ...). A sensitive edit warns to run /code-review and
+ *     add the "Code-Review: reviewed" trailer.
+ *   - Every NUDGE_EVERY ordinary edits it nudges toward running /code-review.
+ * On `git push`/`gh pr` it reminds about pre-merge requirements; on `git commit`
+ * it THROWS if a security-sensitive file lacks the trailer, or if unresolved
+ * merge-conflict markers remain.
+ *
+ * @param ctx  V2 plugin context (used for `warn`).
+ * @param options Overrides for the defaults below.
+ *   - `NUDGE_EVERY` and `maxStateSize` both apply.
+ *   - `extraSecurityPatterns` is reserved but unused today; security file
+ *     matching uses the module-level `SECURITY_PATH_PATTERNS` instead.
+ */
 export const CodeReviewCyclePlugin: Plugin = async (ctx, options) => {
   const modified = new Map<string, TrackedFile>()
   let ordinaryEditsSinceReminder = 0

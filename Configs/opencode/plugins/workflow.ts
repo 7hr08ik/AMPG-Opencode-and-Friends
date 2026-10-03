@@ -3,9 +3,26 @@ import { warn } from "./lib/output.ts"
 
 const GLOB_BUDGET_WINDOW_MS = 300000 // 5 minutes
 
+// Any path containing a github.com/github/ segment is treated as a GitHub search.
 const isGitHubSearch = (path: string): boolean =>
   path.includes("github.com") || path.includes("github/")
 
+/**
+ * WorkflowPlugin — throttles noisy code-discovery tools and nudges the agent
+ * toward faster alternatives, so a runaway tool loop can't stall a session.
+ *
+ * Listens to "tool.execute.before" and:
+ *   - Rate-limits the `glob` tool to 3 calls per a rolling time window
+ *     (`globBudgetWindow`, default 5 min). On exceed it warns, **caps the
+ *     history to the last 3 calls**, and THROWS to block further globs.
+ *   - Always allows `codegraph_explore` (the recommended local-code-search path).
+ *   - Warns (never blocks) on a `grep` executed outside a GitHub repo when
+ *     `gracefulDegrade` is enabled.
+ * The glob history is cleared on the next "session.idle" event.
+ *
+ * @param ctx  V2 plugin context (used for `warn`).
+ * @param options Overrides for the defaults below (`globBudgetWindow`, etc.).
+ */
 export const WorkflowPlugin: Plugin = async (ctx, options) => {
   const defaults = {
     globBudgetWindow: GLOB_BUDGET_WINDOW_MS,
@@ -46,10 +63,13 @@ export const WorkflowPlugin: Plugin = async (ctx, options) => {
         return
       }
 
+      // codegraph_explore is the recommended local-code-search path; never block it.
       if (normalizedTool.startsWith("codegraph")) {
         return
       }
 
+      // When gracefulDegrade is on, `grep` outside GitHub is only warned about
+      // (a hint to use codegraph_explore), never blocked.
       if (opts.gracefulDegrade && normalizedTool === "grep") {
         const args = (output?.args ?? {}) as Record<string, any>
         if (args.path && typeof args.path === "string") {
@@ -63,6 +83,7 @@ export const WorkflowPlugin: Plugin = async (ctx, options) => {
         }
       }
     },
+    // Clear the glob budget when a session goes idle so it doesn't carry over.
     event: async ({ event }) => {
       if (event.type !== "session.idle") return
       globHistory.length = 0

@@ -7,6 +7,23 @@ const AI_GENERATED_NOTE = "Note: AI Generated Commit"
 
 const isShellTool = (tool: string): boolean => tool === "bash" || tool === "shell"
 
+/**
+ * GitWorkflowPlugin — enforces conventional commit messages on `git commit`
+ * shell commands.
+ *
+ * Reassembles the commit message from every -m/--message/-F/-C/-c/--amend
+ * occurrence, then:
+ *   - Skips messages allow-listed by prefix (merge/revert/fixup/amend).
+ *   - Otherwise requires Conventional Commits form (`<type>: <subject>`) AND the
+ *     "Note: AI Generated Commit" tag. Any violation THROWS to block the commit.
+ * Only bash/shell tools are inspected.
+ *
+ * @param ctx  V2 plugin context (unused; kept for API parity).
+ * @param options Overrides for the defaults below.
+ *   - `allowPatterns` and `caseSensitiveNote` both apply.
+ *   - `conventionalPrefix` is reserved but unused today; the required prefix
+ *     is fixed to "feat:" via `CONVENTIONAL_COMMIT_PATTERN`.
+ */
 export const GitWorkflowPlugin: Plugin = async (_ctx, options) => {
   const defaults = {
     conventionalPrefix: "feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert",
@@ -22,6 +39,8 @@ export const GitWorkflowPlugin: Plugin = async (_ctx, options) => {
       const command = String(args.command ?? "")
       if (!/git\s+commit/.test(command)) return
 
+      // Reassemble the commit message from every -m/--message/-F/-C/-c/--amend
+      // occurrence in the command (a message may be passed more than once).
       let message = ""
       for (const m of command.matchAll(
         /(-m\s+(?:"([\s\S]*?)"|'([\s\S]*?'|[^\s]*'?))|--message=([\s\S]*?)|-F\s+([\s\S]*?)|-C|-c|--amend|(?:--no-edit))\s*/g,

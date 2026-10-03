@@ -1,6 +1,7 @@
 import type { Plugin } from "@opencode-ai/plugin"
 import { isWriteTool } from "./lib/guards.ts"
 
+// LEAKED-SECRETS patterns. A single match on write content or a command blocks it.
 const SECRET_PATTERNS = [
   { re: /AKIA[0-9A-Z]{16}/g, name: "AWS Access Key" },
   { re: /sk-[a-zA-Z0-9]{32,}/g, name: "Secret Key" },
@@ -14,6 +15,9 @@ const SECRET_PATTERNS = [
   { re: /redis:\/\/[^"'\s$]+/g, name: "Redis Connection String" },
 ]
 
+// DANGEROUS patterns: destructive shell commands (rm/shutdown/...) AND embedded
+// credentials (JWT / Stripe key / Slack token). Only bash/shell tools are
+// inspected, so these match secrets typed into a command line.
 const DANGEROUS_PATTERNS = [
   /\brm\s+-rf\b/,
   /\brm\s+-/,
@@ -56,6 +60,21 @@ const getWriteContent = (args: Record<string, any>): string => {
   return ""
 }
 
+/**
+ * SecurityPlugin — a write-and-command gate that BLOCKS writes and shell
+ * commands that look like leaked secrets or dangerous system operations.
+ *
+ * On write/edit/patch tools it scans the content for credential patterns
+ * (AWS keys, API keys, private keys, DB connection strings, ...) and THROWS to
+ * block. On bash/shell commands it scans the command text for BOTH credential
+ * patterns AND dangerous-command patterns (`rm -rf`, shutdown, chmod 777,
+ * curl|sh, ...) and THROWS to block. Findings are held in a bounded session log
+ * and dumped to stderr on the next "session.idle" for auditing.
+ *
+ * @param ctx  V2 plugin context (unused; kept for API parity).
+ * @param options Overrides for the defaults below
+ *   (`extraSecurityPatterns`, `maxAuditEntries`).
+ */
 export const SecurityPlugin: Plugin = async (_ctx, options) => {
   const defaults = {
     extraSecurityPatterns: [] as RegExp[],
