@@ -208,5 +208,5 @@ Built on the shoulders of people who wrote the good bits first:
 - [Andrej Karpathy's CLAUDE.md](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md) - woven into the `.md` files
 - [NASA: The Power of Ten](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code) - safety-minded rules
 - [Stack Overflow: Best practices for writing code comments](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/) - comment guidance
-- [Everything Claude Code](https://github.com/affaan-m/ECC) - some agents, skills, commands, converted to Opencode plugins
+- [Everything Claude Code](https://github.com/affaan-m/ECC) - some agents, skills, commands. Converted and updated for use with Opencode
 - [OpenSpec](https://github.com/Fission-AI/OpenSpec) & the [Intent Driven Template](https://github.com/intent-driven-dev/intent-driven-template)
