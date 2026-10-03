@@ -1,4 +1,4 @@
-# Extraction contract — `spec.md` → `.feature`
+# Extraction contract - `spec.md` → `.feature`
 
 **This file is the definition.** `javascript/extract-gherkin.cjs` and `python/extract_gherkin.py` are bindings of it; neither is the definition, and a port in a third language implements what is written here rather than reading either source. When behavior changes, this file changes first.
 
@@ -10,11 +10,11 @@ A spec is `openspec/specs/<capability>/spec.md` (source of truth) or `openspec/c
 
 Extraction **synthesizes** the Gherkin structure from the headings and copies fenced step lines verbatim, writing each `spec.md` to `acceptance-tests/.extracted/<same-relative-path>/spec.feature`.
 
-Discovery covers `openspec/specs/` and each active `openspec/changes/<id>/specs/`, anchored to the literal basename `spec.md` — so `proposal.md`, `design.md` and `tasks.md` are excluded structurally. `openspec/changes/archive/` is excluded twice over: structurally, because the archive nests one level deeper than `changes/<id>/`, and again by a defensive filter on the collected paths.
+Discovery covers `openspec/specs/` and each active `openspec/changes/<id>/specs/`, anchored to the literal basename `spec.md` - so `proposal.md`, `design.md` and `tasks.md` are excluded structurally. `openspec/changes/archive/` is excluded twice over: structurally, because the archive nests one level deeper than `changes/<id>/`, and again by a defensive filter on the collected paths.
 
-`.extracted/` is **gitignored, wiped and rebuilt on every run, and never edited by hand**. The wipe is an invariant, not an optimization — a stale extraction would keep deleted or renamed capabilities executing.
+`.extracted/` is **gitignored, wiped and rebuilt on every run, and never edited by hand**. The wipe is an invariant, not an optimization - a stale extraction would keep deleted or renamed capabilities executing.
 
-## Line fidelity — the core invariant
+## Line fidelity - the core invariant
 
 Every input line maps to **exactly one** output line, so the extracted file has the IDENTICAL line count and **line N of the `.feature` is line N of the `.md`**.
 
@@ -34,7 +34,7 @@ Every line outside a fence is classified by exactly one row:
 | `#### Scenario: <name>` | `    Scenario: <name>` |
 | `#### Scenario Outline: <name>` | `    Scenario Outline: <name>` |
 | any line inside a ` ```gherkin ` fence | copied **verbatim**, column unchanged |
-| everything else — prose, requirement descriptions, `## Purpose`, `## Requirements`, other headings, fence markers, non-gherkin fence bodies, RENAMED `FROM:`/`TO:` bullets | blank line |
+| everything else - prose, requirement descriptions, `## Purpose`, `## Requirements`, other headings, fence markers, non-gherkin fence bodies, RENAMED `FROM:`/`TO:` bullets | blank line |
 
 Heading matching is case-insensitive on the keywords (`Requirement:`, `Scenario:`, `Scenario Outline:`, the four operations); the emitted Gherkin keyword is always normalized to canonical casing.
 
@@ -57,20 +57,20 @@ A fence holds **only** steps (Given/When/Then/And/But), plus `Examples:` tables 
 
 ## Edge cases and hard errors
 
-All deliberate — silent drops are the failure mode to fear. **Both stacks classify every row identically**, with the same message and the same `file:line`:
+All deliberate - silent drops are the failure mode to fear. **Both stacks classify every row identically**, with the same message and the same `file:line`:
 
 | Case | Behavior |
 |---|---|
 | Unclosed fence | Error with `file:line` of the opener |
-| No H1 title | **Hard error** — there would be no `Feature:` |
-| More than one H1 | **Hard error** — a spec.md is exactly one capability |
-| `#### Scenario:` with no fence before the next heading (or before EOF) | **Hard error** — a scenario with no steps would silently pass |
-| `Feature:` / `Rule:` / `Scenario:` / `Scenario Outline:` / `Example:` inside a gherkin fence | **Hard error** — structure comes from headings. This is what an old-format spec hits, so the migration failure is loud |
-| Zero gherkin fences in a `spec.md` | Fine — a REMOVED-only delta legitimately has no steps |
-| `Examples:` and `Background:` inside a fence | Allowed — both legitimately belong there |
-| Indented ` ```gherkin ` opener | **Hard error** — silently ignoring it would silently drop scenarios |
-| ` ```gherkin extra-text ` | Not a gherkin opener (info string must be exactly `gherkin`) — treated as an ordinary fence, contents blanked |
+| No H1 title | **Hard error** - there would be no `Feature:` |
+| More than one H1 | **Hard error** - a spec.md is exactly one capability |
+| `#### Scenario:` with no fence before the next heading (or before EOF) | **Hard error** - a scenario with no steps would silently pass |
+| `Feature:` / `Rule:` / `Scenario:` / `Scenario Outline:` / `Example:` inside a gherkin fence | **Hard error** - structure comes from headings. This is what an old-format spec hits, so the migration failure is loud |
+| Zero gherkin fences in a `spec.md` | Fine - a REMOVED-only delta legitimately has no steps |
+| `Examples:` and `Background:` inside a fence | Allowed - both legitimately belong there |
+| Indented ` ```gherkin ` opener | **Hard error** - silently ignoring it would silently drop scenarios |
+| ` ```gherkin extra-text ` | Not a gherkin opener (info string must be exactly `gherkin`) - treated as an ordinary fence, contents blanked |
 | Non-gherkin fences (` ```js `, plain ` ``` `, 4+ backticks) | Tracked, contents blanked |
-| Gherkin docstrings delimited by ` ``` ` | Safe — docstrings are indented; fence closers require column 0 |
-| Files other than `spec.md` | Ignored — discovery is anchored to `spec.md` |
-| Legacy `.feature` files under `openspec/` | Never run — extraction prints a WARNING naming them |
+| Gherkin docstrings delimited by ` ``` ` | Safe - docstrings are indented; fence closers require column 0 |
+| Files other than `spec.md` | Ignored - discovery is anchored to `spec.md` |
+| Legacy `.feature` files under `openspec/` | Never run - extraction prints a WARNING naming them |

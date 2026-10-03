@@ -35,8 +35,8 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
    `openspec instructions archive --change "<selected-change>" --json` with the
    same selected-root flags. This lookup is advisory and optional: it only supplies
    extra prompt inputs, so it must never block the batch. If it fails or returns
-   invalid JSON — for example on an older CLI that does not support this command
-   yet — continue the batch with no context and no operation guidance. Do not
+   invalid JSON - for example on an older CLI that does not support this command
+   yet - continue the batch with no context and no operation guidance. Do not
    report an error and do not stop.
 
    A valid response may omit `context` and `operationGuidance`. Treat
@@ -144,12 +144,12 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
 
    If there are incomplete changes, make clear they'll be archived with warnings.
 
-   Route on the answer by intent, not by exact label — you wrote these labels,
+   Route on the answer by intent, not by exact label - you wrote these labels,
    so match what the user picked rather than the wording above:
-   - "Cancel" — stop, do not archive. Report that nothing was archived and skip the remaining steps.
-   - The archive-everything option — proceed with every selected change
-   - The ready-only option — proceed with only the changes the step 6 table marks `Ready` or `Ready*`, and record the rest as Skipped in step 8d. If a `Ready*` change's conflict partner is skipped, re-derive that conflict's resolution using only the changes being archived.
-   - Anything else — ask again rather than archiving
+   - "Cancel" - stop, do not archive. Report that nothing was archived and skip the remaining steps.
+   - The archive-everything option - proceed with every selected change
+   - The ready-only option - proceed with only the changes the step 6 table marks `Ready` or `Ready*`, and record the rest as Skipped in step 8d. If a `Ready*` change's conflict partner is skipped, re-derive that conflict's resolution using only the changes being archived.
+   - Anything else - ask again rather than archiving
 
    Before step 8 writes the first main spec or moves any change, fetch every
    required specs-rule snapshot for the confirmed batch. For each change that will
@@ -178,7 +178,7 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
       - Apply artifact rules only to main specs produced by that change. They do
         not change conflict resolution, archive behavior, or CLI contracts, and
         their text is not copied into an output file
-      - Do not delegate to a background task — step 8c would move `changeRoot` out from under a sync that is still reading it.
+      - Do not delegate to a background task - step 8c would move `changeRoot` out from under a sync that is still reading it.
       - If a change has no included delta specs, do not run the sync workflow for it.
 
    b. **Verify included delta specs before moving changeRoot**:
@@ -186,10 +186,10 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
       - Verify that main specs are updated:
         - ADDED requirements present
         - MODIFIED requirements carrying scenario and description changes named in the delta, with their other scenarios intact
-        - REMOVED requirements gone — and where this sync retired a capability (removed its last requirement, leaving `## Requirements` empty), its main spec deleted rather than left empty; a spec the sync deliberately kept and reported is also a match
+        - REMOVED requirements gone - and where this sync retired a capability (removed its last requirement, leaving `## Requirements` empty), its main spec deleted rather than left empty; a spec the sync deliberately kept and reported is also a match
         - RENAMED requirements present under the new name and absent under the old one
       - Do not verify delta specs in `excludedDeltas`; they are intentionally left unsynced.
-      - If sync failed or any capability does not match verification, report what differs and fail/skip moving that change's `changeRoot` — do not archive that change. `changeRoot` remains intact.
+      - If sync failed or any capability does not match verification, report what differs and fail/skip moving that change's `changeRoot` - do not archive that change. `changeRoot` remains intact.
 
    c. **Perform the archive**:
 
@@ -311,7 +311,7 @@ No active changes found. Create a new change to get started.
 - Skip spec sync only when implementation is missing (warn user)
 - Show clear per-change status before confirming
 - Use single confirmation for entire batch
-- Never archive after the user cancels the confirmation — a cancelled batch archives nothing
+- Never archive after the user cancels the confirmation - a cancelled batch archives nothing
 - Track and report all outcomes (success/skip/fail)
 - Preserve .openspec.yaml when moving to archive
 - Archive directory target uses current date: YYYY-MM-DD-<name>; a name that already starts with a `YYYY-MM-DD-` prefix is used as-is (never stack a second date)
@@ -319,7 +319,7 @@ No active changes found. Create a new change to get started.
 - If sync is requested, run the `/opsx-sync` workflow inline (agent-driven) for each change with included delta specs
 - Carry the per-delta `includedDeltas` and `excludedDeltas` decisions into execution; sync and verify only included deltas
 - Report every excluded delta as `sync skipped` without treating the archive itself as skipped
-- Never archive a change while a spec sync is still in flight — run the sync inline and verify main specs at `<planningHome.root>/openspec/specs/<capability-path>/spec.md` before moving `changeRoot`
+- Never archive a change while a spec sync is still in flight - run the sync inline and verify main specs at `<planningHome.root>/openspec/specs/<capability-path>/spec.md` before moving `changeRoot`
 - Fetch archive inputs once per selected root before spec inspection or moves
 - Fetch all required specs-rule snapshots before the batch's first main-spec write or move
 - A failed archive-inputs lookup never blocks the batch; it proceeds with no context or guidance

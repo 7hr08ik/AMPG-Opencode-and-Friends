@@ -81,7 +81,7 @@ These laws are **immutable** and **must** be followed!
 - NEVER Bypass security checks or validation hooks.
 - NEVER Duplicate existing functionality without a clear reason.
 - NEVER Ship code without checking the relevant test suite.
-- NEVER Use emojis or Em Dash (—) in code, comments, or documentation.
+- NEVER Use emojis or Em Dash (—) in any format.
 
 ## Standards
 

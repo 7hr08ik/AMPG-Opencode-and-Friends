@@ -11,10 +11,10 @@ This proposal maps 7 of the 10 NASA safety-critical coding rules to specific loc
 
 The implementation strategy uses a **hybrid approach**:
 
-- **AGENTS.md** — Core principles and behavioral guidelines
-- **instructions/common/*.md** — Detailed rules and checklists
-- **plugins/** — Runtime enforcement via hooks
-- **development-workflow.md** — Process-oriented rules
+- **AGENTS.md** - Core principles and behavioral guidelines
+- **instructions/common/*.md** - Detailed rules and checklists
+- **plugins/** - Runtime enforcement via hooks
+- **development-workflow.md** - Process-oriented rules
 
 **Key Insight**: The NASA rules were designed for C safety-critical systems. We adapt them to be **language-agnostic** while preserving the safety philosophy, making them applicable to any programming language supported by OpenCode.
 
@@ -322,23 +322,23 @@ function checkIgnoredReturnValues(content: string): string[] {
 
 ## 5. Proposed File Changes
 
-### 5.1. `AGENTS.md` — Add NASA Rules Section
+### 5.1. `AGENTS.md` - Add NASA Rules Section
 
 ```markdown
 #### 5.1.1. Safety-Critical Coding Rules (NASA Power of Ten)
 
 For safety-critical code, follow these additional rules:
 
-2. **Bounded loops** — All loops must have fixed upper-bound
-3. **Bounded memory** — Avoid unbounded heap growth
-4. **Small functions** — ≤60 lines (one page)
-5. **Assertion density** — ≥2 assertions per function
-6. **Small scope** — Declare variables at smallest scope
-7. **Check returns** — Always check return values; validate parameters
-10. **Zero warnings** — Compile strict; run static analysis daily
+2. **Bounded loops** - All loops must have fixed upper-bound
+3. **Bounded memory** - Avoid unbounded heap growth
+4. **Small functions** - ≤60 lines (one page)
+5. **Assertion density** - ≥2 assertions per function
+6. **Small scope** - Declare variables at smallest scope
+7. **Check returns** - Always check return values; validate parameters
+10. **Zero warnings** - Compile strict; run static analysis daily
 ```
 
-### 5.2. `instructions/common/coding-style.md` — Add NASA Sections
+### 5.2. `instructions/common/coding-style.md` - Add NASA Sections
 
 ```markdown
 #### 5.2.1. Loop Bounds
@@ -369,7 +369,7 @@ For safety-critical code, follow these additional rules:
 - Daily static analysis with state-of-the-art tools
 ```
 
-### 5.3. `opencode/plugins/coding-style.ts` — Add New Checks
+### 5.3. `opencode/plugins/coding-style.ts` - Add New Checks
 
 ```typescript
 // Add to checkFunctions or create new check functions (language-agnostic patterns):
@@ -381,14 +381,14 @@ For safety-critical code, follow these additional rules:
 const funcsize = 60;
 ```
 
-### 5.4. `opencode/plugins/linting.ts` — Add Return Value Check
+### 5.4. `opencode/plugins/linting.ts` - Add Return Value Check
 
 ```typescript
 // Add rule to detect ignored return values
 function checkIgnoredReturnValues(content: string): string[]
 ```
 
-### 5.5. `instructions/common/development-workflow.md` — Add Static Analysis
+### 5.5. `instructions/common/development-workflow.md` - Add Static Analysis
 
 ```markdown
 #### 5.5.1. Static Analysis

@@ -25,8 +25,8 @@ const checkImmutability = (content: string): string[] => {
 
 const checkNestingDepth = (content: string): number => {
   // Brace depth, skipping strings/comments via the same lexer states.
-  // (The previous keyword-counting version never matched — a 10-char window
-  // can never equal "if"/"for" — so depth was always 0. Object literals do
+  // (The previous keyword-counting version never matched - a 10-char window
+  // can never equal "if"/"for" - so depth was always 0. Object literals do
   // inflate this heuristic; the threshold accounts for that.)
   let maxDepth = 0
   let depth = 0
@@ -105,7 +105,7 @@ const lineOf = (starts: number[], index: number): number => {
 
 const measureFunctions = (content: string): Array<{ name: string; body: string; lines: number }> => {
   // Perf: the old version called content.substring(0, i).split("\n") twice
-  // per function (O(n) each) plus two O(n) tail copies — O(f*n) total, ~15ms
+  // per function (O(n) each) plus two O(n) tail copies - O(f*n) total, ~15ms
   // on a 2000-line file. Line index + binary search + direct scan: O(n + f*len).
   const starts = buildLineIndex(content)
   const out: Array<{ name: string; body: string; lines: number }> = []
@@ -152,7 +152,7 @@ const checkLoopBounds = (content: string): string[] => {
   if (whileNotTrueMatches) violations.push(`Unbounded while loops detected (${whileNotTrueMatches.length} occurrence(s))`)
   const doWhileMatches = content.match(/do\s*\{[\s\S]*?\}\s*while\s*\(/g)
   if (doWhileMatches) violations.push(`do-while loops detected (${doWhileMatches.length} occurrence(s))`)
-  // NOTE: removed the old "Potential recursive calls" heuristic — it matched
+  // NOTE: removed the old "Potential recursive calls" heuristic - it matched
   // every `name(` call in the file, so it warned on literally any code.
   return violations
 }

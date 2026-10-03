@@ -4,7 +4,7 @@
   // ============================================
   
   // Storage location for vector database
-  "storagePath": "~/Coding/AI/Opencode-Mem/data",
+  "storagePath": "{env:STORAGE_PATH}",
 
   "userEmailOverride": "",
   "userNameOverride": "",
@@ -94,7 +94,7 @@
    // (with structured output) instead of talking to provider HTTPS endpoints
    // directly, so opencode owns the auth, token refresh, and provider routing.
    //
-   // No separate API key is needed in this plugin — whatever you configured in
+   // No separate API key is needed in this plugin - whatever you configured in
    // opencode (OAuth like Claude Pro/Max, GitHub Copilot personal/business,
    // bring-your-own API key, custom provider, ...) just works.
    //
@@ -122,12 +122,12 @@
   // Provider type: "openai-chat" | "openai-responses" | "anthropic" | "minimax"
   // Note: "openai-chat" is a generic OpenAI API-compatible mode.
   // Any service that follows the OpenAI Chat Completions API can use it via custom "memoryApiUrl".
-  "memoryProvider": "openai-chat",
+  "memoryProvider": "{env:PROVIDER}",
   
   // Manual fallback. Uncomment all 3 lines and replace memoryApiKey before use:
-  "memoryModel": "Ornith-1.5-35B-A3B-GGUF-Q8_0",
-  "memoryApiUrl": "http://10.69.30.23:13305/v1",
-  "memoryApiKey": "local",
+  "memoryModel": "{env:MODEL}",
+  "memoryApiUrl": "{env:APIURL}",
+  "memoryApiKey": "{env:APIKEY}",
 
   // API Key Formats:
   // Direct value:        "sk-..."
@@ -248,7 +248,7 @@
   "userProfileDisplayWorkflows": 10,
   
   // Number of preferences injected into LLM conversation context
-  // Keep this small — the strongest signals are enough; more dilute LLM attention
+  // Keep this small - the strongest signals are enough; more dilute LLM attention
   "userProfileInjectPreferences": 5,
   
   // Number of patterns injected into LLM conversation context
@@ -276,7 +276,7 @@
 
   // Enable LLM validation of existing preferences against recent behavior.
   // When enabled, each analysis round checks if top-5 preferences still match recent prompts.
-  // Experimental — disabled by default.
+  // Experimental - disabled by default.
   "userProfileValidationEnabled": false,
 
   // ============================================

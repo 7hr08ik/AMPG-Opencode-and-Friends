@@ -4,7 +4,7 @@
 // synthesizing Feature:/Rule:/Scenario: from the Markdown headings and copying
 // fenced step lines verbatim.
 //
-// ../EXTRACTION.md IS THE DEFINITION — the line-by-line mapping, the fence
+// ../EXTRACTION.md IS THE DEFINITION - the line-by-line mapping, the fence
 // mechanics, the line-fidelity invariant and every hard error live there. This
 // file is one binding of it; python/extract_gherkin.py is the other, and the
 // two must stay behaviourally identical. Change the doc first, then both
@@ -26,7 +26,7 @@ const DELTA_SECTION_RE = /^##\s+(ADDED|MODIFIED|REMOVED|RENAMED)\s+Requirements\
 const REQUIREMENT_RE = /^###\s+Requirement:\s*(.+?)\s*$/i;
 const SCENARIO_RE = /^####\s+(Scenario(?:\s+Outline)?):\s*(.+?)\s*$/i;
 
-// Structure keywords are illegal inside a fence — they come from the
+// Structure keywords are illegal inside a fence - they come from the
 // headings. `Examples:` (the Scenario Outline table) and `Background:` are
 // deliberately absent: both legitimately live in a fence.
 const STRUCTURE_IN_FENCE_RE = /^\s*(Feature|Rule|Scenario\s+Outline|Scenario|Example):/;
@@ -53,7 +53,7 @@ function extractFile(mdPath) {
       }
       if (INDENTED_GHERKIN_RE.test(line)) {
         throw new Error(
-          `${mdPath}:${i + 1}: indented \`\`\`gherkin fence — gherkin fences must start at column 0`
+          `${mdPath}:${i + 1}: indented \`\`\`gherkin fence - gherkin fences must start at column 0`
         );
       }
       if ((m = ANY_OPEN_RE.exec(line))) {
@@ -78,7 +78,7 @@ function extractFile(mdPath) {
         h1Count += 1;
         if (h1Count > 1) {
           throw new Error(
-            `${mdPath}:${i + 1}: more than one H1 — a spec.md has exactly one "# <capability>" title`
+            `${mdPath}:${i + 1}: more than one H1 - a spec.md has exactly one "# <capability>" title`
           );
         }
         out.push(`Feature: ${m[1]}`);
@@ -114,7 +114,7 @@ function extractFile(mdPath) {
     const kw = STRUCTURE_IN_FENCE_RE.exec(line);
     if (kw) {
       throw new Error(
-        `${mdPath}:${i + 1}: "${kw[1]}:" inside a \`\`\`gherkin fence — structure comes from Markdown ` +
+        `${mdPath}:${i + 1}: "${kw[1]}:" inside a \`\`\`gherkin fence - structure comes from Markdown ` +
           `headings ("# title", "### Requirement:", "#### Scenario:"); fences hold only steps`
       );
     }
@@ -131,7 +131,7 @@ function extractFile(mdPath) {
     );
   }
   if (h1Count === 0) {
-    throw new Error(`${mdPath}: no H1 title — a spec.md must start with "# <capability>"`);
+    throw new Error(`${mdPath}: no H1 title - a spec.md must start with "# <capability>"`);
   }
   if (out.length !== lines.length) {
     throw new Error(`${mdPath}: line-count invariant violated (extractor bug)`);
@@ -153,7 +153,7 @@ function walk(root, dir, basename, found) {
   return found;
 }
 
-// Spec roots: specs/ (source of truth) and each active change's specs/ —
+// Spec roots: specs/ (source of truth) and each active change's specs/ -
 // changes/archive/ is excluded structurally (archive nests one level deeper
 // than changes/<id>/) plus a defensive filter on the collected paths.
 function collectSpecSources(openspecDir, basename) {
@@ -171,7 +171,7 @@ function collectSpecSources(openspecDir, basename) {
 // Extracts every spec.md under <openspecDir> (source of truth + active
 // change deltas, archive excluded) into <outDir>, mirroring the
 // openspec-relative path with spec.md -> spec.feature. The output dir is
-// wiped first — a stale extraction would keep deleted or renamed
+// wiped first - a stale extraction would keep deleted or renamed
 // capabilities executing.
 function extractAll(openspecDir, outDir) {
   openspecDir = openspecDir ? path.resolve(openspecDir) : path.resolve(__dirname, '../openspec');
@@ -182,7 +182,7 @@ function extractAll(openspecDir, outDir) {
   const sources = collectSpecSources(openspecDir, 'spec.md');
 
   // Legacy-format tripwire: raw .feature files under openspec/ no longer run
-  // anywhere — flag them instead of letting them silently drop out.
+  // anywhere - flag them instead of letting them silently drop out.
   const legacy = collectSpecSources(openspecDir, '*.feature');
   if (legacy.length > 0) {
     console.error(

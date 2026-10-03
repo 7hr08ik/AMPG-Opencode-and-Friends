@@ -58,7 +58,7 @@ original file unchanged.
 
 This schema declares its companion skills in `skills.txt`; they are installed automatically by Step 6 of `AGENT_INSTALL.md` into `.agents/skills/`, sourced from [intent-driven-dev/skills](https://github.com/intent-driven-dev/skills).
 
-- [`architectural-decision-records`](https://github.com/intent-driven-dev/skills/tree/main/.agents/skills/architectural-decision-records) — drafting/reviewing ADRs; includes MADR, Nygard, and Y-statement templates, and takes care of choosing the ADR style/template used by this schema.
-- `openspec-git-discipline` — git hygiene for OpenSpec propose/apply/archive workflows.
+- [`architectural-decision-records`](https://github.com/intent-driven-dev/skills/tree/main/.agents/skills/architectural-decision-records) - drafting/reviewing ADRs; includes MADR, Nygard, and Y-statement templates, and takes care of choosing the ADR style/template used by this schema.
+- `openspec-git-discipline` - git hygiene for OpenSpec propose/apply/archive workflows.
 
 For more schemas, refer to https://github.com/intent-driven-dev/openspec-schemas.

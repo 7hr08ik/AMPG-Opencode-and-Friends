@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest a change or new feature for the config.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea? Tell me about it.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What are you trying to do that's currently hard or impossible?
+      placeholder: Describe the need.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Your idea
+      description: How would you solve it? Sketchy is fine - this is a starting point.
+      placeholder: Describe your idea.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the config does this touch?
+      options:
+        - Opencode config (opencode.jsonc / agents / commands / skills / rules)
+        - Billion Context (bili)
+        - Plugins
+        - Project template
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else?
+    validations:
+      required: false

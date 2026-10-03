@@ -9,9 +9,9 @@ This command enforces test-driven development for React using React Testing Libr
 ## What This Command Does
 
 1. **Define Component Signature**: Scaffold the component, prop type, and exports
-2. **Write Behavior Tests First**: RTL queries (role-first), `userEvent`, MSW for network — RED
+2. **Write Behavior Tests First**: RTL queries (role-first), `userEvent`, MSW for network - RED
 3. **Run Tests**: Verify they fail for the right reason
-4. **Implement Minimal Code**: Just enough to pass — GREEN
+4. **Implement Minimal Code**: Just enough to pass - GREEN
 5. **Refactor**: Improve while keeping tests green
 6. **Check Coverage**: Hit the targets in [rules/react/testing.md](../rules/react/testing.md)
 
@@ -122,7 +122,7 @@ describe("SearchInput", () => {
 });
 ```
 
-## Step 3: Run Tests — Verify FAIL
+## Step 3: Run Tests - Verify FAIL
 
 ```bash
 $ vitest run src/components/SearchInput.test.tsx
@@ -156,7 +156,7 @@ export function SearchInput({ onSearch, placeholder, debounceMs = 300 }: Props) 
 }
 ```
 
-## Step 5: Run Tests — Verify PASS
+## Step 5: Run Tests - Verify PASS
 
 ```bash
 $ vitest run src/components/SearchInput.test.tsx
@@ -227,12 +227,12 @@ Configure in `vitest.config.ts` / `jest.config.js` to enforce thresholds in CI.
 
 ## Anti-Patterns to Avoid
 
-- `container.querySelector(...)` — bypasses accessibility queries
+- `container.querySelector(...)` - bypasses accessibility queries
 - Asserting on render count
 - Mocking `react` itself (`jest.mock("react", ...)`)
 - Mocking child components by default (mock only when child has heavy side effects)
-- Ignoring `act()` warnings — they signal real bugs
-- Snapshot tests of rendered components (brittle, rubber-stamped) — use Playwright/Cypress visual diff instead
+- Ignoring `act()` warnings - they signal real bugs
+- Snapshot tests of rendered components (brittle, rubber-stamped) - use Playwright/Cypress visual diff instead
 
 ## Test Commands
 
@@ -254,9 +254,9 @@ CI=true vitest run --coverage
 
 ## Related Commands
 
-- `/react-build` — fix build errors before running tests
-- `/react-review` — review after implementation
-- `verification-loop` skill — full verification loop
+- `/react-build` - fix build errors before running tests
+- `/react-review` - review after implementation
+- `verification-loop` skill - full verification loop
 
 ## Related
 

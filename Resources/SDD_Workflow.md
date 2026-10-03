@@ -7,10 +7,9 @@
     - git init && codegraph init && openspec init
 3. Opencode
     - /init - To bring it all together
-    - /opsx-explore
+    - `/opsx-explore` or `/ospx-propose`
 4. ?
 5. Profit
-
 
 ## Tips
 
@@ -23,22 +22,18 @@ When you know what you want to build and just need to execute:
 
 ## Project Folder Setup
 
-- Use Main template to create project folder boilerplate.
-    - Rename whats needed
-- Open Project folder in your IDE.
-- Copy in environment specific templates.
-    - Merge the AGENTS.md with multiple environment details, if needed.
+`Boilerplate` template for use in project creation
+
+- Copy template.
 - Configure:
-    - Templates
-        - AGENTS.md
-        - env_template
-        - gitignore_template
-    - Openspec config.yaml
+    - AGENTS.md
+    - env_template
+    - gitignore_template
 - Init all the things
     - git init && codegraph init && openspec init
     - opencode
         - /init
-
+- Done. Go. Build.
 
 ## Building - Workflow
 
@@ -69,8 +64,7 @@ When you know what you want to build and just need to execute:
 - Apply tasks - Build the thing
     - /opsx:apply <name>                   # (Optional) Set <name> for individual tasks
 
-- Checks - Tests 
-
+- Checks - Tests
     - /code-review
     - Language/ENV Specific Review/Testing
     - /optimize

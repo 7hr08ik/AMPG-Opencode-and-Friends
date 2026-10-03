@@ -1,169 +1,155 @@
 # AMPG: OpenCode and friends
 
-*A morons personal guide* and setup for [Opencode](https://opencode.ai/), configured with models locally hosted by [Lemonade Server](https://lemonade-server.ai/)
+*A Morons Personal Guide* for [Opencode](https://opencode.ai/), built on locally-hosted models via [Lemonade Server](https://lemonade-server.ai/).
 
-This config is made for 1 GPU, on 1 PC, with 1 moron hammering at the keyboard.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## 1. Preamble
+## 1. TL;DR
 
- - This is made by me, for me, because of me. 
- - I am fully AMD, and Linux (Arch/Manjaro btw!).
- - Fork this, try this, help me improve this.
- - I do not know if this setup works on Microslop.
- - [Lemonade Server](https://lemonade-server.ai/) not required. I include it because thats what I'm running. Its pretty trivial to change the `"baseURL": "http://127.0.0.1:13305/v1"` to Ollama/LM Studio if you need.
+- This is a [Opencode 2](https://opencode.ai/) **config recipe**, not an app. Fork it, tweak it, make it yours.
+- Follow the instructions, there are a few things to install.
+- I run everything on **AMD + Linux**. Tested on one GPU, one PC, one over-caffeinated developer.
+- **[Lemonade Server](https://lemonade-server.ai/) is not required.** The config points at a standard OpenAI-compatible endpoint, so it works with Ollama, LM Studio, vLLM, or cloud. Just swap the `baseURL`.
+- It's mine, for me - published so someone can grab a useful piece. If I've done something wrong, tell me and I'll fix it.
 
-This was born from my own journey into the world of making AI do my work for me. I started like most on Claude Code, but I'm cheap...so I looked into [Free Claude Code](https://github.com/Alishahryar1/free-claude-code) and started playing with [Everything Claude Code](https://github.com/affaan-m/ECC). I saw posts claiming to show Karpathy's and Cherny's CLAUDE.md files, so I copied those, and started on my way down the path of combining and optimizing those for my needs.
+## 2. What this actually is
 
-I started playing around with different local hosting, [LM Studio](https://lmstudio.ai/), [Ollama](https://ollama.com/), then I found [Lemonade Server](https://lemonade-server.ai/). As my whole system is AMD, it was a perfect fit, it even allows me to run a 38GB MoE model, while streaming video through Jellyfin, without any issues. Well, after some tweaking anyway.
+A single Git repo holding a working Opencode configuration, a starter template for new projects, and the reference docs along the way. There's nothing to build - you copy the `Configs/` folders over your own config and go.
 
-I eventually moved on to [Opencode](https://opencode.ai/). I brought along my .md files, and tried to port over what I could/wanted to from ECC. Admittedly not a lot, some agents, some skills, the rules/ folder became templates for individual project level folders, and I was able to port the useful hooks over to Opencode compatible plugins. I do not know typescript, but Qwen3-coder does.
+```
+.
+├── Configs/
+│   ├── opencode/            # the installable Opencode config (the good stuff)
+│   │   ├── opencode.jsonc   #   providers, models, plugins, permissions
+│   │   ├── cli.json
+│   │   ├── agents/
+│   │   ├── commands/        #   opsx-* workflow + dev commands
+│   │   ├── skills/          #   OpenSpec + openspec-git-discipline + misc
+│   │   └── rules/<stack>/   #   per-language coding/security/testing rules
+│   └── billion-context/
+│       └── billion-context.json   # the Billion Context (bili) config
+├── Project_Template/        # starter layout for a new project
+├── Resources/               # reference docs I leaned on
+│   ├── Lemonade-Server.md   #   how my Lemonade instance is set up
+│   └── SDD_Workflow.md      #   spec-driven development walkthrough
+├── Quick-Start.md           # empty folder -> running project in a few steps
+├── AGENTS.md                # instructions for agents working in this repo
+└── README.md                # you are here
+```
 
-This repo is my personal setup, filled with everything I am using. I have turned my config files into .template files. I include a quick guide for how I have Lemonade setup, and a slightly condescending guide on starting a project/workflow.
+## 3. The story (skip if you want)
 
-Help is always appreciated. If i've done something wrong, please tell me so I can fix it.
+I started like most people: on [Claude Code](https://claude.ai/). But I'm cheap, so I went hunting for [Free Claude Code](https://github.com/Alishahryar1/free-claude-code) and started playing with [Everything Claude Code](https://github.com/affaan-m/ECC). I'd seen the claims about Karpathy's and Boris Cherny's `CLAUDE.md` files, copied them, and started optimizing for my own needs.
 
-## 2. About
-Merged various sources of .md files:
+Eventually I moved on to [Opencode](https://opencode.ai/). I brought my `.md` files along and ported what I could from ECC: some agents, some skills, and the `rules/` folder became templates for individual project-level folders. I hooks got converted into Opencode-compatible plugins. (I don't know TypeScript, but Qwen3-coder does.)
 
-Incorporates:
-  - [Boris Cherny's CLAUDE.md](https://gist.github.com/hqman/e29cb6386c539d795767e8c3fd2c959b)
-    - Basis for my AGENTS.md file
-  - [Andrej Karpathy's CLAUDE.md](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md)
-    - Incorporated into my .md files
-  - [NASA: The Power of Ten](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code)
-    - Merged into INSTRUCTIONS.md
-  - [Stackoverflow commenting guidelines](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/)
-    - Merged into INSTRUCTIONS.md
-  - Parts of [Everything Claude Code](https://github.com/affaan-m/ECC)
-    - Some Agents, Skills, Commands
-    - *Plugin hooks:* Converted them into Opencode compatible .ts plugins.
-    - *Rules:* Common used in main config. 
-    - *Template Rules* Individual per language/environment project level templates.
-  - [OpenSpec Driven Development](https://intent-driven.dev/blog/2026/05/10/spec-driven-development-openspec-opencode/)
-  - [Intent Driven Template](https://github.com/intent-driven-dev/intent-driven-template)
+## 4. Features / tools in the setup
 
-Included skills:
-  - [Matt Pococks Skills](https://github.com/mattpocock/skills)
-  - The Unslop skill from Cursor - https://www.skills.sh/cursor/plugins/unslop
-  - Vercel
-    - Find-Skills
-    - Agent-Browser
+Additional Tools
 
-My theory is 3 main files:
-  - INSTRUCTIONS.md - Operational Instructions.
-  - LAWS.md - Immutable laws.
+  - **[Open Agent Control](https://github.com/darrenhinde/OpenAgentsControl)** - AI agents that learn YOUR coding patterns and generate matching code every time.
+  - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** - A lightweight framework for spec-driven development.
+  - **[Opencode-mem](https://github.com/tickernelz/opencode-mem)** - A persistent memory system for AI coding agents.
+  - **[Superpowers](https://github.com/obra/superpowers)** - An agentic skills framework.
+  - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pollock's .agents directory.
 
-And a collection of common coding rules:
-  - instructions/common/*.md
- 
-A collection of language specific rules, for use at the project level. Taken directly from ECC:
-  - Templates/`environment`/AGENTS.md
-  - Templates/`environment`/.opencode/[agents/commands/rules/skills]
-> Project level folders are hidden `/.opencode/` not `/opencode/`. Remember to `Show Hidden Files`
+Background plugins
 
-## 3. Features
+  - **[Billion Context](https://github.com/ranxianglei/billion-context)** - Dynamic configurable context management.
+  - **[Codegraph](https://github.com/colbymchenry/codegraph)** - Codebase memory & search.
+  - **[opencode-tps-meter](https://github.com/ChiR24/opencode-tps-meter)** - Display tokens/sec.
+  
+MCPs
 
-  - **[Open Agent Control](https://github.com/darrenhinde/OpenAgentsControl)** - Main Agent Harness/Workflow/Architect.
-  - **[Dynamic Context Pruning](https://github.com/Opencode-DCP/opencode-dynamic-context-pruning)** - Prunes context ... Dynamically.
-  - **[Codegraph](https://github.com/colbymchenry/codegraph)** - Codebase Memory/Search
-  - **[Context7](https://github.com/upstash/context7)** - Online Documentation Search
-  - **[opencode-tps-meter](https://github.com/ChiR24/opencode-tps-meter)** - Display Tokens/Sec
-  - **[Markitdown-mcp](https://github.com/microsoft/markitdown)** - Document Converter. Microslop made, python based.
-  - **[opencode-ignore](https://github.com/lgladysz/opencode-ignore)** - Create .ignore files for AI (Just like .gitignore)
-  - **[true-mem](https://github.com/rizal72/true-mem)** - Opencode, Local first, long term memory. 
-  (Yes I know about opencode-mem. But it keeps giving me problems, not starting, corrupting etc.)
-  - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** Search Github repos
-  - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** A lightweight framework for Spec Driven Development
+  - **[Draw.io](https://github.com/jgraph/drawio-mcp/blob/main/mcp-tool-server/README.md)** - Draw.io, for diagrams etc.
+  - **[Playwrite](https://github.com/microsoft/playwright-mcp)** - AI Browser automation.
+  - **[Context7](https://github.com/upstash/context7)** - Online documentation search.
+  - **[MarkItDown](https://github.com/microsoft/markitdown)** - Document converter.
+  - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** - Search GitHub repos.
 
-## 4. Installation
+And some custom plugins I created for myself.
 
-### 4.1. Requirements
+## 5. Installation
 
-API access to some sort of AI model.
-- Locally:
-  - [Lemonade Server](https://lemonade-server.ai/)
-  - [Ollama](https://ollama.com/)
-  - [vLLM](https://docs.vllm.ai/en/stable/)
-- Cloud
+### 5.1. Requirements
 
-Installed on the system:
-- Bun
-- pip
-- npm
+- **Something to run a model** - either locally or via the cloud:
+  - Local: [Lemonade Server](https://lemonade-server.ai/), [Ollama](https://ollama.com/), or [vLLM](https://docs.vllm.ai/en/stable/)
+  - Cloud: whatever API you like
+- **Runtimes on your system:** 
+  - [Bun](https://bun.sh/)
+  - [pip](https://pypi.org/project/pip/)
+  - [npm](https://www.npmjs.com/)
 
-### 4.2. Install Opencode
+### 5.2. Install Opencode 2
 
-[OpenCode Docs](https://opencode.ai/docs/)
-
-Install with
 ```bash
-# curl -fsSL https://opencode.ai/install | bash
 curl -fsSL https://opencode.ai/v2/install | bash
 ```
 
-### 4.3. Copy over the Opencode setup
+(See the [Opencode Docs](https://opencode.ai/v2/docs) for other install methods.)
 
-  - Download this repo.
-  - Copy/paste the contents of `Configs` folder into `~/.config/`.
-  - Overwrite everything when asked.
+### 5.3. Copy over the config
 
-### 4.4. Plugins
+The installable configs live in `Configs/`. See **`Configs/INSTALL.md`** for the exact, cross-platform copy steps
+(Linux, macOS, PowerShell), but the gist is:
 
-Most features are automatically installed at runtime, thanks to Opencode plugins features.
-
-The following are required to be installed manually:
 ```bash
-# TPS Meter
-npm install opencode-tps-meter
-# Codegraph
-curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
-# In a seperate terminal!!!
-codegraph install
+# Copy the Opencode config and the Billion Context config over your own
+cp -r Configs/opencode/*      ~/.config/opencode/
+cp Configs/billion-context/   ~/.config/billion-context/
+```
+
+Overwrite if asked.
+
+> The core config does **not** self-copy. After any change to `Configs/opencode/`, re-run the copy.
+
+### 5.4. Install the plugins
+
+Most plugins are picked up automatically by Opencode. The following may need a one-time manual install:
+
+```bash
 # Billion Context
 npm install -g billion-context
 bili plugin install opencode
+
 # Context7
 npx ctx7 setup --opencode
-# OpenAgentControl
-# Keep this at default install location. Otherwise makes the ~/.config/opencode folder messy
+
+# TPS Meter
+npm install opencode-tps-meter
+
+# Codegraph  (run in a separate terminal)
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+codegraph install
+
+# OpenAgent Control  (keep the default install location, or ~/.config/opencode gets messy)
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
+
 # MarkItDown
 pip install 'markitdown[all]' && pip install markitdown-mcp
+
 # OpenSpec
 bun add --global @fission-ai/openspec@latest
-# Matt Pocock Skills - (Install full MattPocock package)
+
+# Matt Pocock Skills
 npx skills@latest add mattpocock/skills
 ```
 
+## 6. Usage
 
-Or all-together
-```bash
-npx ctx7 setup --opencode && \
-npx skills@latest add mattpocock/skills && \
-npm install opencode-tps-meter && \
-npm install -g billion-context && \
-bili plugin install opencode && \
-pip install 'markitdown[all]' && pip install markitdown-mcp && \
-bun add --global @fission-ai/openspec@latest && \
-curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
-```
+- **[Quick-Start.md](Quick-Start.md)** - go from an empty folder to a running project.
+- **[Resources/SDD_Workflow.md](Resources/SDD_Workflow.md)** - full spec-driven development walkthrough.
+- **[Resources/Lemonade-Server.md](Resources/Lemonade-Server.md)** - how my Lemonade instance is configured.
 
-## 5. Usage
+## 7. Updating
 
-[Quickstart Guide](Quick-Start.md)
-[Full Spec Driven Dev Walkthrough](SDD_Workflow.md)
-
-## 6. Updating
-
-Most updates occur automatically:
-  - Opencode autoupdate activated in config
-  - Plugins update at runtime
-
-Some plugins require manually updating:
+- **Opencode** auto-updates (enabled in the config).
+- **Most plugins** update themselves at runtime.
+- **A few** need a manual nudge:
 
 ```bash
-# Open Agent Control
+# OpenAgent Control
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash
 # Codegraph
 codegraph upgrade
@@ -171,16 +157,31 @@ codegraph upgrade
 npx skills@latest update
 ```
 
-## 7. Notes / Fixes / Workarounds
+## 8. Notes, fixes & how I un-break things
 
-**ALT + Enter** = Next Line, not send
+- **ALT + Enter** = next line, not send. (This one catches people out.)
+- **Thinking loops** are rare but real. If the model gets stuck, hit `ESC` twice then `continue` - the task just carries on, no restart needed.
+- **Full reset** - nuke everything and start fresh:
 
-**Full Reset:** Delete all files. Start again from scratch
-```bash
-rm -rf ~/.config/opencode ~/.cache/opencode ~/.opencode ~/.local/share/opencode/
-```
-Then re-install everything
+  ```bash
+  rm -rf ~/.config/opencode ~/.cache/opencode ~/.opencode ~/.local/share/opencode/
+  ```
 
-Rare Problems:
- - Occasionally my system will lockup/full GPU driver crash, requiring a hard system reset. This could be so many things....wayland, RAM, VRAM, model settings, the fact i watch Jellyfin while working. I do not believe it is related to Opencode though. More an issue with running AI, and getting Lemonade setting dialed in just right.
- - I have noticed, only twice in 2 weeks of usage, my model Ornith-1.0 has got into a thinking loop. So remember to check the thoughts. Simply hitting ESC twice, and then `continue` seemed to sort it. The task continued just fine without having to restart anything, just interrupt and continue.
+## 9. Contributing
+
+Forks, tweaks, and "hey, this is broken" reports are all welcome. If you've made it work somewhere I haven't (Windows, a second GPU, a cloud model), a note - or a pull request - would be appreciated.
+
+## 10. License
+
+This project is licensed under the [MIT License](LICENSE). Fork it, use it, make something of it.
+
+## 11. Acknowledgments
+
+Built on the shoulders of people who wrote the good bits first:
+
+- [Boris Cherny's CLAUDE.md](https://gist.github.com/hqman/e29cb6386c539d795767e8c3fd2c959b) - basis for the `AGENTS.md` file
+- [Andrej Karpathy's CLAUDE.md](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md) - woven into the `.md` files
+- [NASA: The Power of Ten](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code) - safety-minded rules
+- [Stack Overflow: Best practices for writing code comments](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/) - comment guidance
+- [Everything Claude Code](https://github.com/affaan-m/ECC) - some agents, skills, commands, converted to Opencode plugins
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec) & the [Intent Driven Template](https://github.com/intent-driven-dev/intent-driven-template)

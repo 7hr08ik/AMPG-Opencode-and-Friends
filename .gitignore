@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 .pnp.*
+/.opencode
 
 # Build outputs
 dist/
@@ -34,11 +35,13 @@ service.json
 *.key
 *.pem
 
-# OpenCode local dependencies
-.opencode/node_modules/
+# OpenCode local dependencies (repo root working copies only)
+/AGENTS.md
+/opencode.jsonc
+/Project_Notes.txt
 
-# OpenSpec local output
-openspec/.cache/
+# OpenSpec local output (repo root working area only)
+/openspec/
 
 # Editor and OS files
 .DS_Store

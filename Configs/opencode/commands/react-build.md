@@ -1,5 +1,5 @@
 ---
-description: Fix React build failures (Vite, webpack, Next.js, CRA, Parcel, esbuild, Bun) incrementally — JSX/TSX compile errors, hydration mismatches, server/client component boundary failures, missing types. Invokes the react-build-resolver agent for minimal, surgical fixes.
+description: Fix React build failures (Vite, webpack, Next.js, CRA, Parcel, esbuild, Bun) incrementally - JSX/TSX compile errors, hydration mismatches, server/client component boundary failures, missing types. Invokes the react-build-resolver agent for minimal, surgical fixes.
 ---
 
 # React Build and Fix
@@ -152,17 +152,17 @@ Build Status: PASS: SUCCESS
 | `You're importing a component that needs useState` (Next.js) | Add `"use client"` or move hook to a Client Component child |
 | `Module not found: Can't resolve 'fs'` (Next.js) | Remove `fs` import or move logic into Server Component / API route |
 | `Hydration failed because the initial UI does not match` | Move `Date.now()`/`Math.random()`/`window.*` to `useEffect` |
-| `Invalid hook call` | Multiple React copies — dedupe via `resolutions`/`overrides` |
+| `Invalid hook call` | Multiple React copies - dedupe via `resolutions`/`overrides` |
 | `Element type is invalid` | Default vs named import mismatch |
 
 ## Fix Strategy
 
-1. **Compile errors first** — code must build
-2. **Hydration errors second** — affects production correctness
-3. **Bundler config third** — restore plugin/loader correctness
-4. **One fix at a time** — verify each change
-5. **Minimal changes** — never `// @ts-ignore` without explanation
-6. **Re-run after each fix** — surface new errors immediately
+1. **Compile errors first** - code must build
+2. **Hydration errors second** - affects production correctness
+3. **Bundler config third** - restore plugin/loader correctness
+4. **One fix at a time** - verify each change
+5. **Minimal changes** - never `// @ts-ignore` without explanation
+6. **Re-run after each fix** - surface new errors immediately
 
 ## Stop Conditions
 
@@ -175,10 +175,10 @@ The agent will stop and report if:
 
 ## Related Commands
 
-- `/react-test` — run tests after the build is green
-- `/react-review` — review code quality after the build succeeds
-- `/build-fix` — generic build fixer (non-React)
-- `verification-loop` skill — full verification loop
+- `/react-test` - run tests after the build is green
+- `/react-review` - review code quality after the build succeeds
+- `/build-fix` - generic build fixer (non-React)
+- `verification-loop` skill - full verification loop
 
 ## Related
 

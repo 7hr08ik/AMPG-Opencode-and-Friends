@@ -32,9 +32,6 @@
       "skill",
       "skill_*",
 		  "**/AGENTS.md",
-      "**/instructions/INSTRUCTIONS.md",
-      "**/instructions/LAWS.md",
-      "**/instructions/common/*.md",
       "**/rules/*/*.md"
     ]
   }

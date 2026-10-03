@@ -22,7 +22,7 @@
 Its now in the main Arch repo.
 
 - lemonade-server
-- lemonade-desktop
+- lemonade-desktop (Optional)
 
 ## Terminal Config
 

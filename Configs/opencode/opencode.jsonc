@@ -28,14 +28,18 @@
     "billion-context",
     "opencode-tps-meter@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",
-    "opencode-mem"
+    "opencode-mem@latest"
   ],
   "providers": {
     "local": {
       "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "[local] Lemonade",
       "settings": {
-        "baseURL": "http://10.69.30.23:13305/v1"
+      // Point this at your local model server.
+      // Defaults to 127.0.0.1 (local loopback). For a remote/other-on-LAN
+      // server, replace it with that machine's address, e.g.
+      //   http://10.69.30.23:13305/v1
+      "baseURL": "http://127.0.0.1:13305/v1"
       },
       "models": {
         "Ornith-1.5-35B-A3B-GGUF-Q8_0": {

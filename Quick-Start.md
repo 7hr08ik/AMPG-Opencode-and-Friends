@@ -2,19 +2,18 @@
 
 ## A guide to going from empty folder to building software.
 
-### Basics
- - Make new project folder
- - Open terminal inside project folder
+### Step - 1
 
+   -  Make new project folder
 
-### Customize setup
- - Copy Template folder for coding environment
-    -   e.g; Coding in python. Copy the contents of the python template, into the `root` of your project.
-    -   Opencode will pick up the extra files, and use all the python specific knowledge/skills/agents etc.
-    >[!NOTE]
-    > Project level folders are hidden `/.opencode/` not `/opencode/`. Remember to `Show Hidden Files`
- - Customize AGENTS.md for the project.
+### Step - 2
 
+-  Copy Template folder
+   -  Opencode will pick up the extra files, and use all the python specific knowledge/skills/agents etc.
+-  Customize AGENTS.md for the project.
+
+>[!NOTE]
+>  Project level folders are hidden `/.opencode/` not `/opencode/`. Remember to `Show Hidden Files`
 
 ## Initialize stuff
 
@@ -36,4 +35,3 @@ opencode
 ```
 
 Now you can start vibe-coding that awesome idea you had.
-

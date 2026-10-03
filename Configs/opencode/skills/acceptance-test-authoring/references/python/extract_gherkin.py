@@ -26,9 +26,7 @@ INDENTED_GHERKIN_RE = re.compile(r"^\s+`{3,}gherkin\s*$")
 
 HEADING_RE = re.compile(r"^#{1,6}\s+")
 H1_RE = re.compile(r"^#\s+(.+?)\s*$")
-DELTA_SECTION_RE = re.compile(
-    r"^##\s+(ADDED|MODIFIED|REMOVED|RENAMED)\s+Requirements\s*$", re.IGNORECASE
-)
+DELTA_SECTION_RE = re.compile(r"^##\s+(ADDED|MODIFIED|REMOVED|RENAMED)\s+Requirements\s*$", re.IGNORECASE)
 REQUIREMENT_RE = re.compile(r"^###\s+Requirement:\s*(.+?)\s*$", re.IGNORECASE)
 SCENARIO_RE = re.compile(r"^####\s+(Scenario(?:\s+Outline)?):\s*(.+?)\s*$", re.IGNORECASE)
 
@@ -67,8 +65,7 @@ def extract_file(md_path):
                 continue
             if INDENTED_GHERKIN_RE.match(line):
                 raise ExtractionError(
-                    "%s:%d: indented ```gherkin fence — gherkin fences must "
-                    "start at column 0" % (md_path, i + 1)
+                    "%s:%d: indented ```gherkin fence - gherkin fences must start at column 0" % (md_path, i + 1)
                 )
             m = ANY_OPEN_RE.match(line)
             if m:
@@ -92,8 +89,7 @@ def extract_file(md_path):
                 h1_count += 1
                 if h1_count > 1:
                     raise ExtractionError(
-                        '%s:%d: more than one H1 — a spec.md has exactly one '
-                        '"# <capability>" title' % (md_path, i + 1)
+                        '%s:%d: more than one H1 - a spec.md has exactly one "# <capability>" title' % (md_path, i + 1)
                     )
                 out.append("Feature: %s" % m.group(1))
                 continue
@@ -124,7 +120,7 @@ def extract_file(md_path):
         kw = STRUCTURE_IN_FENCE_RE.match(line)
         if kw:
             raise ExtractionError(
-                '%s:%d: "%s:" inside a ```gherkin fence — structure comes from Markdown '
+                '%s:%d: "%s:" inside a ```gherkin fence - structure comes from Markdown '
                 'headings ("# title", "### Requirement:", "#### Scenario:"); fences hold '
                 "only steps" % (md_path, i + 1, kw.group(1))
             )
@@ -138,9 +134,7 @@ def extract_file(md_path):
             % (md_path, pending_scenario[0], pending_scenario[1], pending_scenario[2])
         )
     if h1_count == 0:
-        raise ExtractionError(
-            '%s: no H1 title — a spec.md must start with "# <capability>"' % md_path
-        )
+        raise ExtractionError('%s: no H1 title - a spec.md must start with "# <capability>"' % md_path)
     if len(out) != len(lines):
         raise ExtractionError("%s: line-count invariant violated (extractor bug)" % md_path)
     return "\n".join(out)
@@ -154,9 +148,7 @@ def _walk(root, directory, basename, found):
     for entry in sorted(directory.iterdir()):
         if entry.is_dir():
             _walk(root, entry, basename, found)
-        elif entry.name == basename or (
-            basename.startswith("*.") and entry.name.endswith(basename[1:])
-        ):
+        elif entry.name == basename or (basename.startswith("*.") and entry.name.endswith(basename[1:])):
             found.append(entry.relative_to(root).as_posix())
     return found
 
@@ -215,9 +207,7 @@ if __name__ == "__main__":
             sys.argv[1] if len(sys.argv) > 1 else None,
             sys.argv[2] if len(sys.argv) > 2 else None,
         )
-        sys.stderr.write(
-            "[extract-gherkin] %d spec.md file(s) extracted to %s\n" % (len(written_files), out)
-        )
+        sys.stderr.write("[extract-gherkin] %d spec.md file(s) extracted to %s\n" % (len(written_files), out))
     except ExtractionError as err:
         sys.stderr.write("[extract-gherkin] %s\n" % err)
         sys.exit(1)

@@ -24,7 +24,7 @@ export const EnvProtectionPlugin: Plugin = async (_ctx, options) => {
         ".ENV",
         "credentials.json",
       ]
-      // NOTE: extra patterns are RegExps — they must be tested, not compared
+      // NOTE: extra patterns are RegExps - they must be tested, not compared
       // with .includes() (a RegExp object never === a string, so the old code
       // silently never matched). They join the regex list below.
       const blockedRegex = [

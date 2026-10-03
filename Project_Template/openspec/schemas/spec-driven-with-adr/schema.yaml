@@ -166,9 +166,9 @@ artifacts:
       Prior decisions (read existing ADRs first):
 
       Before writing, list every file in <repo>/adr/. Build the supersession
-      graph from each ADR's Supersedes field — an ADR is no longer in force if
+      graph from each ADR's Supersedes field - an ADR is no longer in force if
       a later ADR's Supersedes points at it. Only the currently-in-force ADRs
-      (accepted, not superseded) constrain this design — older superseded
+      (accepted, not superseded) constrain this design - older superseded
       ADRs are historical context only and MUST NOT be treated as live
       commitments. New design choices MUST be coherent with the in-force set.
       If a current ADR needs to be revisited, do not propose modifying it;
@@ -191,7 +191,7 @@ artifacts:
       - **Migration Plan**: Steps to deploy, rollback strategy (if applicable)
 
       - **Open Questions**: Outstanding decisions or unknowns to resolve.
-      Include any in-force ADRs that this design suggests revisiting — the
+      Include any in-force ADRs that this design suggests revisiting - the
       adr step will record the supersession.
 
 
@@ -225,12 +225,12 @@ artifacts:
       in the manifest.
 
 
-      IRON RULE — ADRs are immutable once accepted. You MUST NOT edit a prior
+      IRON RULE - ADRs are immutable once accepted. You MUST NOT edit a prior
       ADR file under any circumstance (not its Status, not its body, not its
-      date — nothing). To change a previously accepted decision, record a NEW
+      date - nothing). To change a previously accepted decision, record a NEW
       ADR whose Status is "accepted, supersedes ADR-NNNN" and whose
       `Supersedes:` field names the prior one. Design consumers derive what is
-      currently in force by walking Supersedes links across the folder — the
+      currently in force by walking Supersedes links across the folder - the
       prior ADR's contents stay frozen as a historical record.
 
 
@@ -246,7 +246,7 @@ artifacts:
       2. Re-read design.md. Identify decisions that meet ALL of these:
 
       - Establish a long-term architectural commitment (pattern, technology,
-      boundary, contract) — not a tactical implementation detail.
+      boundary, contract) - not a tactical implementation detail.
 
       - Will affect future changes beyond this one.
 
@@ -262,7 +262,7 @@ artifacts:
       this decision replaces a prior in-force ADR, set Status to
       "accepted, supersedes ADR-NNNN", populate the `Supersedes:` field, and
       explain in Context why the prior decision is being revisited. Do NOT
-      touch the prior ADR's file — leave it exactly as it was. Reference every
+      touch the prior ADR's file - leave it exactly as it was. Reference every
       new repository-level ADR file from openspec/changes/<change>/adr.md.
 
 
