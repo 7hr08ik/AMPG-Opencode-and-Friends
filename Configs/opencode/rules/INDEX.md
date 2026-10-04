@@ -43,3 +43,26 @@ Read a module only when the task matches its line. They live in this folder; if 
 - `rules/privacy.md`: personal data, analytics or tracking scripts, session-recording SDKs.
 - `rules/design-patterns.md`: structuring modules, adding state, wiring dependencies between modules, choosing a pattern.
 - `rules/performance.md`: making code faster or diagnosing latency.
+
+## Per-environment consolidated guides
+
+Read the matching consolidated file when developing/coding in that environment. Each is a single standalone guide (merging that environment's former topic files: coding-style, patterns, security, testing, hooks, plus environment-specific extras).
+
+- `rules/angular-development.md`: Angular development.
+- `rules/arkts-development.md`: ArkTS / HarmonyOS development.
+- `rules/cpp-development.md`: C++ development.
+- `rules/csharp-development.md`: C# development.
+- `rules/dart-development.md`: Dart/Flutter development.
+- `rules/fsharp-development.md`: F# development.
+- `rules/golang-development.md`: Go development.
+- `rules/java-development.md`: Java development.
+- `rules/kotlin-development.md`: Kotlin development.
+- `rules/perl-development.md`: Perl development.
+- `rules/php-development.md`: PHP development.
+- `rules/python-development.md`: Python development (includes FastAPI).
+- `rules/react-development.md`: React development.
+- `rules/ruby-development.md`: Ruby development.
+- `rules/rust-development.md`: Rust development.
+- `rules/swift-development.md`: Swift development.
+- `rules/typescript-development.md`: TypeScript/JavaScript development.
+- `rules/web-development.md`: Web frontend development (includes design-quality, performance).
