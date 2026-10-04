@@ -17,7 +17,6 @@
 A single Git repo holding a working Opencode configuration, a starter template for new projects, and the reference docs along the way. There's nothing to build - you copy the `Configs/` folders over your own config and go.
 
 ```
-.
 ├── Configs/
 │   ├── opencode/            # the installable Opencode config (the good stuff)
 │   │   ├── opencode.jsonc   #   providers, models, plugins, permissions
