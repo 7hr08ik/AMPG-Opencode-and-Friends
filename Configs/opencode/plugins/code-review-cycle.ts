@@ -1,6 +1,6 @@
 import type { Plugin } from "@opencode-ai/plugin"
 import { readFile } from "node:fs/promises"
-import { isWriteTool } from "./lib/guards.ts"
+import { isWriteTool, isShellTool } from "./lib/guards.ts"
 import { warn } from "./lib/output.ts"
 
 // Commit-message trailer an agent appends once it has reviewed the change.
@@ -44,7 +44,8 @@ const extractCommitMessage = (command: string): string => {
   return message.trim()
 }
 
-const isShellTool = (tool: string): boolean => tool === "bash" || tool === "shell"
+// True for a shell-invoking tool (`bash`/`shell`) - now the shared helper from
+// lib/guards.ts, no longer defined locally in this plugin.
 const isCommitCommand = (command: string): boolean => /git\s+commit/.test(command)
 const isPushOrPrCommand = (command: string): boolean =>
   /git\s+push|gh\s+pr\s+(merge|create)/.test(command)

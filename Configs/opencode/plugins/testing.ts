@@ -78,22 +78,16 @@ export const TestingPlugin: Plugin = async (ctx, options) => {
     })
   }
 
-  // Does every implementation file have a colocated test? We can't stat the
-  // filesystem from here, so we approximate: a test exists if the file lives
-  // under a /test/ or /tests/ directory. Returns false when coverage is missing.
+  // Approximate test coverage from the impl path alone. We can't stat the
+  // filesystem from a hook, so a test is "derivable" only when the impl path
+  // itself sits inside a test area (`test/`/`tests/`). We deliberately do NOT
+  // fabricate a colocated `<basename>.test.<ext>` match - if the impl lives
+  // outside a test area we assume coverage is missing so the TDD enforcement
+  // can fire instead of silently passing. Returns false when coverage is absent.
   async function checkTestCoverage(implFiles: string[]): Promise<boolean> {
     for (const implFile of implFiles) {
-      const basename = implFile.replace(/^.*\//, "").replace(/\.[^.]+$/, "")
-      const potentialTestFiles = [
-        `${basename}.test.${implFile.split(".").pop()}`,
-        `test_${basename}.${implFile.split(".").pop()}`,
-        `/test/${basename}.${implFile.split(".").pop()}`,
-      ]
-      const hasTest = potentialTestFiles.some((_pf) => {
-        const dir = implFile.replace(/\/[^/]*$/, "/")
-        return dir.includes("/test/") || dir.endsWith("/tests")
-      })
-      if (!hasTest) return false
+      const inTestArea = /(^|[/\\])(test|tests)([/\\]|$)/.test(implFile)
+      if (!inTestArea) return false
     }
     return true
   }
@@ -134,8 +128,9 @@ export const TestingPlugin: Plugin = async (ctx, options) => {
       if (event.type !== "session.idle") return
       if (implementationAttempts.length === 0) return
       if (opts.enforceOnCommit) {
+        const windowMs = opts.testEditWindowMinutes * 60 * 1000
         const recentImpl = implementationAttempts.filter(
-          (a) => Date.now() - a.timestamp < 300000,
+          (a) => Date.now() - a.timestamp < windowMs,
         )
         if (recentImpl.length > 0) {
           const testCoverage = await checkTestCoverage(

@@ -1,5 +1,5 @@
 import type { Plugin } from "@opencode-ai/plugin"
-import { isWriteTool } from "./lib/guards.ts"
+import { isWriteTool, unwrapWriteContent } from "./lib/guards.ts"
 
 // LEAKED-SECRETS patterns. A single match on write content or a command blocks it.
 const SECRET_PATTERNS = [
@@ -51,15 +51,6 @@ const scanForSecrets = (content: string): Array<{ name: string }> => {
   return findings
 }
 
-const getWriteContent = (args: Record<string, any>): string => {
-  if (typeof args.patchText === "string") return args.patchText
-  if (typeof args.content === "string") return args.content
-  if (typeof args.newString === "string") return args.newString
-  if (typeof args.text === "string") return args.text
-  if (typeof args.input === "string") return args.input
-  return ""
-}
-
 /**
  * SecurityPlugin — a write-and-command gate that BLOCKS writes and shell
  * commands that look like leaked secrets or dangerous system operations.
@@ -107,7 +98,7 @@ export const SecurityPlugin: Plugin = async (_ctx, options) => {
       const args = (output?.args ?? {}) as Record<string, any>
 
       if (isWriteTool(tool)) {
-        const content = getWriteContent(args)
+        const content = unwrapWriteContent(args)
         const findings = scanForSecrets(content)
         if (findings.length > 0) {
           const summary = recordFinding(String(args.filePath ?? args.path ?? "unknown"), findings)
@@ -130,7 +121,9 @@ export const SecurityPlugin: Plugin = async (_ctx, options) => {
         }
         for (const pattern of DANGEROUS_PATTERNS) {
           if (pattern.test(command)) {
-            throw new Error(`BLOCKED: Dangerous command detected.`)
+            throw new Error(
+              `BLOCKED: Dangerous command detected (matched rule: ${pattern.source}).`,
+            )
           }
         }
       }

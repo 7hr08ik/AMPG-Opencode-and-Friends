@@ -1,11 +1,11 @@
 import type { Plugin } from "@opencode-ai/plugin"
+import { isShellTool } from "./lib/guards.ts"
 
 const CONVENTIONAL_COMMIT_PATTERN =
   /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-zA-Z0-9_-]+\))?: (.*?)(?:\n(.+))?$/
 
 const AI_GENERATED_NOTE = "Note: AI Generated Commit"
 
-const isShellTool = (tool: string): boolean => tool === "bash" || tool === "shell"
 
 /**
  * GitWorkflowPlugin — enforces conventional commit messages on `git commit`

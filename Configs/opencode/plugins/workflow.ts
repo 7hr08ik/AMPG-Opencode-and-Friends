@@ -42,22 +42,25 @@ export const WorkflowPlugin: Plugin = async (ctx, options) => {
         const now = Date.now()
         globHistory.push({ timestamp: now, count: 1 })
 
-        const recent = globHistory.filter(
-          (entry) => now - entry.timestamp < opts.globBudgetWindow,
-        )
+        // BOUND the rolling window on EVERY push: evict expired entries from the
+        // array itself (not just a filtered view), so the history can't grow
+        // unbounded between caps or idle flushes. This is the defect the block
+        // was originally reworked to fix - a filtered `.filter(...)` view left
+        // stale entries in `globHistory` forever.
+        const windowStart = now - opts.globBudgetWindow
+        while (globHistory.length > 0 && globHistory[0].timestamp < windowStart) {
+          globHistory.shift()
+        }
 
-        const totalInWindow = recent.reduce((sum, entry) => sum + entry.count, 0)
+        const totalInWindow = globHistory.reduce((sum, e) => sum + e.count, 0)
 
         if (totalInWindow > 3) {
           const summaryMsg =
             `Glob search budget exceeded: ${totalInWindow} searches in last ${opts.globBudgetWindow / 60000}min window. ` +
             `Use codegraph_explore for code intelligence or escalate to a subagent.`
           await warn(ctx, `[Workflow] ${summaryMsg}`)
-          const capped = recent.slice(-3)
-          globHistory.length = 0
-          for (const e of capped) {
-            globHistory.push(e)
-          }
+          // Keep only the most recent 3 entries so the bounded array stays tight.
+          while (globHistory.length > 3) globHistory.shift()
           throw new Error(`BLOCKED: Glob search budget exceeded.`)
         }
         return
