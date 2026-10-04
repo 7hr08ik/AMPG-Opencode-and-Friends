@@ -1,0 +1,31 @@
+{
+  "port": 8787,
+  "host": "127.0.0.1",
+  "providers": {
+    "http://127.0.0.1:13305/v1": {
+      "models": {
+        "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
+          "context": 200000,
+          "output": 8192
+        }
+      }
+    }
+  },
+  "compressProtocol": "tools",
+  "compress": {
+    "maxContextLimit": "80%",
+    "emergencyThresholdPercent": "95%",
+    "preserveRecentMessages": "5",
+    "protectedLatestTools": [
+      "todo_list",
+      "TodoWrite"
+    ],
+    "protectedTools": [
+      "skill",
+      "skill_*",
+		  "**/AGENTS.md",
+      "**/rules/*.md",
+      "**/rules/*/*.md"
+    ]
+  }
+}

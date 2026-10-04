@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "diffs": {
+    "wrap": "word",
+    "single": false
+  },
+  "prompt": {
+    "paste": "full",
+    "image_preview": true
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": true,
+    "thinking": "hide",
+    "image_preview": true,
+    "tps": true
+  },
+  "animations": true,
+  "attention": {
+    "sound": true,
+    "notifications": true,
+    "volume": 0.8
+  },
+  "theme": {
+    "name": "opencode",
+    "mode": "dark"
+  },
+  "tabs": {
+    "mode": "auto",
+    "scope": "cwd"
+  }
+}

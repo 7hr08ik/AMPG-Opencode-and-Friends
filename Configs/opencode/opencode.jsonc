@@ -1,0 +1,126 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "update": "auto",
+  "lsp": true,
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "allow" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" },
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "read", "resource": "*.env", "effect": "deny" },
+    { "action": "read", "resource": "*.env.*", "effect": "ask" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" },
+    { "action": "read", "resource": "secrets/*", "effect": "deny" },
+    { "action": "edit", "resource": "*", "effect": "allow"},
+    { "action": "shell", "resource": "*", "effect": "ask"},
+    { "action": "shell", "resource": "git status *", "effect": "allow"},
+    { "action": "shell", "resource": "git diff *", "effect": "allow"},
+    { "action": "shell", "resource": "git push *", "effect": "ask"},
+    { "action": "skill", "resource": "*", "effect": "allow"},
+    { "action": "question", "resource": "*", "effect": "allow"},
+    { "action": "webfetch", "resource": "*", "effect": "deny"},
+    { "action": "websearch", "resource": "*", "effect": "deny"},
+    // { "action": "lsp", "resource": "*", "effect": "allow"},
+    // { "action": "doom_loop", "resource": "*", "effect": "deny"}
+  ],
+  "snapshots": true,
+  "media": { "image": { "auto_resize": true } },
+  "plugins": [
+    "billion-context",
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "opencode-mem@latest"
+  ],
+  "model": "local/Ornith-1.5-35B-A3B-GGUF-Q8_0",
+  "providers": {
+    "local": {
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "name": "[local] Lemonade",
+      "settings": {
+      // Point this at your local model server.
+      // Defaults to 127.0.0.1 (local loopback). For a remote/other-on-LAN
+      // server, replace it with that machine's address
+      // e.g. http://<lan-ip>:13305/v1
+      "baseURL": "http://127.0.0.1:13305/v1"
+      },
+      "models": {
+        "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
+          "name": "Ornith-1.5",
+          "limit": {
+            "context": 200000,
+            "output": 16384
+          },
+          "settings": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 8192
+            },
+            "temperature": 0.6,
+            "top_k": 20,
+            "top_p": 0.95
+          }
+        }
+      }
+    },
+  },
+  "compaction": {
+    "auto": false,
+    "buffer": 10000
+  },
+  "mcp": {
+    "timeout": {
+      "startup": 45000,
+      "catalog": 30000,
+      "execution": 600000,
+    },
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": [
+          "npx",
+          "@playwright/mcp@latest"
+        ],
+        "disabled": false
+      },
+      "drawio": {
+        "type": "local",
+        "command": [
+          "npx",
+          "@drawio/mcp"
+        ],
+        "disabled": false
+      },
+      "markitdown-mcp": {
+        "type": "local",
+        "disabled": false,
+        "command": [
+          "markitdown-mcp"
+        ]
+      },
+      "grep_app": {
+        "type": "remote",
+        "url": "https://mcp.grep.app",
+        "disabled": false,
+        "oauth": false
+      },
+      "codegraph": {
+        "type": "local",
+        "command": [
+          "codegraph",
+          "serve",
+          "--mcp"
+        ],
+        "disabled": false
+      },
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": false,
+        "headers": {
+          "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+        }
+      }
+    }
+  },
+  "experimental": {
+    "policies": [{ "action": "permission", "resource": "shell:sudo *", "effect": "deny" }]
+  }
+}
