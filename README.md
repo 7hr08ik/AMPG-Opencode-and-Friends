@@ -25,7 +25,7 @@ A single Git repo holding a working Opencode configuration, a starter template f
 │   │   ├── agents/
 │   │   ├── commands/        #   opsx-* workflow + dev commands
 │   │   ├── skills/          #   OpenSpec + openspec-git-discipline + misc
-│   │   └── rules/<stack>/   #   per-language coding/security/testing rules
+│   │   └── rules/           #   Environment coding/security/testing rules
 │   └── billion-context/
 │       └── billion-context.json   # the Billion Context (bili) config
 ├── Project_Template/        # starter layout for a new project
@@ -52,6 +52,7 @@ Additional Tools
   - **[Opencode-mem](https://github.com/tickernelz/opencode-mem)** - A persistent memory system for AI coding agents.
   - **[Superpowers](https://github.com/obra/superpowers)** - An agentic skills framework.
   - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pocock's .agents directory.
+  - **[Awesome AGENTS.md](https://github.com/khasky/awesome-agents-md)** - A ruleset written in the AGENTS.md format, with shared rules for AI coding agents
 
 Background plugins
 
