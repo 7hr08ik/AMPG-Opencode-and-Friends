@@ -50,6 +50,27 @@
 - [rules/memory.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/memory.md): persistent agent memory hygiene.
 - [rules/long-running-agents.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/long-running-agents.md): unattended multi-iteration runs — state baton, early stops and continuations, stall detection, quota-vs-error branching, budget.
 
+## Environment rule files
+
+- [rules/angular-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/angular-development.md): Angular — signals-first state, zoneless change detection, inject() over constructors, strict templates.
+- [rules/arkts-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/arkts-development.md): ArkTS (HarmonyOS) — staged fast checks in pre-commit, full suite assigned to CI.
+- [rules/cpp-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/cpp-development.md): C++ — ownership-first (smart pointers, RAII), clang-tidy clean.
+- [rules/csharp-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/csharp-development.md): C# — nullable-aware types, async discipline.
+- [rules/dart-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/dart-development.md): Dart/Flutter — Riverpod state, staged fast checks in pre-commit, full suite in CI.
+- [rules/fsharp-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/fsharp-development.md): F# — railway-oriented programming, Result types over exceptions.
+- [rules/golang-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/golang-development.md): Go — table-driven tests, explicit error handling, go vet clean.
+- [rules/java-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/java-development.md): Java — Spring/Jakarta layering, JPA access patterns.
+- [rules/kotlin-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/kotlin-development.md): Kotlin — coroutine-safe concurrency, null safety.
+- [rules/perl-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/perl-development.md): Perl — taint mode, strict and warnings, parameterized queries.
+- [rules/php-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/php-development.md): PHP — PSR-12 style, Eloquent safety.
+- [rules/python-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/python-development.md): Python — Django/DRF and FastAPI patterns, pytest suites.
+- [rules/react-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/react-development.md): React 18/19 — hooks discipline, server/client component boundaries.
+- [rules/ruby-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/ruby-development.md): Ruby — StandardRB style, Rails conventions.
+- [rules/rust-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/rust-development.md): Rust — ownership and borrow-checker-first design, clippy clean.
+- [rules/swift-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/swift-development.md): Swift — Swift 6 concurrency, SwiftUI composition.
+- [rules/typescript-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/typescript-development.md): TypeScript — strict mode, no explicit any, typed boundaries.
+- [rules/web-development.md](https://github.com/khasky/awesome-agents-md/blob/main/rules/web-development.md): plain web — semantic HTML, keyboard-complete UI, design quality and performance.
+
 ## Docs
 
 - [README](https://github.com/khasky/awesome-agents-md/blob/main/README.md): per-agent install paths for Claude Code, Codex CLI, Gemini CLI and Cursor.
