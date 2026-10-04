@@ -1,3 +1,0 @@
-python evals/benchmark/run.py --selftest                     # every scorer tells good from bad, no agent
-python evals/benchmark/run.py --split test --repeats 5 --model claude-sonnet-5-5 --effort low --budget 30
-python evals/benchmark/run.py --summary <run directory>      # totals with 95% intervals
