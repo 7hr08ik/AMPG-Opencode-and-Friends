@@ -191,6 +191,99 @@ If CI tests fail for reasons caused by your changes, investigate and fix them wi
 3. Verify mocks are correct
 4. Fix implementation, not tests (unless tests are wrong)
 
+## Code Review Standards
+
+### When to Review
+
+**MANDATORY review triggers:**
+- After writing or modifying code
+- Before any commit to shared branches
+- When security-sensitive code is changed (auth, payments, user data)
+- When architectural changes are made
+- Before merging pull requests
+
+**Pre-Review Requirements:**
+- All automated checks (CI/CD) are passing
+- Merge conflicts are resolved
+- Branch is up to date with target branch
+
+### Review Tools
+
+| Type | Name | Usecase |
+|------|------|---------|
+| Skill | code-review | To be used whenever reviewing ANY code |
+| Command | /code-review | Command used before processing any PR |
+| Agent | code-reviewer | Agent for use during development |
+
+### Security Review Triggers
+
+**STOP and use `security-reviewer` agent when:**
+
+- Authentication or authorization code
+- User input handling
+- Database queries
+- File system operations
+- External API calls
+- Cryptographic operations
+- Payment or financial code
+
+### Review Workflow
+
+1. Run git diff to understand changes
+2. Review code quality checklist
+3. Run relevant tests
+4. Verify test coverage meets Testing Requirements above
+5. Use appropriate agent for detailed review
+
+### Common Issues to Catch
+
+- N+1 queries, missing pagination/LIMIT, unbounded queries, missing caching.
+- SQL injection (string concatenation in queries)
+- XSS vulnerabilities (unescaped user input)
+- Path traversal (un-sanitized file paths)
+- CSRF protection missing
+- Authentication bypasses
+- Rotate any secrets that may have been exposed and inform the user.
+
+## Git Workflow
+
+### Commit Style
+
+- Use conventional commit format (`feat:`, `fix:`, `docs:`, etc.) for all commits.
+- Keep changes modular and explain user-facing impact in the PR summary.
+
+### Commit Message Format
+
+```
+<type>: <description>
+
+<optional body>
+
+Note: AI Generated Commit
+```
+
+Types: feat, fix, refactor, docs, test, chore, perf, ci, build, style
+
+### Mandatory Security Checks
+
+Before ANY commit:
+- [ ] All user inputs validated
+- [ ] SQL injection prevention (parameterized queries)
+- [ ] XSS prevention (sanitized HTML)
+- [ ] CSRF protection enabled
+- [ ] Authentication/authorization verified
+- [ ] Rate limiting on all endpoints
+- [ ] Error messages don't leak sensitive data
+
+### Pull Request Workflow
+
+When creating PRs:
+1. Analyze full commit history (not just latest commit)
+2. Use `git diff [base-branch]...HEAD` to see all changes
+3. Draft comprehensive PR summary
+4. Include test plan with TODOs
+5. Push with `-u` flag if new branch
+
 ## Operational Playbook
 
 <!-- CODEGRAPH_START -->
