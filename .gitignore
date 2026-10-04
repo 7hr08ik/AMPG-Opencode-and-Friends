@@ -39,6 +39,8 @@ service.json
 /AGENTS.md
 /opencode.jsonc
 /Project_Notes.txt
+/adr
+/glossary
 
 # OpenSpec local output (repo root working area only)
 /openspec/

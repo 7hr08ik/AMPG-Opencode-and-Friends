@@ -24,7 +24,7 @@ When you know what you want to build and just need to execute:
 
 `Boilerplate` template for use in project creation
 
-- Copy template.
+- Copy template into project root.
 - Configure:
     - AGENTS.md
     - env_template
@@ -64,11 +64,13 @@ When you know what you want to build and just need to execute:
 - Apply tasks - Build the thing
     - /opsx:apply <name>                   # (Optional) Set <name> for individual tasks
 
+- Verify completion
+    - /opsx:verify
+
 - Checks - Tests
     - Analyze the codes current comments/docstrings, and add new comments/docstrings where necessary to improve readability and user understanding.
     - /code-review
     - /optimize
-    - /opsx:verify                         # Check its correct
 
 - git
     - Commit/Push/PR
@@ -93,6 +95,3 @@ When you know what you want to build and just need to execute:
 | `/opsx:verify` | Validate implementation against artifacts (expanded workflow) |
 | `/opsx:archive` | Archive when done |
 | `/opsx:onboard` | Guided walkthrough of an end-to-end change (expanded workflow) |
-
-## Bug fixing
-

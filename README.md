@@ -57,7 +57,6 @@ Background plugins
 
   - **[Billion Context](https://github.com/ranxianglei/billion-context)** - Dynamic configurable context management.
   - **[Codegraph](https://github.com/colbymchenry/codegraph)** - Codebase memory & search.
-  - **[opencode-tps-meter](https://github.com/ChiR24/opencode-tps-meter)** - Display tokens/sec.
   
 MCPs
 
@@ -68,6 +67,19 @@ MCPs
   - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** - Search GitHub repos.
 
 And some custom plugins I created for myself.
+These plugins were originally ported from ECC hooks, converted to opencode plugins, and tweaked.
+
+| Plugin | What it does |
+| --- | --- |
+| [`code-review-cycle.ts`](Configs/opencode/plugins/code-review-cycle.ts) | Runs before `git commit`: scans the patch for conflict markers, unused variables, and security-sensitive files, then makes you review before re-committing. |
+| [`coding-style.ts`](Configs/opencode/plugins/coding-style.ts) | Runs on every edit. Enforces house style: short functions, flagged mutations, bounded nesting/loops, and real assertion density. |
+| [`env-protection.ts`](Configs/opencode/plugins/env-protection.ts) | Blocks the `read` tool from opening `.env` files and secret keys (`id_rsa`, `.aws/`, `credentials.json`, …) before their contents reach the model. |
+| [`git-workflow.ts`](Configs/opencode/plugins/git-workflow.ts) | Enforces conventional commit messages (plus the AI-generated tag) on every `git commit` - refuse-and-fix, no free-form commits. |
+| [`security.ts`](Configs/opencode/plugins/security.ts) | Scans every edit for leaked secrets (AWS keys, private keys, tokens, connection strings) and dangerous shell commands like `rm -rf`. |
+| [`testing.ts`](Configs/opencode/plugins/testing.ts) | At session end, tallies what you changed without tests and chases you to add them - keeps you honest on TDD. |
+| [`workflow.ts`](Configs/opencode/plugins/workflow.ts) | Throttles runaway `glob` searches and nudges you toward `codegraph_explore` (with a warning on repo-wide grep). |
+| [`lib/guards.ts`](Configs/opencode/plugins/lib/guards.ts) | Shared helpers every plugin leans on - tool-type checks and writing-content extraction. Not a plugin itself. |
+| [`lib/output.ts`](Configs/opencode/plugins/lib/output.ts) | Shared warning/error helpers. Falls back to stdout when there's no toast to show. |
 
 ## 5. Installation
 
@@ -116,9 +128,6 @@ bili plugin install opencode
 # Context7
 npx ctx7 setup --opencode
 
-# TPS Meter
-npm install opencode-tps-meter
-
 # Codegraph  (run in a separate terminal)
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 codegraph install
@@ -138,10 +147,8 @@ npx skills@latest add mattpocock/skills
 
 AIO
 ```bash
-npm install -g billion-context && \
-bili plugin install opencode && \
+npm install -g billion-context && bili plugin install opencode && \
 npx ctx7 setup --opencode && \
-npm install opencode-tps-meter && \
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
 codegraph install && \
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer && \
@@ -175,8 +182,7 @@ openspec update
 
 AIO
 ```bash
-# OpenAgent Control
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash && \
+cd && curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash && \
 codegraph upgrade && \
 npx skills@latest update && \
 openspec update
@@ -209,4 +215,5 @@ Built on the shoulders of people who wrote the good bits first:
 - [NASA: The Power of Ten](https://en.wikipedia.org/wiki/The_Power_of_10:_Rules_for_Developing_Safety-Critical_Code) - safety-minded rules
 - [Stack Overflow: Best practices for writing code comments](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/) - comment guidance
 - [Everything Claude Code](https://github.com/affaan-m/ECC) - some agents, skills, commands. Converted and updated for use with Opencode
-- [OpenSpec](https://github.com/Fission-AI/OpenSpec) & the [Intent Driven Template](https://github.com/intent-driven-dev/intent-driven-template)
+- [OpenSpec](https://github.com/Fission-AI/OpenSpec)
+- [Intent Driven Templates + Schemas](https://github.com/intent-driven-dev/intent-driven-template)
