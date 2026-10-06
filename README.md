@@ -36,13 +36,7 @@ A single Git repo holding a working Opencode configuration, a starter template f
 └── README.md                # you are here
 ```
 
-## 3. The story (skip if you want)
-
-I started like most people: on [Claude Code](https://claude.ai/). But I'm cheap, so I went hunting for [Free Claude Code](https://github.com/Alishahryar1/free-claude-code) and started playing with [Everything Claude Code](https://github.com/affaan-m/ECC). I'd seen the claims about Karpathy's and Boris Cherny's `CLAUDE.md` files, copied them, and started optimizing for my own needs.
-
-Eventually I moved on to [Opencode](https://opencode.ai/). I brought my `.md` files along and ported what I could from ECC: some agents, some skills, and the `rules/` folder became templates for individual project-level folders. I hooks got converted into Opencode-compatible plugins. (I don't know TypeScript, but Qwen3-coder does.)
-
-## 4. Features / tools in the setup
+## 3. Features / tools in the setup
 
 Additional Tools
 
@@ -81,9 +75,9 @@ These plugins were originally ported from ECC hooks, converted to opencode plugi
 | [`lib/guards.ts`](Configs/opencode/plugins/lib/guards.ts) | Shared helpers every plugin leans on - tool-type checks and writing-content extraction. Not a plugin itself. |
 | [`lib/output.ts`](Configs/opencode/plugins/lib/output.ts) | Shared warning/error helpers. Falls back to stdout when there's no toast to show. |
 
-## 5. Installation
+## 4. Installation
 
-### 5.1. Requirements
+### 4.1. Requirements
 
 - **Something to run a model** - either locally or via the cloud:
   - Local: [Lemonade Server](https://lemonade-server.ai/), [Ollama](https://ollama.com/), or [vLLM](https://docs.vllm.ai/en/stable/)
@@ -93,7 +87,7 @@ These plugins were originally ported from ECC hooks, converted to opencode plugi
   - [pip](https://pypi.org/project/pip/)
   - [npm](https://www.npmjs.com/)
 
-### 5.2. Install Opencode 2
+### 4.2. Install Opencode 2
 
 ```bash
 curl -fsSL https://opencode.ai/v2/install | bash
@@ -101,7 +95,7 @@ curl -fsSL https://opencode.ai/v2/install | bash
 
 (See the [Opencode Docs](https://opencode.ai/v2/docs) for other install methods.)
 
-### 5.3. Copy over the config
+### 4.3. Copy over the config
 
 The installable configs live in `Configs/`. See **`Configs/INSTALL.md`** for the exact, cross-platform copy steps
 (Linux, macOS, PowerShell), but the gist is:
@@ -116,7 +110,7 @@ Overwrite if asked.
 
 > The core config does **not** self-copy. After any change to `Configs/opencode/`, re-run the copy.
 
-### 5.4. Install the plugins
+### 4.4. Install the plugins
 
 Most plugins are picked up automatically by Opencode. The following may need a one-time manual install:
 
@@ -132,7 +126,7 @@ npx ctx7 setup --opencode
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
 codegraph install
 
-# OpenAgent Control  (keep the default install location, or ~/.config/opencode gets messy)
+# OpenAgent Control  (keep the default install location)
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer
 
 # MarkItDown
@@ -145,25 +139,13 @@ bun add --global @fission-ai/openspec@latest
 npx skills@latest add mattpocock/skills
 ```
 
-AIO
-```bash
-npm install -g billion-context && bili plugin install opencode && \
-npx ctx7 setup --opencode && \
-curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh && \
-codegraph install && \
-curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/install.sh | bash -s developer && \
-pip install 'markitdown[all]' && pip install markitdown-mcp && \
-bun add --global @fission-ai/openspec@latest && \
-npx skills@latest add mattpocock/skills
-```
-
-## 6. Usage
+## 5. Usage
 
 - **[Quick-Start.md](Quick-Start.md)** - go from an empty folder to a running project.
 - **[Docs/SDD_Workflow.md](Docs/SDD_Workflow.md)** - full spec-driven development walkthrough.
 - **[Docs/Lemonade-Server.md](Docs/Lemonade-Server.md)** - how my Lemonade instance is configured.
 
-## 7. Updating
+## 6. Updating
 
 - **Opencode** auto-updates (enabled in the config).
 - **Most plugins** update themselves at runtime.
@@ -180,15 +162,7 @@ npx skills@latest update
 openspec update
 ```
 
-AIO
-```bash
-cd && curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash && \
-codegraph upgrade && \
-npx skills@latest update && \
-openspec update
-```
-
-## 8. Notes, fixes & how I un-break things
+## 7. Notes, fixes & how I un-break things
 
 - **ALT + Enter** = next line, not send. (This one catches people out.)
 - **Thinking loops** are rare but real. If the model gets stuck, hit `ESC` twice then `continue` - the task just carries on, no restart needed.
@@ -198,15 +172,15 @@ openspec update
   rm -rf ~/.config/opencode ~/.cache/opencode ~/.opencode ~/.local/share/opencode/
   ```
 
-## 9. Contributing
+## 8. Contributing
 
 Forks, tweaks, and "hey, this is broken" reports are all welcome. If you've made it work somewhere I haven't (Windows, a second GPU, a cloud model), a note - or a pull request - would be appreciated.
 
-## 10. License
+## 9. License
 
 This project is licensed under the [MIT License](LICENSE). Fork it, use it, make something of it.
 
-## 11. Acknowledgments
+## 10. Acknowledgments
 
 Built on the shoulders of people who wrote the good bits first:
 
