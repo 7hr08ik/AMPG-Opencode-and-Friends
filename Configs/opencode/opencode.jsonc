@@ -51,7 +51,7 @@
           "settings": {
             "thinking": {
               "type": "enabled",
-              "budgetTokens": 4096
+              "budgetTokens": 8192
             },
             "temperature": 0.6,
             "top_k": 20,
