@@ -38,7 +38,7 @@ service.json
 # OpenCode local dependencies (repo root working copies only)
 /AGENTS.md
 /opencode.jsonc
-/Project_Notes.txt
+/Project_Notes.md
 /adr
 /glossary
 

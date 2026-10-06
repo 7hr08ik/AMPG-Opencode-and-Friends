@@ -160,8 +160,8 @@ npx skills@latest add mattpocock/skills
 ## 6. Usage
 
 - **[Quick-Start.md](Quick-Start.md)** - go from an empty folder to a running project.
-- **[Resources/SDD_Workflow.md](Resources/SDD_Workflow.md)** - full spec-driven development walkthrough.
-- **[Resources/Lemonade-Server.md](Resources/Lemonade-Server.md)** - how my Lemonade instance is configured.
+- **[Docs/SDD_Workflow.md](Docs/SDD_Workflow.md)** - full spec-driven development walkthrough.
+- **[Docs/Lemonade-Server.md](Docs/Lemonade-Server.md)** - how my Lemonade instance is configured.
 
 ## 7. Updating
 

@@ -45,13 +45,13 @@
         "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
           "name": "Ornith-1.5",
           "limit": {
-            "context": 200000,
+            "context": 150000,
             "output": 16384
           },
           "settings": {
             "thinking": {
               "type": "enabled",
-              "budgetTokens": 8192
+              "budgetTokens": 4096
             },
             "temperature": 0.6,
             "top_k": 20,
