@@ -139,6 +139,28 @@ bun add --global @fission-ai/openspec@latest
 npx skills@latest add mattpocock/skills
 ```
 
+### 4.5. Point the setup at your model server
+
+Everything here talks to an OpenAI-compatible endpoint, and two files need to agree on where it is.
+
+- **`opencode.jsonc`** - the main model. Set `providers.local.settings.baseURL` to your server, like `http://127.0.0.1:13305/v1`. The top-level `model` has to match a model listed in that provider. It defaults to local loopback, so you only change it if the server runs somewhere else.
+- **`billion-context.json`** - the compression backend. Set the `providers` key to the same server. If the two point at different places, Billion Context can't reach your model.
+
+`127.0.0.1` is your own machine. If the server runs on another machine on the LAN, use that address instead.
+
+### 4.6. Opencode-Mem
+
+The memory plugin ships inside `Configs/opencode/`, so it copies over with the rest. Two things to set:
+
+- **Where memories live** - set `storagePath` to a folder you control, like `~/Coding/AI/Opencode-Mem/data`.
+- **The model that reads your sessions** - auto-capture forwards session context to an LLM to learn your preferences. Reuse Opencode's own auth with `opencodeProvider` and `opencodeModel` so no separate key is needed (grab the provider name from `opencode providers list`). Otherwise fill in the manual `memoryProvider`, `memoryModel`, `memoryApiUrl` and `memoryApiKey`. The repo ships that path pointed at the local model, so change it only if you use a different service.
+
+OpenAI-compatible services like DeepSeek, Qwen and Groq work with `memoryProvider: "openai-chat"`. Plain Ollama sometimes lacks tool calling, which auto-capture needs.
+
+### 4.7. Context7
+
+Context7 pulls current library docs. The bundled config ships with a placeholder key, so paste a real Context7 key into `mcp.servers.context7.headers.CONTEXT7_API_KEY`. With just the placeholder the tool stays silent.
+
 ## 5. Usage
 
 - **[Quick-Start.md](Quick-Start.md)** - go from an empty folder to a running project.
