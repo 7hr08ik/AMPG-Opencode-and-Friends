@@ -8,9 +8,10 @@
 
 ### Step - 2
 
--  Copy Template folder
+-  Copy Template folder + hidden files
    -  Opencode will pick up the extra files, and use all the python specific knowledge/skills/agents etc.
 -  Customize AGENTS.md for the project.
+-  Configure .gitignore
 
 >[!NOTE]
 >  Project level folders are hidden `/.opencode/` not `/opencode/`. Remember to `Show Hidden Files`

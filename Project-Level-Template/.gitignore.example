@@ -26,7 +26,8 @@ pnpm-debug.log*
 .codegraph/
 .opencode/
 openspec/
-Project_Notes.txt
+Project_Notes.md
+Project_Log.md
 .ignore
 AGENTS.md
 opencode.jsonc

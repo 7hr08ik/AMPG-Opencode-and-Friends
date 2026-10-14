@@ -11,7 +11,7 @@ Currently this file is in template form. The user must complete this form before
 
 - **Project name** <name-me>
 - **Description:** <ONE-SENTENCE DESCRIPTION>
-- **Stack(s):** <STACK> (one of: angular, cpp, csharp, dart, fsharp, golang, java, kotlin, perl, php, python, react, rust, swift, typescript, web, arkts, ruby)
+- **Stack(s):** <STACK> (eg:  web, databases, angular, cpp, csharp, dart, fsharp, golang, java, kotlin, perl, php, python, react, rust, swift, typescript, arkts, ruby)
 
 ## **Objective**
 
