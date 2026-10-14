@@ -59,8 +59,7 @@ MCPs
   - **[Context7](https://github.com/upstash/context7)** - Online documentation search.
   - **[MarkItDown](https://github.com/microsoft/markitdown)** - Document converter.
   - **[Vercel Grep](https://vercel.com/blog/grep-a-million-github-repositories-via-mcp)** - Search GitHub repos.
-  - **[OmniSQL](https://github.com/srthkdev/omnisql-mcp)** - Universal database MCP server
-
+  
 And some custom plugins I created for myself.
 These plugins were originally ported from ECC hooks, converted to opencode plugins, and tweaked.
 
@@ -132,9 +131,6 @@ curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/
 
 # MarkItDown
 pip install 'markitdown[all]' && pip install markitdown-mcp
-
-# OmniSQL
-npm install -g omnisql-mcp
 
 # OpenSpec
 bun add --global @fission-ai/openspec@latest
