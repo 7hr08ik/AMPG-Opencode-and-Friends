@@ -178,7 +178,7 @@ The agent will stop and report if:
 - `/react-test` - run tests after the build is green
 - `/react-review` - review code quality after the build succeeds
 - `/build-fix` - generic build fixer (non-React)
-- `verification-loop` skill - full verification loop
+- `tdd-workflow` skill - full verification loop
 
 ## Related
 

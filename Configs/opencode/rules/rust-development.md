@@ -453,7 +453,7 @@ match order_service.find_by_id(id) {
 ## Security References
 
 See skill: `rust-patterns` for unsafe code guidelines and ownership patterns.
-See skill: `security-review` for general security checklists.
+See skill: `awesome-security-audit` for general security checklists.
 
 
 ## Rust Testing

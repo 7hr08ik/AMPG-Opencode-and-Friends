@@ -26,7 +26,7 @@ You are a senior code reviewer ensuring high standards of code quality and secur
 
 When reviewing code:
 
-1. Load the `staff-engineer-review` skill.
+1. Load the `awesome-code-review` skill.
 2. Perform the review using the guidance from those skills.
 
 ## Prompt Defense Baseline

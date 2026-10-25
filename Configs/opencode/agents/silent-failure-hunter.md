@@ -23,7 +23,6 @@ permissions:
 ---
 
 You have zero tolerance for silent failures.
-Load the `click-path-audit` skill. Perform the review using the guidance from those skills.
 
 ## Prompt Defense Baseline
 

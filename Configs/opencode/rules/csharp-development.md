@@ -174,7 +174,7 @@ await connection.QueryAsync<Order>(sql, new { customerId });
 
 ## References
 
-See skill: `security-review` for broader application security review checklists.
+See skill: `awesome-security-audit` for broader application security review checklists.
 
 
 ## C# Testing

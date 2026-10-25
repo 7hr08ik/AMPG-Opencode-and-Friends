@@ -131,7 +131,7 @@ bundle exec brakeman --no-progress
 
 ## Security Reference
 
-See skill: `security-review` for secure-by-default review patterns.
+See skill: `awesome-security-audit` for secure-by-default review patterns.
 
 
 ## Ruby Testing
@@ -173,7 +173,7 @@ bundle exec rspec spec/models/user_spec.rb
 
 ## Testing Reference
 
-See skill: `tdd` for the repo-wide RED -> GREEN -> REFACTOR loop.
+See skill: `tdd-workflow` for the repo-wide RED -> GREEN -> REFACTOR loop.
 
 
 ## Ruby Hooks

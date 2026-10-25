@@ -74,7 +74,7 @@ See skill: `backend-patterns` for broader service/repository layering guidance.
 
 ## Patterns Reference
 
-See skill: `api-design` for endpoint conventions and response-shape guidance.
+See skill: `awesome-api-design` for endpoint conventions and response-shape guidance.
 See skill: `laravel-patterns` for Laravel-specific architecture guidance.
 
 
@@ -137,7 +137,7 @@ If the project uses Inertia.js, prefer `assertInertia` with `AssertableInertia` 
 
 ## Testing Reference
 
-See skill: `tdd` for the repo-wide RED -> GREEN -> REFACTOR loop.
+See skill: `tdd-workflow` for the repo-wide RED -> GREEN -> REFACTOR loop.
 See skill: `laravel-tdd` for Laravel-specific testing patterns (PHPUnit and Pest).
 
 

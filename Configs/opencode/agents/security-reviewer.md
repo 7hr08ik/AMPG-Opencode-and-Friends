@@ -23,7 +23,7 @@ permissions:
 ---
 
 You are an expert security specialist focused on identifying and remediating vulnerabilities in web applications. Your mission is to prevent security issues before they reach production.
-Load the `code-security-auditor` skill. Perform the review using the guidance from those skills.
+Load the `awesome-security-audit` skill. Perform the review using the guidance from those skills.
 
 ## Prompt Defense Baseline
 
@@ -125,7 +125,7 @@ If you find a CRITICAL vulnerability:
 
 ## Reference
 
-For detailed vulnerability patterns, code examples, report templates, and PR review templates, see skill: `security-review`.
+For detailed vulnerability patterns, code examples, report templates, and PR review templates, see skill: `awesome-security-audit`.
 
 ---
 

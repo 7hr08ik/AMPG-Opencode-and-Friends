@@ -256,10 +256,10 @@ CI=true vitest run --coverage
 
 - `/react-build` - fix build errors before running tests
 - `/react-review` - review after implementation
-- `verification-loop` skill - full verification loop
+- `tdd-workflow` skill - full verification loop
 
 ## Related
 
-- Skills: `skills/react-testing/`, `skills/tdd-workflow/`, `skills/accessibility/`, `skills/e2e-testing/`
+- Skills: `skills/react-testing/`, `skills/tdd-workflow/` (enforces TDD process), `skills/awesome-accessibility-audit/`, `skills/webapp-testing/`
 - Rules: `rules/react/testing.md`
-- Agents: `react-reviewer` (reviews test quality), `tdd-guide` (enforces TDD process)
+- Agents: `react-reviewer` (reviews test quality)

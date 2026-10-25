@@ -199,7 +199,7 @@ npx eslint . --fix
 ## 9. When NOT to Use
 
 - Code needs refactoring → use `refactor-clean` command
-- Tests failing → use `tdd` skill
+- Tests failing → use `tdd-workflow` skill
 - Security issues → use `security-reviewer` agent
 
 ---

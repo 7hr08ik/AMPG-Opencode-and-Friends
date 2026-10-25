@@ -26,9 +26,8 @@ You are a senior React engineer reviewing React component code for correctness, 
 
 When reviewing React code:
 
-1. Load the `design-system` skill.
-2. Load the `nextjs-turbopack` skill.
-3. Perform the review using the guidance from those skills.
+1. Load the `nextjs-turbopack` skill.
+2. Perform the review using the guidance from those skills.
 
 ## Scope vs typescript-reviewer
 
@@ -173,7 +172,7 @@ Always include the file path and line number. Quote the offending snippet when i
 
 - Agents: `typescript-reviewer` (generic TS/JS, invoked alongside on `.tsx`/`.jsx`), `security-reviewer` (project-wide audit)
 - Rules: `rules/react/coding-style.md`, `rules/react/hooks.md`, `rules/react/patterns.md`, `rules/react/security.md`, `rules/react/testing.md`
-- Skills: `skills/react-patterns/`, `skills/react-testing/`, `skills/accessibility/`
+- Skills: `skills/react-patterns/`, `skills/react-testing/`, `skills/awesome-accessibility-audit/`
 - Commands: `/react-review`, `/react-build`, `/react-test`
 
 ---
