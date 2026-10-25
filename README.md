@@ -46,6 +46,7 @@ Additional Tools
   - **[Superpowers](https://github.com/obra/superpowers)** - An agentic skills framework.
   - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pocock's .agents directory.
   - **[Awesome AGENTS.md](https://github.com/khasky/awesome-agents-md)** - A ruleset written in the AGENTS.md format, with shared rules for AI coding agents
+  - **[Awesome Agent Skills](https://github.com/khasky/awesome-agent-skills)** - Skills for AI coding agents
 
 Background plugins
 
