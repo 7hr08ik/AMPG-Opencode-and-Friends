@@ -47,6 +47,7 @@ Additional Tools
   - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pocock's .agents directory.
   - **[Awesome AGENTS.md](https://github.com/khasky/awesome-agents-md)** - A ruleset written in the AGENTS.md format, with shared rules for AI coding agents
   - **[Awesome Agent Skills](https://github.com/khasky/awesome-agent-skills)** - Skills for AI coding agents
+  - **[Archify](https://github.com/tt-a1i/archify)** - Turn any idea, plan, or codebase into a beautiful interactive diagram. 
 
 Background plugins
 
@@ -138,6 +139,9 @@ bun add --global @fission-ai/openspec@latest
 
 # Matt Pocock Skills
 npx skills@latest add mattpocock/skills
+
+# Archify
+npx skills add tt-a1i/archify -g
 ```
 
 ### 4.5. Point the setup at your model server
