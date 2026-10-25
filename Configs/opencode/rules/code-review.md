@@ -52,6 +52,7 @@ Read this when reviewing a diff/PR or preparing your own changes for review.
 - A comment in the diff is a claim: check it against the code it sits on. One that no longer describes that code is a defect, not a nit, and the machine-written tells (mirrored "X, not Y", figures from one measurement) are findings of their own (`rules/code-comments.md`).
 - History is review context: `git log -L <start>,<end>:<file>` on the lines being changed says what the replaced code was for. A line introduced by a commit naming a bug, CVE, or incident is a guard — its removal is a regression until the author says why the cause is gone; a file that keeps appearing in fix commits is a hotspot worth reading whole.
 - A confirmed defect is a class, not an instance: before closing the finding, search for the same shape elsewhere — the same sink with another caller, the same missing check on sibling routes, the same pattern copy-pasted into a second module — and report every location as one finding. Fixing the one place the review named leaves the siblings live (core Coding rule on grepping every caller).
+- A change to one side of a paired operation is checked against its counterpart: create and update, serialize and deserialize, encode and decode, acquire and release, setup and teardown, migrate up and down. A validation added to create and missing from update, or a field written and never read back, passes every test that exercises one side.
 - An agent-authored diff earns a plausibility pass a human's would not: confirm every cited file, symbol, flag, and API actually exists, that a claimed verification run really happened and its output says what the summary claims, and that no unrequested file was touched. Fluent prose is not evidence (core Verification gate).
 - Label numbers as measured / estimated / unknown; never present an estimate as measured — unknown stays "unknown", not N/A.
 
@@ -66,10 +67,10 @@ Read this when reviewing a diff/PR or preparing your own changes for review.
 
 ## Review comment format
 
-- One line per finding: `file:line: <severity>: problem. fix.` — location, problem, concrete fix. No throat-clearing ("I noticed that...", "You might want to consider...").
+- A review skill or the repository's own template that sets a finding format wins; otherwise one line per finding: `file:line: <severity>: problem. fix.` — location, problem, concrete fix. No throat-clearing ("I noticed that...", "You might want to consider...").
 - Concrete fix over "consider refactoring"; exact symbols in backticks; add the why only when the fix isn't obvious from the problem.
 - Unsure whether it's a real problem → ask it as a question, never hedge with "perhaps"/"maybe"/"I think".
-- Praise once at the top of the review: praise scattered between findings reads as padding and dilutes them.
+- No praise for what was already right: the review is its findings, and praise beside them reads as padding and dilutes them.
 - Full-prose exceptions: security findings (complete explanation plus reference) and architectural disagreements (rationale, not a one-liner). Resume one-liners after.
 
 ## Receiving review
