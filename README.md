@@ -43,9 +43,12 @@ Additional Tools
   - **[Open Agent Control](https://github.com/darrenhinde/OpenAgentsControl)** - AI agents that learn YOUR coding patterns and generate matching code every time.
   - **[OpenSpec](https://github.com/Fission-AI/OpenSpec)** - A lightweight framework for spec-driven development.
   - **[Opencode-mem](https://github.com/tickernelz/opencode-mem)** - A persistent memory system for AI coding agents.
+
+Skills
+
   - **[Superpowers](https://github.com/obra/superpowers)** - An agentic skills framework.
   - **[Matt Pocock's Skills](https://github.com/mattpocock/skills)** - Skills for Real Engineers. Straight from Mr Pocock's .agents directory.
-  - ** [Awesome Opencode](https://github.com/weisser-dev/awesome-opencode)** - 108 agents, 15 skills, smart model config, and interactive CLI for OpenCode
+  - **[Awesome Opencode](https://github.com/weisser-dev/awesome-opencode)** - 108 agents, 15 skills, smart model config, and interactive CLI for OpenCode
   - **[Awesome AGENTS.md](https://github.com/khasky/awesome-agents-md)** - A ruleset written in the AGENTS.md format, with shared rules for AI coding agents
   - **[Awesome Agent Skills](https://github.com/khasky/awesome-agent-skills)** - Skills for AI coding agents
   - **[Archify](https://github.com/tt-a1i/archify)** - Turn any idea, plan, or codebase into a beautiful interactive diagram.

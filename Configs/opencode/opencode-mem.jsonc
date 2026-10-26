@@ -101,7 +101,7 @@
   // Default scope for memory list/search queries
   // "project" keeps queries within the current project, "all-projects" searches across all project shards
   "memory": {
-    "defaultScope": "project",
+    "defaultScope": "project"
   },
 
   // ============================================
@@ -111,7 +111,7 @@
   // Inject relevant memories after session compaction
   "compaction": {
     "enabled": true,
-    "memoryLimit": 10,
+    "memoryLimit": 10
   },
 
   // ============================================
@@ -136,7 +136,7 @@
     // by the parent agent, not by you, so the default false means they are not
     // stored, auto-captured, used for profile learning, or given memory
     // context. Enable only if you deliberately want those prompts memorized.
-    "captureChildSessions": false,
+    "captureChildSessions": false
     // Extra markers identifying injected blocks. These are ADDED to the
     // built-in list, never replace it.
     // "injectionMarkers": ["<my-plugin-banner>"],
@@ -435,5 +435,5 @@
   // ============================================
 
   // Inject user profile into AI context (preferences, patterns, workflows)
-  "injectProfile": true,
+  "injectProfile": true
 }
