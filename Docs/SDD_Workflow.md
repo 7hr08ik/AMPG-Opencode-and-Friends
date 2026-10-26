@@ -7,7 +7,7 @@
     - git init && codegraph init && openspec init
 3. Opencode
     - /init - To bring it all together
-    - /add-context
+    - /add-context Build full project context
     - Choose agent:
         - Build: Default Opencode
         - Plan: Default Opencode

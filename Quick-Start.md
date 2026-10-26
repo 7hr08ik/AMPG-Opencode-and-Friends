@@ -33,7 +33,7 @@ git init && codegraph init && openspec init
 # Run opencode
 opencode
 /init
-/add-context
+/add-context Build full project context
 ```
 
 More, betterer instructions in `Docs/SDD_Workflow.md`
