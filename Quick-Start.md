@@ -33,6 +33,7 @@ git init && codegraph init && openspec init
 # Run opencode
 opencode
 /init
+/add-context
 ```
 
-Now you can start vibe-coding that awesome idea you had.
+More, betterer instructions in `Docs/SDD_Workflow.md`

@@ -7,6 +7,12 @@
     - git init && codegraph init && openspec init
 3. Opencode
     - /init - To bring it all together
+    - /add-context
+    - Choose agent:
+        - Build: Default Opencode
+        - Plan: Default Opencode
+        - OpenAgent - Universal Agent Guide (More exploration/searching/planning)
+        - OpenCoder - Specialized Development Agent (Give it a spec, and a plan, and watch it go).
     - `/opsx-explore` or `/ospx-propose`
 4. ?
 5. Profit
