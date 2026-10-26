@@ -48,7 +48,8 @@ Additional Tools
   - ** [Awesome Opencode](https://github.com/weisser-dev/awesome-opencode)** - 108 agents, 15 skills, smart model config, and interactive CLI for OpenCode
   - **[Awesome AGENTS.md](https://github.com/khasky/awesome-agents-md)** - A ruleset written in the AGENTS.md format, with shared rules for AI coding agents
   - **[Awesome Agent Skills](https://github.com/khasky/awesome-agent-skills)** - Skills for AI coding agents
-  - **[Archify](https://github.com/tt-a1i/archify)** - Turn any idea, plan, or codebase into a beautiful interactive diagram. 
+  - **[Archify](https://github.com/tt-a1i/archify)** - Turn any idea, plan, or codebase into a beautiful interactive diagram.
+  - **[Resume Skills](https://github.com/Paramchoudhary/ResumeSkills)** - A collection of AI agent skills focused on resume optimization, job applications, and career development.
 
 Background plugins
 
@@ -143,6 +144,9 @@ npx skills@latest add mattpocock/skills
 
 # Archify
 npx skills add tt-a1i/archify -g
+
+# Resume Skills
+npx skills add Paramchoudhary/ResumeSkills -g -y
 ```
 
 ### 4.5. Point the setup at your model server
