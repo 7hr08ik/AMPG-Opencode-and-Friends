@@ -18,7 +18,7 @@ A single Git repo holding a working Opencode configuration, a starter template f
 
 ```
 ├── Configs/
-│   ├── opencode/            # the installable Opencode config (the good stuff)
+│   ├── opencode/            #   the installable Opencode config (the good stuff)
 │   │   ├── opencode.jsonc   #   providers, models, plugins, permissions
 │   │   ├── cli.json
 │   │   ├── agents/
@@ -27,13 +27,13 @@ A single Git repo holding a working Opencode configuration, a starter template f
 │   │   └── rules/           #   Environment coding/security/testing rules
 │   └── billion-context/
 │       └── billion-context.json   # the Billion Context (bili) config
-├── Project_Template/        # starter layout for a new project
-├── Resources/               # reference docs I leaned on
+├── Project_Template/        #   starter layout for a new project
+├── Resources/               #   
 │   ├── Lemonade-Server.md   #   how my Lemonade instance is set up
 │   └── SDD_Workflow.md      #   spec-driven development walkthrough
-├── Quick-Start.md           # empty folder -> running project in a few steps
-├── AGENTS.md                # instructions for agents working in this repo
-└── README.md                # you are here
+├── Quick-Start.md           #   empty folder -> running project in a few steps
+├── AGENTS.md                #   instructions for agents working in this repo
+└── README.md                #   you are here
 ```
 
 ## 3. Features / tools in the setup

@@ -23,15 +23,13 @@ yarn-error.log*
 pnpm-debug.log*
 
 # AI Template files
-.codegraph/
 .opencode/
 openspec/
+adr/
+glossary/
+AGENTS.md
 Project_Notes.md
 Project_Log.md
-.ignore
-AGENTS.md
-opencode.jsonc
-adr/
 
 # Environment and local secrets
 .env
