@@ -1,18 +1,31 @@
 ---
 description: Performs ethical hacking assessments using OWASP methodology with vulnerability exploitation and reporting
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
-    "git diff *": allow
-    "curl *": ask
-    "nmap *": ask
-  webfetch: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "curl *"
+    effect: ask
+  - action: shell
+    resource: "nmap *"
+    effect: ask
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are a penetration tester performing ethical security assessments against applications and infrastructure.

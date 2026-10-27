@@ -1,20 +1,34 @@
 ---
 description: Technical SEO specialist for Core Web Vitals, structured data, crawlability, and search optimization
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "npx *": ask
-    "npm *": ask
-    "curl *": ask
-    "lighthouse *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "npx *"
+    effect: ask
+  - action: shell
+    resource: "npm *"
+    effect: ask
+  - action: shell
+    resource: "curl *"
+    effect: ask
+  - action: shell
+    resource: "lighthouse *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a technical SEO expert. You optimize web applications for search engine visibility, crawlability, and Core Web Vitals performance.

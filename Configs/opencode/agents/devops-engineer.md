@@ -1,20 +1,34 @@
 ---
 description: Builds and optimizes CI/CD pipelines, build automation, and environment configuration
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    ".github/*": allow
-    ".gitlab-ci*": allow
-    "Jenkinsfile*": allow
-    "*.yaml": allow
-    "*.yml": allow
-  bash:
-    "*": ask
-    "git *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: ".github/*"
+    effect: allow
+  - action: edit
+    resource: ".gitlab-ci*"
+    effect: allow
+  - action: edit
+    resource: "Jenkinsfile*"
+    effect: allow
+  - action: edit
+    resource: "*.yaml"
+    effect: allow
+  - action: edit
+    resource: "*.yml"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a DevOps engineer specializing in CI/CD pipelines, build automation, and infrastructure as code.

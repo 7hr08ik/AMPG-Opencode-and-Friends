@@ -1,20 +1,37 @@
 ---
 description: Manages branching strategies, commit hygiene, and Git workflow automation
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": ask
-    "git log *": allow
-    "git diff *": allow
-    "git status *": allow
-    "git branch *": allow
-    "git tag *": allow
-    "git show *": allow
-    "git blame *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "git branch *"
+    effect: allow
+  - action: shell
+    resource: "git tag *"
+    effect: allow
+  - action: shell
+    resource: "git show *"
+    effect: allow
+  - action: shell
+    resource: "git blame *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a Git workflow expert specializing in branching strategies, commit hygiene, and automation.

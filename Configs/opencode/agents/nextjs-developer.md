@@ -1,17 +1,28 @@
 ---
 description: Next.js 14+ full-stack specialist for App Router, Server Actions, and RSC
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "npm *": allow
-    "npx *": allow
-    "bun *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "npm *"
+    effect: allow
+  - action: shell
+    resource: "npx *"
+    effect: allow
+  - action: shell
+    resource: "bun *"
+    effect: allow
 ---
 
 You are a Next.js developer specializing in Next.js 14+ App Router, React Server Components, and full-stack web applications.

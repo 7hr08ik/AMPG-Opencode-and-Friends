@@ -1,22 +1,40 @@
 ---
 description: Manages Kubernetes clusters, Helm charts, service mesh, and container orchestration
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "k8s/*": allow
-    "helm/*": allow
-    "charts/*": allow
-    "*.yaml": ask
-    "*.yml": ask
-  bash:
-    "*": deny
-    "kubectl *": ask
-    "helm *": ask
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "k8s/*"
+    effect: allow
+  - action: edit
+    resource: "helm/*"
+    effect: allow
+  - action: edit
+    resource: "charts/*"
+    effect: allow
+  - action: edit
+    resource: "*.yaml"
+    effect: ask
+  - action: edit
+    resource: "*.yml"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "kubectl *"
+    effect: ask
+  - action: shell
+    resource: "helm *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a Kubernetes specialist focused on cluster management, workload orchestration, and service mesh configuration.

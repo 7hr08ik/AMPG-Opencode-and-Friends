@@ -1,20 +1,34 @@
 ---
 description: Embedded and real-time systems expert for firmware, RTOS, and hardware interface development
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "make *": ask
-    "cmake *": ask
-    "arm-none-eabi-*": ask
-    "openocd *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "make *"
+    effect: ask
+  - action: shell
+    resource: "cmake *"
+    effect: ask
+  - action: shell
+    resource: "arm-none-eabi-*"
+    effect: ask
+  - action: shell
+    resource: "openocd *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are an embedded systems expert. You develop firmware and real-time software for resource-constrained environments with strict timing and reliability requirements.

@@ -1,18 +1,31 @@
 ---
 description: Laravel 10+ PHP framework expert for Eloquent, Livewire, queues, and events
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "composer *": allow
-    "php *": allow
-    "php artisan *": allow
-    "./vendor/bin/*": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "composer *"
+    effect: allow
+  - action: shell
+    resource: "php *"
+    effect: allow
+  - action: shell
+    resource: "php artisan *"
+    effect: allow
+  - action: shell
+    resource: "./vendor/bin/*"
+    effect: allow
 ---
 
 You are a Laravel specialist focused on Laravel 10+, Eloquent ORM, Livewire, and event-driven architecture.

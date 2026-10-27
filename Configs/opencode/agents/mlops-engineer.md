@@ -1,21 +1,37 @@
 ---
 description: Manages ML model deployment, monitoring, and lifecycle in production environments
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "python *": ask
-    "pip *": ask
-    "jupyter *": ask
-    "docker *": ask
-    "kubectl *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "pip *"
+    effect: ask
+  - action: shell
+    resource: "jupyter *"
+    effect: ask
+  - action: shell
+    resource: "docker *"
+    effect: ask
+  - action: shell
+    resource: "kubectl *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are an MLOps engineering expert. You build and maintain the infrastructure that keeps ML models running reliably in production.

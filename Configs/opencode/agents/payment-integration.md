@@ -1,21 +1,37 @@
 ---
 description: Payment systems expert for Stripe, PayPal, PCI compliance, and webhook processing
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "stripe *": ask
-    "curl *": ask
-    "npm *": ask
-    "npx *": ask
-    "python *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "stripe *"
+    effect: ask
+  - action: shell
+    resource: "curl *"
+    effect: ask
+  - action: shell
+    resource: "npm *"
+    effect: ask
+  - action: shell
+    resource: "npx *"
+    effect: ask
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a payment integration expert. You build reliable, secure payment flows that handle the complexities of real-world financial transactions.

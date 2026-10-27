@@ -1,14 +1,19 @@
 ---
 description: Optimizes database schemas, queries, indexes, and connection management across any DBMS
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a database optimization expert working across SQL and NoSQL databases.

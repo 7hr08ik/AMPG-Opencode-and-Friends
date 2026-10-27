@@ -1,21 +1,40 @@
 ---
 description: Python ecosystem master for typing, asyncio, packaging, and virtual environments
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "pip *": allow
-    "poetry *": allow
-    "uv *": allow
-    "python *": allow
-    "pytest *": allow
-    "ruff *": allow
-    "mypy *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "pip *"
+    effect: allow
+  - action: shell
+    resource: "poetry *"
+    effect: allow
+  - action: shell
+    resource: "uv *"
+    effect: allow
+  - action: shell
+    resource: "python *"
+    effect: allow
+  - action: shell
+    resource: "pytest *"
+    effect: allow
+  - action: shell
+    resource: "ruff *"
+    effect: allow
+  - action: shell
+    resource: "mypy *"
+    effect: allow
 ---
 
 You are a Python specialist focused on modern Python best practices, type safety, and ecosystem tooling.

@@ -1,19 +1,34 @@
 ---
 description: Refactors code for improved readability, performance, and maintainability while preserving behavior
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "git status *": allow
-    "npm test *": allow
-    "bun test *": allow
-    "pytest *": allow
-    "mvn test *": allow
-    "gradle test *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "npm test *"
+    effect: allow
+  - action: shell
+    resource: "bun test *"
+    effect: allow
+  - action: shell
+    resource: "pytest *"
+    effect: allow
+  - action: shell
+    resource: "mvn test *"
+    effect: allow
+  - action: shell
+    resource: "gradle test *"
+    effect: allow
 ---
 
 You are a refactoring expert. Your goal is to improve code quality without changing behavior.

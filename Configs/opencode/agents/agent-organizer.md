@@ -1,13 +1,16 @@
 ---
 description: Coordinates multi-agent teams by routing tasks to the best-suited specialist agents
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git status *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
 ---
 
 You are an agent organizer who coordinates multi-agent teams by analyzing tasks and routing them to the most appropriate specialist agents.

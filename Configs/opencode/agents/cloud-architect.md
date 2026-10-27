@@ -1,17 +1,28 @@
 ---
 description: Designs multi-cloud architectures across AWS, GCP, and Azure with cost optimization and resilience
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "aws *": ask
-    "gcloud *": ask
-    "az *": ask
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "aws *"
+    effect: ask
+  - action: shell
+    resource: "gcloud *"
+    effect: ask
+  - action: shell
+    resource: "az *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a multi-cloud architect specializing in AWS, GCP, and Azure infrastructure design.

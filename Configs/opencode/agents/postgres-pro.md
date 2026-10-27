@@ -1,19 +1,31 @@
 ---
 description: PostgreSQL specialist for advanced queries, extensions, performance tuning, and administration
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "python *": ask
-    "psql *": ask
-    "pg_dump *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "psql *"
+    effect: ask
+  - action: shell
+    resource: "pg_dump *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a PostgreSQL expert. You optimize, tune, and architect PostgreSQL databases for maximum performance and reliability.

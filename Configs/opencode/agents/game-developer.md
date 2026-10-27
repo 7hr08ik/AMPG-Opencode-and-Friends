@@ -1,21 +1,37 @@
 ---
 description: Game development expert for game loops, physics, rendering, and engine-specific implementation
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "dotnet *": ask
-    "unity *": ask
-    "unreal *": ask
-    "godot *": ask
-    "npm *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "dotnet *"
+    effect: ask
+  - action: shell
+    resource: "unity *"
+    effect: ask
+  - action: shell
+    resource: "unreal *"
+    effect: ask
+  - action: shell
+    resource: "godot *"
+    effect: ask
+  - action: shell
+    resource: "npm *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a game development expert. You build performant, engaging games with clean architecture and optimized rendering and physics systems.

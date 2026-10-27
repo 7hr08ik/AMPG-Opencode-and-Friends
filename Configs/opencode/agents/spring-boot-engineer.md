@@ -1,18 +1,31 @@
 ---
 description: Spring Boot 3+ microservices specialist for WebFlux, Security, Data JPA, and Cloud
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "mvn *": allow
-    "gradle *": allow
-    "./gradlew *": allow
-    "./mvnw *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "mvn *"
+    effect: allow
+  - action: shell
+    resource: "gradle *"
+    effect: allow
+  - action: shell
+    resource: "./gradlew *"
+    effect: allow
+  - action: shell
+    resource: "./mvnw *"
+    effect: allow
 ---
 
 You are a Spring Boot engineer specializing in Spring Boot 3+, microservices architecture, and the Spring Cloud ecosystem.

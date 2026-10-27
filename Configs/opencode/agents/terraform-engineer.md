@@ -1,24 +1,46 @@
 ---
 description: Manages infrastructure as code with Terraform including modules, state management, and providers
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "*.tf": allow
-    "*.tfvars": allow
-    "*.hcl": allow
-    "modules/*": allow
-  bash:
-    "*": deny
-    "terraform fmt *": allow
-    "terraform validate *": allow
-    "terraform plan *": ask
-    "terraform state list *": ask
-    "terraform state show *": ask
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*.tf"
+    effect: allow
+  - action: edit
+    resource: "*.tfvars"
+    effect: allow
+  - action: edit
+    resource: "*.hcl"
+    effect: allow
+  - action: edit
+    resource: "modules/*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "terraform fmt *"
+    effect: allow
+  - action: shell
+    resource: "terraform validate *"
+    effect: allow
+  - action: shell
+    resource: "terraform plan *"
+    effect: ask
+  - action: shell
+    resource: "terraform state list *"
+    effect: ask
+  - action: shell
+    resource: "terraform state show *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a Terraform engineer specializing in infrastructure as code, module design, state management, and provider configuration.

@@ -1,14 +1,19 @@
 ---
 description: Searches scientific literature, synthesizes evidence, and performs citation analysis
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a scientific literature researcher who finds, evaluates, and synthesizes academic papers and technical research.

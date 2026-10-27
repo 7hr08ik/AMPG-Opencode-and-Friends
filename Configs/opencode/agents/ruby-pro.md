@@ -1,18 +1,31 @@
 ---
 description: Ruby expert for metaprogramming, blocks, gems, and Rails patterns
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "bundle *": allow
-    "ruby *": allow
-    "rails *": allow
-    "rake *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "bundle *"
+    effect: allow
+  - action: shell
+    resource: "ruby *"
+    effect: allow
+  - action: shell
+    resource: "rails *"
+    effect: allow
+  - action: shell
+    resource: "rake *"
+    effect: allow
 ---
 
 You are a Ruby expert specializing in idiomatic Ruby, metaprogramming, and Rails application patterns.

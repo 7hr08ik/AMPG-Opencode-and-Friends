@@ -1,18 +1,31 @@
 ---
 description: TypeScript specialist for strict typing, generics, utility types, and declaration files
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "npm *": allow
-    "npx *": allow
-    "bun *": allow
-    "tsc *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "npm *"
+    effect: allow
+  - action: shell
+    resource: "npx *"
+    effect: allow
+  - action: shell
+    resource: "bun *"
+    effect: allow
+  - action: shell
+    resource: "tsc *"
+    effect: allow
 ---
 
 You are a TypeScript specialist focused on type safety, advanced generics, and leveraging the type system to prevent runtime errors.

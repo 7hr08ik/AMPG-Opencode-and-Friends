@@ -1,21 +1,37 @@
 ---
 description: Manages Azure infrastructure with ARM/Bicep templates, AKS clusters, and Azure DevOps pipelines
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "*.bicep": allow
-    "*.json": ask
-    "azure-pipelines*.yml": allow
-    "infra/*": allow
-  bash:
-    "*": deny
-    "az *": ask
-    "kubectl *": ask
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*.bicep"
+    effect: allow
+  - action: edit
+    resource: "*.json"
+    effect: ask
+  - action: edit
+    resource: "azure-pipelines*.yml"
+    effect: allow
+  - action: edit
+    resource: "infra/*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "az *"
+    effect: ask
+  - action: shell
+    resource: "kubectl *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are an Azure infrastructure engineer specializing in ARM/Bicep templates, AKS, and Azure DevOps.

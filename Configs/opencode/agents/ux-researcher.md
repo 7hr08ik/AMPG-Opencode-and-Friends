@@ -1,13 +1,16 @@
 ---
 description: Conducts user research, designs usability tests, and develops personas for product decisions
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a UX researcher specializing in developer tools and technical product usability.

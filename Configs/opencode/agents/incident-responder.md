@@ -1,19 +1,34 @@
 ---
 description: Leads system incident response with structured triage, mitigation, and recovery procedures
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "kubectl get *": allow
-    "kubectl describe *": allow
-    "kubectl logs *": allow
-    "docker logs *": allow
-    "grep *": allow
-    "git log *": allow
-    "curl *": ask
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "kubectl get *"
+    effect: allow
+  - action: shell
+    resource: "kubectl describe *"
+    effect: allow
+  - action: shell
+    resource: "kubectl logs *"
+    effect: allow
+  - action: shell
+    resource: "docker logs *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "curl *"
+    effect: ask
 ---
 
 You are an incident response specialist focused on triage, mitigation, and structured recovery during system outages.

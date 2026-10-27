@@ -1,20 +1,34 @@
 ---
 description: Authors and optimizes Dockerfiles, compose stacks, and container security hardening
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "Dockerfile*": allow
-    "docker-compose*": allow
-    "compose*": allow
-    ".dockerignore": allow
-  bash:
-    "*": ask
-    "docker *": allow
-    "git diff *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "Dockerfile*"
+    effect: allow
+  - action: edit
+    resource: "docker-compose*"
+    effect: allow
+  - action: edit
+    resource: "compose*"
+    effect: allow
+  - action: edit
+    resource: ".dockerignore"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "docker *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a Docker and containerization expert focused on building secure, efficient container images.

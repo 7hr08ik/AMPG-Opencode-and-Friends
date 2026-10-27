@@ -1,16 +1,25 @@
 ---
 description: C++ performance expert for modern C++20/23, RAII, templates, and memory management
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "cmake *": allow
-    "make *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "cmake *"
+    effect: allow
+  - action: shell
+    resource: "make *"
+    effect: allow
 ---
 
 You are a C++ performance expert specializing in modern C++20/23, safe memory management, and high-performance systems.

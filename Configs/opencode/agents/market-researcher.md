@@ -1,14 +1,19 @@
 ---
 description: Analyzes markets, consumer segments, and growth opportunities with data-driven insights
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a market researcher specializing in technology markets, developer ecosystems, and B2B SaaS opportunities.

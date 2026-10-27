@@ -1,17 +1,28 @@
 ---
 description: Elixir and OTP fault-tolerant systems specialist for GenServer, Phoenix, and LiveView
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "mix *": allow
-    "iex *": allow
-    "elixir *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "mix *"
+    effect: allow
+  - action: shell
+    resource: "iex *"
+    effect: allow
+  - action: shell
+    resource: "elixir *"
+    effect: allow
 ---
 
 You are an Elixir expert specializing in OTP fault-tolerant systems, Phoenix web applications, and LiveView real-time UIs.

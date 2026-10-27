@@ -1,14 +1,19 @@
 ---
 description: Audits codebases for regulatory compliance (GDPR, SOC2, HIPAA) and OSS license issues
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a compliance auditor specializing in regulatory requirements and open source license management.

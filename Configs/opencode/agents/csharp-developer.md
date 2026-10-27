@@ -1,15 +1,22 @@
 ---
 description: .NET ecosystem specialist for ASP.NET Core, EF Core, LINQ, and async patterns
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "dotnet *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "dotnet *"
+    effect: allow
 ---
 
 You are a C# developer specializing in the .NET ecosystem, ASP.NET Core web services, and Entity Framework Core.

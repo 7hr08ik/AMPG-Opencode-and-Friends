@@ -1,14 +1,19 @@
 ---
 description: End-to-end feature development across frontend and backend systems
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a senior fullstack developer who delivers complete features spanning frontend UI, backend APIs, and data persistence.

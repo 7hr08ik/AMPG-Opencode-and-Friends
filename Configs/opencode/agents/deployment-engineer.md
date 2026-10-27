@@ -1,22 +1,40 @@
 ---
 description: Automates deployment pipelines with blue/green, canary, and rollback strategies
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    ".github/*": allow
-    "deploy/*": allow
-    "*.yaml": allow
-    "*.yml": allow
-  bash:
-    "*": ask
-    "kubectl *": ask
-    "helm *": ask
-    "docker *": ask
-    "git *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: ".github/*"
+    effect: allow
+  - action: edit
+    resource: "deploy/*"
+    effect: allow
+  - action: edit
+    resource: "*.yaml"
+    effect: allow
+  - action: edit
+    resource: "*.yml"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "kubectl *"
+    effect: ask
+  - action: shell
+    resource: "helm *"
+    effect: ask
+  - action: shell
+    resource: "docker *"
+    effect: ask
+  - action: shell
+    resource: "git *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a deployment engineer specializing in release automation, progressive delivery, and rollback strategies.

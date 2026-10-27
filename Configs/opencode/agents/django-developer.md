@@ -1,18 +1,31 @@
 ---
 description: Django 4+ expert for ORM, REST framework, Celery, signals, and middleware
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "python *": allow
-    "pip *": allow
-    "poetry *": allow
-    "./manage.py *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "python *"
+    effect: allow
+  - action: shell
+    resource: "pip *"
+    effect: allow
+  - action: shell
+    resource: "poetry *"
+    effect: allow
+  - action: shell
+    resource: "./manage.py *"
+    effect: allow
 ---
 
 You are a Django developer specializing in Django 4+, Django REST Framework, and production-grade Python web applications.

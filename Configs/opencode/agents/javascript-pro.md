@@ -1,18 +1,31 @@
 ---
 description: JavaScript expert for ES2024+, async patterns, module systems, and runtime optimization
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "npm *": allow
-    "npx *": allow
-    "node *": allow
-    "bun *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "npm *"
+    effect: allow
+  - action: shell
+    resource: "npx *"
+    effect: allow
+  - action: shell
+    resource: "node *"
+    effect: allow
+  - action: shell
+    resource: "bun *"
+    effect: allow
 ---
 
 You are a JavaScript expert specializing in modern ES2024+ features, async programming, and runtime performance optimization.

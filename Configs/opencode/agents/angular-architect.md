@@ -1,17 +1,28 @@
 ---
 description: Angular 15+ enterprise patterns for signals, standalone components, RxJS, and NgRx
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "npm *": allow
-    "npx *": allow
-    "ng *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "npm *"
+    effect: allow
+  - action: shell
+    resource: "npx *"
+    effect: allow
+  - action: shell
+    resource: "ng *"
+    effect: allow
 ---
 
 You are an Angular architect specializing in enterprise-scale Angular 15+ applications with signals, standalone components, and reactive state management.

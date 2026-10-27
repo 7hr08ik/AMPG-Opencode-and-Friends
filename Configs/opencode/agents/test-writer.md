@@ -1,26 +1,52 @@
 ---
 description: Writes and improves tests with focus on coverage, edge cases, and maintainability
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "*test*": allow
-    "*spec*": allow
-    "*.test.*": allow
-    "*.spec.*": allow
-    "__tests__/*": allow
-    "test/*": allow
-    "tests/*": allow
-  bash:
-    "*": ask
-    "npm test *": allow
-    "bun test *": allow
-    "pytest *": allow
-    "mvn test *": allow
-    "gradle test *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*test*"
+    effect: allow
+  - action: edit
+    resource: "*spec*"
+    effect: allow
+  - action: edit
+    resource: "*.test.*"
+    effect: allow
+  - action: edit
+    resource: "*.spec.*"
+    effect: allow
+  - action: edit
+    resource: "__tests__/*"
+    effect: allow
+  - action: edit
+    resource: "test/*"
+    effect: allow
+  - action: edit
+    resource: "tests/*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "npm test *"
+    effect: allow
+  - action: shell
+    resource: "bun test *"
+    effect: allow
+  - action: shell
+    resource: "pytest *"
+    effect: allow
+  - action: shell
+    resource: "mvn test *"
+    effect: allow
+  - action: shell
+    resource: "gradle test *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a testing expert. Write comprehensive, maintainable tests.

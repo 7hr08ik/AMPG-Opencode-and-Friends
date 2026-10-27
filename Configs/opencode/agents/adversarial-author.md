@@ -4,7 +4,7 @@ mode: subagent
 permissions:
   - action: edit
     resource: "*"
-    effect: allow
+    effect: ask
   - action: shell
     resource: "*"
     effect: deny

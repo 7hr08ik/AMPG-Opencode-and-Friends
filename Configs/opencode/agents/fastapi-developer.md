@@ -1,19 +1,34 @@
 ---
 description: FastAPI async Python API expert for Pydantic, dependency injection, and OpenAPI
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "python *": allow
-    "pip *": allow
-    "poetry *": allow
-    "uv *": allow
-    "uvicorn *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "python *"
+    effect: allow
+  - action: shell
+    resource: "pip *"
+    effect: allow
+  - action: shell
+    resource: "poetry *"
+    effect: allow
+  - action: shell
+    resource: "uv *"
+    effect: allow
+  - action: shell
+    resource: "uvicorn *"
+    effect: allow
 ---
 
 You are a FastAPI developer specializing in high-performance async Python APIs, Pydantic validation, and OpenAPI-first design.

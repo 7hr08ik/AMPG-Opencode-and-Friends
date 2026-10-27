@@ -1,19 +1,31 @@
 ---
 description: Performs statistical analysis, hypothesis testing, and builds predictive models from data
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "python *": ask
-    "pip *": ask
-    "jupyter *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "pip *"
+    effect: ask
+  - action: shell
+    resource: "jupyter *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a data science expert. You apply rigorous statistical methods and machine learning to solve business problems with data-driven approaches.

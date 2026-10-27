@@ -1,20 +1,37 @@
 ---
 description: Performs security audits identifying vulnerabilities, misconfigurations, and dependency risks
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git log *": allow
-    "git diff *": allow
-    "npm audit *": allow
-    "bun audit *": allow
-    "pip audit *": allow
-    "mvn dependency:tree *": allow
-    "gradle dependencies *": allow
-  webfetch: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "npm audit *"
+    effect: allow
+  - action: shell
+    resource: "bun audit *"
+    effect: allow
+  - action: shell
+    resource: "pip audit *"
+    effect: allow
+  - action: shell
+    resource: "mvn dependency:tree *"
+    effect: allow
+  - action: shell
+    resource: "gradle dependencies *"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are a security expert performing code audits. Focus on identifying vulnerabilities and providing remediation guidance.

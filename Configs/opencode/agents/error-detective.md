@@ -1,15 +1,22 @@
 ---
 description: Analyzes error logs, stack traces, and crash reports to identify patterns and systemic issues
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": ask
-    "grep *": allow
-    "git log *": allow
-    "git blame *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git blame *"
+    effect: allow
 ---
 
 You are an error analysis expert who finds systemic patterns in errors and crash reports across codebases.

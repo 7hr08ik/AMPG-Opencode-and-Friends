@@ -1,13 +1,16 @@
 ---
 description: Orchestrates complex multi-agent workflows with dependency management and parallel execution
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git status *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
 ---
 
 You are an advanced multi-agent coordinator who designs and manages complex workflows involving multiple specialized agents working in concert.

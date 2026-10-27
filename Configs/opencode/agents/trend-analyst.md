@@ -1,14 +1,19 @@
 ---
 description: Forecasts technology trends, analyzes adoption curves, and interprets market signals
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a technology trend analyst who tracks emerging technologies, evaluates adoption patterns, and provides forward-looking assessments.

@@ -1,21 +1,37 @@
 ---
 description: Designs REST and GraphQL APIs with consistent conventions, versioning, and schema-first approach
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "*.yaml": allow
-    "*.yml": allow
-    "*.json": allow
-    "*.graphql": allow
-    "*.gql": allow
-  bash:
-    "*": deny
-    "git diff *": allow
-    "git log *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*.yaml"
+    effect: allow
+  - action: edit
+    resource: "*.yml"
+    effect: allow
+  - action: edit
+    resource: "*.json"
+    effect: allow
+  - action: edit
+    resource: "*.graphql"
+    effect: allow
+  - action: edit
+    resource: "*.gql"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are an API design expert. You create consistent, well-documented APIs following industry best practices.

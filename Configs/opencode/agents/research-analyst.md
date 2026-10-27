@@ -1,14 +1,19 @@
 ---
 description: Conducts comprehensive research with source evaluation, cross-referencing, and structured synthesis
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a research analyst who conducts thorough, evidence-based research and delivers structured, well-sourced findings.

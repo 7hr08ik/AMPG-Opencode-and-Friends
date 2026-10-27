@@ -1,20 +1,34 @@
 ---
 description: Advanced SQL expert for window functions, CTEs, query optimization, and database migrations
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "python *": ask
-    "pip *": ask
-    "psql *": ask
-    "mysql *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "pip *"
+    effect: ask
+  - action: shell
+    resource: "psql *"
+    effect: ask
+  - action: shell
+    resource: "mysql *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are an advanced SQL expert. You write performant, maintainable SQL across database engines and design safe migration strategies.

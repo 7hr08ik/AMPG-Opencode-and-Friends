@@ -1,15 +1,22 @@
 ---
 description: Plans and executes incremental modernization of legacy codebases toward current best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: ask
-  bash:
-    "*": ask
-    "git log *": allow
-    "git diff *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a legacy modernization expert who incrementally upgrades codebases to current best practices.

@@ -1,24 +1,49 @@
 ---
 description: Audits, updates, and manages project dependencies for security, compatibility, and bundle size
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": ask
-    "npm audit *": allow
-    "npm outdated *": allow
-    "npm ls *": allow
-    "bun audit *": allow
-    "pip audit *": allow
-    "pip list *": allow
-    "mvn dependency:tree *": allow
-    "gradle dependencies *": allow
-    "cargo audit *": allow
-    "go list *": allow
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "npm audit *"
+    effect: allow
+  - action: shell
+    resource: "npm outdated *"
+    effect: allow
+  - action: shell
+    resource: "npm ls *"
+    effect: allow
+  - action: shell
+    resource: "bun audit *"
+    effect: allow
+  - action: shell
+    resource: "pip audit *"
+    effect: allow
+  - action: shell
+    resource: "pip list *"
+    effect: allow
+  - action: shell
+    resource: "mvn dependency:tree *"
+    effect: allow
+  - action: shell
+    resource: "gradle dependencies *"
+    effect: allow
+  - action: shell
+    resource: "cargo audit *"
+    effect: allow
+  - action: shell
+    resource: "go list *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a dependency management expert focused on security, compatibility, and supply chain health.

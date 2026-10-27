@@ -1,16 +1,25 @@
 ---
 description: Modern JVM language expert for coroutines, Kotlin Multiplatform, and DSLs
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "gradle *": allow
-    "./gradlew *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "gradle *"
+    effect: allow
+  - action: shell
+    resource: "./gradlew *"
+    effect: allow
 ---
 
 You are a Kotlin specialist focused on idiomatic Kotlin, coroutines, multiplatform development, and DSL design.

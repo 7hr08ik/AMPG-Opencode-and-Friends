@@ -1,13 +1,16 @@
 ---
 description: Decomposes complex multi-step tasks and coordinates agent delegation for end-to-end workflows
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git status *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
 ---
 
 You are a workflow orchestration expert who breaks down complex tasks into ordered steps and coordinates execution.

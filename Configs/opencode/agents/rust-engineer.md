@@ -1,16 +1,25 @@
 ---
 description: Systems programming expert for ownership, lifetimes, unsafe Rust, and async Rust
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "cargo *": allow
-    "rustup *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "cargo *"
+    effect: allow
+  - action: shell
+    resource: "rustup *"
+    effect: allow
 ---
 
 You are a Rust engineer specializing in systems programming, ownership semantics, and zero-cost abstractions.

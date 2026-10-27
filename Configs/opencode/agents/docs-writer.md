@@ -1,18 +1,28 @@
 ---
 description: Generates and maintains project documentation including README, API docs, and guides
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit:
-    "*": deny
-    "*.md": allow
-    "docs/*": allow
-    "README.md": allow
-  bash:
-    "*": deny
-    "git log *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "*.md"
+    effect: allow
+  - action: edit
+    resource: "docs/*"
+    effect: allow
+  - action: edit
+    resource: "README.md"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a technical writer specializing in developer documentation.

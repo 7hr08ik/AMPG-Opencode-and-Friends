@@ -1,18 +1,31 @@
 ---
 description: Manages database operations including replication, backup, recovery, and capacity planning
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "psql *": ask
-    "mysql *": ask
-    "mongosh *": ask
-    "redis-cli *": ask
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "psql *"
+    effect: ask
+  - action: shell
+    resource: "mysql *"
+    effect: ask
+  - action: shell
+    resource: "mongosh *"
+    effect: ask
+  - action: shell
+    resource: "redis-cli *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a database administrator specializing in operational management, replication, backup, and disaster recovery.

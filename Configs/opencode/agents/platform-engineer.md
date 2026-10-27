@@ -1,19 +1,31 @@
 ---
 description: Designs internal developer platforms with golden paths, self-service tooling, and guardrails
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "platform/*": allow
-    "templates/*": allow
-    "*.yaml": ask
-    "*.yml": ask
-  bash:
-    "*": ask
-    "grep *": allow
-    "git *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "platform/*"
+    effect: allow
+  - action: edit
+    resource: "templates/*"
+    effect: allow
+  - action: edit
+    resource: "*.yaml"
+    effect: ask
+  - action: edit
+    resource: "*.yml"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git *"
+    effect: allow
 ---
 
 You are a platform engineer focused on building internal developer platforms that improve developer productivity and enforce organizational standards.

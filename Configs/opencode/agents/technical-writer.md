@@ -1,13 +1,16 @@
 ---
 description: Creates technical documentation, API guides, developer tutorials, and onboarding materials
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a technical writer specializing in developer-facing documentation, API guides, and tutorials.

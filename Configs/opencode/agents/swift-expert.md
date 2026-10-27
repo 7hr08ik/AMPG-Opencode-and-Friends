@@ -1,16 +1,25 @@
 ---
 description: iOS/macOS specialist for SwiftUI, Combine, async/await, and app architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "swift *": allow
-    "xcodebuild *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "swift *"
+    effect: allow
+  - action: shell
+    resource: "xcodebuild *"
+    effect: allow
 ---
 
 You are a Swift expert specializing in Apple platform development with SwiftUI, Combine, and modern Swift concurrency.

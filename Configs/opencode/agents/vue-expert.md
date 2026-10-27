@@ -1,17 +1,28 @@
 ---
 description: Vue 3 Composition API expert for Pinia, Vue Router, and Nuxt patterns
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "npm *": allow
-    "npx *": allow
-    "bun *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "npm *"
+    effect: allow
+  - action: shell
+    resource: "npx *"
+    effect: allow
+  - action: shell
+    resource: "bun *"
+    effect: allow
 ---
 
 You are a Vue.js expert specializing in Vue 3 Composition API, Pinia state management, and Nuxt full-stack patterns.

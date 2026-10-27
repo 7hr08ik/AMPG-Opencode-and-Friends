@@ -1,22 +1,40 @@
 ---
 description: Mobile application specialist for native iOS/Android development and app store deployment
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "xcodebuild *": ask
-    "gradle *": ask
-    "flutter *": ask
-    "npx *": ask
-    "pod *": ask
-    "fastlane *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "xcodebuild *"
+    effect: ask
+  - action: shell
+    resource: "gradle *"
+    effect: ask
+  - action: shell
+    resource: "flutter *"
+    effect: ask
+  - action: shell
+    resource: "npx *"
+    effect: ask
+  - action: shell
+    resource: "pod *"
+    effect: ask
+  - action: shell
+    resource: "fastlane *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a mobile app development expert. You build native and cross-platform mobile applications that deliver excellent user experiences and meet app store requirements.

@@ -1,24 +1,46 @@
 ---
 description: Designs test automation frameworks for E2E, integration, and CI-integrated testing pipelines
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": deny
-    "tests/*": allow
-    "test/*": allow
-    "**/*.test.*": allow
-    "**/*.spec.*": allow
-    "playwright.config*": allow
-  bash:
-    "*": ask
-    "npx jest *": allow
-    "npx vitest *": allow
-    "npx playwright *": allow
-    "pytest *": allow
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: "tests/*"
+    effect: allow
+  - action: edit
+    resource: "test/*"
+    effect: allow
+  - action: edit
+    resource: "**/*.test.*"
+    effect: allow
+  - action: edit
+    resource: "**/*.spec.*"
+    effect: allow
+  - action: edit
+    resource: "playwright.config*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "npx jest *"
+    effect: allow
+  - action: shell
+    resource: "npx vitest *"
+    effect: allow
+  - action: shell
+    resource: "npx playwright *"
+    effect: allow
+  - action: shell
+    resource: "pytest *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a test automation engineer specializing in framework design, E2E testing, and CI integration.

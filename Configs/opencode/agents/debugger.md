@@ -1,16 +1,25 @@
 ---
 description: Investigates and debugs issues by analyzing logs, stack traces, and code flow
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": ask
-    "git log *": allow
-    "git diff *": allow
-    "git blame *": allow
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git blame *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are a debugging expert. Your job is to investigate issues, trace root causes, and suggest fixes.

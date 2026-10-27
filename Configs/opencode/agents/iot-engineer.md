@@ -1,20 +1,34 @@
 ---
 description: IoT systems developer for MQTT, edge computing, sensor data processing, and device protocols
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "python *": ask
-    "mosquitto_*": ask
-    "docker *": ask
-    "npm *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "python *"
+    effect: ask
+  - action: shell
+    resource: "mosquitto_*"
+    effect: ask
+  - action: shell
+    resource: "docker *"
+    effect: ask
+  - action: shell
+    resource: "npm *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are an IoT engineering expert. You design and build connected device systems that are reliable, secure, and scalable from edge to cloud.

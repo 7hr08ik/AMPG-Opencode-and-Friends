@@ -1,14 +1,19 @@
 ---
 description: Optimizes context usage across agent conversations to prevent bloat and maintain focus
 mode: subagent
-model: anthropic/claude-haiku-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git status *": allow
-    "git diff --stat *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "git diff --stat *"
+    effect: allow
 ---
 
 You are a context optimization expert who helps manage token usage efficiently across agent conversations.

@@ -1,13 +1,16 @@
 ---
 description: Audits UI components for WCAG 2.1 AA/AAA compliance and inclusive design
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
 ---
 
 You are an accessibility expert specializing in WCAG 2.1 compliance and inclusive design.

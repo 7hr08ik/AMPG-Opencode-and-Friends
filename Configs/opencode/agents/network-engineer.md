@@ -1,19 +1,34 @@
 ---
 description: Designs network infrastructure including DNS, load balancing, firewalls, and VPN/peering
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "dig *": allow
-    "nslookup *": allow
-    "traceroute *": allow
-    "ping *": allow
-    "curl -I *": allow
-    "grep *": allow
-    "git diff *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "dig *"
+    effect: allow
+  - action: shell
+    resource: "nslookup *"
+    effect: allow
+  - action: shell
+    resource: "traceroute *"
+    effect: allow
+  - action: shell
+    resource: "ping *"
+    effect: allow
+  - action: shell
+    resource: "curl -I *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
 ---
 
 You are a network engineer specializing in cloud and on-premises network infrastructure design.

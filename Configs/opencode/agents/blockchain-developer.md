@@ -1,22 +1,40 @@
 ---
 description: Web3 specialist for Solidity smart contracts, DeFi protocols, and blockchain architecture
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit:
-    "*": allow
-  bash:
-    "*": deny
-    "forge *": ask
-    "cast *": ask
-    "anvil *": ask
-    "hardhat *": ask
-    "npx *": ask
-    "npm *": ask
-    "grep *": allow
-    "git diff *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "forge *"
+    effect: ask
+  - action: shell
+    resource: "cast *"
+    effect: ask
+  - action: shell
+    resource: "anvil *"
+    effect: ask
+  - action: shell
+    resource: "hardhat *"
+    effect: ask
+  - action: shell
+    resource: "npx *"
+    effect: ask
+  - action: shell
+    resource: "npm *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a blockchain development expert. You build secure, gas-efficient smart contracts and decentralized applications.

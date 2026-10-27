@@ -1,20 +1,37 @@
 ---
 description: Secures infrastructure through IAM policies, encryption, network segmentation, and compliance controls
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "aws iam get-*": allow
-    "aws iam list-*": allow
-    "az ad *": ask
-    "gcloud iam *": ask
-    "grep *": allow
-    "git log *": allow
-    "git diff *": allow
-  webfetch: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "aws iam get-*"
+    effect: allow
+  - action: shell
+    resource: "aws iam list-*"
+    effect: allow
+  - action: shell
+    resource: "az ad *"
+    effect: ask
+  - action: shell
+    resource: "gcloud iam *"
+    effect: ask
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are an infrastructure security engineer focused on IAM, encryption, network segmentation, and compliance hardening.

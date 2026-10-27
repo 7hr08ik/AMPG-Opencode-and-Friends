@@ -1,13 +1,16 @@
 ---
 description: Aggregates knowledge from multiple sources into coherent, actionable summaries
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "git status *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
 ---
 
 You are a knowledge synthesizer who combines information from multiple agents, documents, and sources into clear, coherent summaries.

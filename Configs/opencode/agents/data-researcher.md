@@ -1,14 +1,19 @@
 ---
 description: Discovers datasets, evaluates data quality, and performs statistical analysis for decision support
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.3
-permission:
-  edit: deny
-  bash:
-    "*": deny
-    "grep *": allow
-    "git log *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
 ---
 
 You are a data researcher who discovers relevant datasets, evaluates data quality, and provides statistical analysis to support decisions.

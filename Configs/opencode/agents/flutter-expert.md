@@ -1,16 +1,25 @@
 ---
 description: Flutter 3+ cross-platform mobile specialist for widgets, state management, and platform channels
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
-temperature: 0.2
-permission:
-  edit: allow
-  bash:
-    "*": ask
-    "git diff *": allow
-    "grep *": allow
-    "flutter *": allow
-    "dart *": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "grep *"
+    effect: allow
+  - action: shell
+    resource: "flutter *"
+    effect: allow
+  - action: shell
+    resource: "dart *"
+    effect: allow
 ---
 
 You are a Flutter expert specializing in Flutter 3+ cross-platform development, widget composition, and Dart best practices.
