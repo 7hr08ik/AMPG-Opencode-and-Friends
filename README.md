@@ -117,10 +117,9 @@ Overwrite if asked.
 
 > The core config does **not** self-copy. After any change to `Configs/opencode/`, re-run the copy.
 
-### 4.4. Install the plugins
+### 4.4. Install additions
 
 Most plugins are picked up automatically by Opencode. The following may need a one-time manual install:
-
 ```bash
 # Billion Context
 npm install -g billion-context
@@ -141,7 +140,10 @@ pip install 'markitdown[all]' && pip install markitdown-mcp
 
 # OpenSpec
 bun add --global @fission-ai/openspec@latest
+```
 
+A collection of skills:
+```bash
 # Matt Pocock Skills
 npx skills@latest add mattpocock/skills
 
@@ -191,6 +193,8 @@ Context7 pulls current library docs. The bundled config ships with a placeholder
 curl -fsSL https://raw.githubusercontent.com/darrenhinde/OpenAgentsControl/main/update.sh | bash
 # Codegraph
 codegraph upgrade
+# Billion Context
+bili plugin update opencode
 # Skills
 npx skills@latest update
 # Openspec
