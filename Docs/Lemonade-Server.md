@@ -46,10 +46,9 @@ lemonade config
 lemonade config set models_dir="/home/rob/Programs/LLM_Models/Lemonade/"
 lemonade config set auto_evict=true
 lemonade config set auto_evict_threshold_pct=0.98
-lemonade config set ctx_size=150000
+lemonade config set ctx_size=131072
 lemonade config set global_timeout=1800
 lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on --parallel 1 -b 2048 -ub 512 --fit on --fit-target 1024 --reasoning-budget 8192"
-
 ```
 
 [!NOTE] Keep `parallel` at 1. It seems that the server will divide your stated context length by this amount. So a context of 200k with parallel 2 == context of 100k per.

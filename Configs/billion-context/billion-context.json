@@ -5,16 +5,16 @@
     "http://127.0.0.1:13305/v1": {
       "models": {
         "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
-          "context": 150000,
-          "output": 16384
+          "context": 131072,
+          "output": 8192
         }
       }
     }
   },
   "compressProtocol": "tools",
   "compress": {
-    "maxContextLimit": "90%",
-    "emergencyThresholdPercent": "95%",
+    "maxContextLimit": "85%",
+    "emergencyThresholdPercent": "92%",
     "preserveRecentMessages": "3",
     "protectedLatestTools": [
       "todo_list",
