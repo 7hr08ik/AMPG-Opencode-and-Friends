@@ -21,7 +21,7 @@
   // Remote = set BOTH embeddingApiUrl and embeddingApiKey (OpenAI-compatible /embeddings).
 
   // Default: Nomic Embed v1 (768 dimensions, 8192 context, multilingual)
-  "embeddingModel": "Xenova/nomic-embed-text-v1",
+  // "embeddingModel": "Xenova/nomic-embed-text-v1",
 
   // Opt-in Nomic task prefixes (search_document: / search_query:). After enabling,
   // re-index existing memories so store and query vectors stay aligned.
@@ -29,7 +29,7 @@
 
   // Local pooling: "mean" (default) | "cls" | "last_token".
   // Unset → model preset (bge-m3=cls, Qwen3-Embedding=last_token) or "mean".
-  // "embeddingPooling": "mean",
+  "embeddingPooling": "last_token",
 
   // Custom task prefixes (override presets / Nomic). Explicit "" disables a side.
   // Changing pooling or prefixes requires re-embedding stored memories.
@@ -51,10 +51,10 @@
   // "embeddingModel": "intfloat/multilingual-e5-large",     // 1024 dims, query:/passage: prefixes (auto)
 
   // Optional: OpenAI-compatible API for embeddings (both URL and key required)
-  // "embeddingApiUrl": "https://api.openai.com/v1",
-  // "embeddingApiKey": "env://OPENAI_API_KEY",  // or "sk-..." / "file:///path/to/key"
-  // "embeddingModel": "text-embedding-3-small",  // 1536 dims, auto-detected
-
+  "embeddingApiUrl": "http://127.0.0.1:13305/v1",
+  "embeddingApiKey": "local",  // or "sk-..." / "file:///path/to/key"
+  "embeddingModel": "Qwen3-Embedding-4B-GGUF",  // 1536 dims, auto-detected
+  
   // ============================================
   // Web Server Settings
   // ============================================
@@ -196,7 +196,7 @@
   "memoryProvider": "openai-chat",
 
   // Manual fallback. Uncomment all 3 lines and replace memoryApiKey before use:
-  "memoryModel": "Ornith-1.5-35B-A3B-GGUF-Q8_0",
+  "memoryModel": "Ornith-1.5-35B-A3B-GGUF",
   "memoryApiUrl": "http://127.0.0.1:13305/v1",
   "memoryApiKey": "local",
 
