@@ -7,9 +7,15 @@
   // Project overrides: <project>/.opencode/opencode-mem.jsonc
   // On first startup the plugin also writes a starter config at the global path.
 
-  // Storage location for vector database
+  // Storage location for vector database (and search index when using markdown backend)
   // Default=~/.opencode-mem/data
   "storagePath": "~/Coding/AI/Opencode-Mem/data",
+
+  // Memory persistence: "database" (default) or "markdown".
+  // When "markdown", all .md files under markdownPath are the source of truth;
+  // Turso under storagePath is only a rebuildable semantic-search index.
+  // "memoryBackend": "markdown",
+  // "markdownPath": "~/Documents/LLM-Wiki",
 
   "userEmailOverride": "",
   "userNameOverride": "",
@@ -29,7 +35,7 @@
 
   // Local pooling: "mean" (default) | "cls" | "last_token".
   // Unset → model preset (bge-m3=cls, Qwen3-Embedding=last_token) or "mean".
-  "embeddingPooling": "last_token",
+  // "embeddingPooling": "last_token",
 
   // Custom task prefixes (override presets / Nomic). Explicit "" disables a side.
   // Changing pooling or prefixes requires re-embedding stored memories.
@@ -126,6 +132,14 @@
     // "maxAgeDays": 30,
     // "first" = only on the first user message in a session; "always" = every message
     "injectOn": "first",
+    // "relevant" (default) = vector search against each authored user prompt
+    // (refreshes every turn even when injectOn is "first");
+    // "recent" = newest-N listing (honors injectOn); "both" = relevant first, then fill
+    "recall": "relevant",
+    // "default" follows memory.defaultScope; or "project" / "all-projects"
+    "recallScope": "default",
+    // Optional override of top-level similarityThreshold for relevant recall:
+    // "similarityThreshold": 0.6,
     // Skip prompt text injected by the host or by other OpenCode plugins
     // (system reminders, orchestration directives, background-task
     // notifications) so it is never stored as if the user had typed it.
@@ -140,6 +154,18 @@
     // Extra markers identifying injected blocks. These are ADDED to the
     // built-in list, never replace it.
     // "injectionMarkers": ["<my-plugin-banner>"],
+  },
+
+  // Opt-in background consolidation ("dreaming"): merge/update/supersede related
+  // memories via LLM and soft-delete superseded rows into recoverable trash.
+  "dreaming": {
+    "enabled": true,
+    "intervalHours": 24,
+    "maxGroupsPerRun": 5,
+    "trashRetentionDays": 30,
+    "relatedThreshold": 0.75,
+    // Also effective when memory.defaultScope is "all-projects".
+    "crossProject": false
   },
 
   // ============================================
@@ -183,6 +209,12 @@
 
   "autoCaptureEnabled": true,
 
+  // Opt-in: before saving a new auto-capture memory, search for similar entries
+  // and let the model choose add / update / supersede (old rows go to trash).
+  "updateOnCaptureEnabled": true,
+  "updateOnCaptureSimilarityThreshold": 0.75,
+  "updateOnCaptureMaxCandidates": 5,
+
   // When both opencodeProvider and manual memoryModel/memoryApiUrl are set, which
   // channel to try first for auto-capture summaries. Default "opencode-first".
   // Prefer "external-first" if the host session API is slow/busy and you want the
@@ -190,7 +222,7 @@
   // Faster opencode failover: also lower "opencodeTimeoutMs" (default 90000).
   // "autoCaptureProviderOrder": "external-first",
 
-  // Provider type: "api-route" | "atlas-cloud" | "cheaper-inference" | "openai-chat" | "openai-responses" | "anthropic" | "minimax" | "orcarouter"
+  // Provider type: "api-route" | "atlas-cloud" | "cheaper-inference" | "openai-chat" | "openai-responses" | "anthropic" | "minimax" | "orcarouter" | "runcrate" | "cloudgpu"
   // Note: "openai-chat" is a generic OpenAI API-compatible mode.
   // Any service that follows the OpenAI Chat Completions API can use it via custom "memoryApiUrl".
   "memoryProvider": "openai-chat",
@@ -281,6 +313,25 @@
   //   // conversation context are sent to global.api-route.com.
   //   // "memoryModel": "gpt-6.1-sol"
 
+  // Runcrate (OpenAI-compatible Chat Completions preset, with session support):
+  //   "memoryProvider": "runcrate"
+  //   "memoryApiKey": "env://RUNCRATE_API_KEY"
+  //   // memoryApiUrl and memoryModel are optional — they default to
+  //   // https://api.runcrate.ai/v1 and "deepseek-ai/DeepSeek-V4.1-Flash".
+  //   // When selected, auto-capture/profile prompts, responses, and relevant
+  //   // conversation context are sent to api.runcrate.ai.
+  //   // "memoryModel": "deepseek-ai/DeepSeek-V4.1-Flash"
+
+  // CloudGPU (OpenAI-compatible Chat Completions preset, with session support):
+  //   "memoryProvider": "cloudgpu"
+  //   "memoryApiKey": "env://CLOUDGPU_API_KEY"
+  //   // memoryApiUrl and memoryModel are optional — they default to
+  //   // https://cloudgpu.app/v1 and "deepseek-v4.1-flash".
+  //   // Create a key at https://cloudgpu.app/api/console (docs: https://cloudgpu.app/api/docs).
+  //   // When selected, auto-capture/profile prompts, responses, and relevant
+  //   // conversation context are sent to cloudgpu.app.
+  //   // "memoryModel": "deepseek-v4.1-flash"
+
   // Groq (OpenAI-compatible, use openai-chat provider):
   //   "memoryProvider": "openai-chat"
   //   "memoryModel": "llama-3.3-70b-versatile"
@@ -309,7 +360,7 @@
   // Set to false and add "memoryTemperature": false in config when using such models
   "memoryTemperature": 0.3,
 
-  // Force tool calls on openai-chat / orcarouter / atlas-cloud / cheaper-inference / api-route (tool_choice: "required"). Default true.
+  // Force tool calls on openai-chat / orcarouter / atlas-cloud / cheaper-inference / api-route / runcrate / cloudgpu (tool_choice: "required"). Default true.
   // Some thinking/reasoning models reject forced tool choice — set false to fall back to "auto":
   // "forceToolChoice": false,
 
@@ -346,6 +397,19 @@
   // Automatically update when installed as opencode-mem@latest (or a range).
   // Pinned versions like opencode-mem@2.26.0 are never auto-updated.
   "autoUpdate": true,
+
+  // Recover a store whose Turso WAL index is stale (a leftover -tshm/-shm, often
+  // beside a 0-byte -wal). The guard copies the main .db, verifies it with
+  // PRAGMA integrity_check, moves the -shm/-tshm index sidecars to
+  // <storagePath>/recovery/, and retries the open once. A non-empty -wal is
+  // never moved; only an absent or 0-byte -wal is removed. Concurrent sessions
+  // serialise healing through <storagePath>/recovery/<db>.lock.
+  "tursoAutoHeal": true,
+
+  // Turso experimental multiprocess_wal (Unix). Set false for single-owner mode:
+  // a second process then fails loudly with "database is locked" instead of
+  // writing into a divergent WAL. See issue #435.
+  "tursoMultiprocessWal": true,
 
   // ============================================
   // User Profile System
