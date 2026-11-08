@@ -5,15 +5,15 @@
     "http://10.69.30.23:13305/v1": {
       "models": {
         "Ornith-1.5-35B-A3B-GGUF": {
-          "context": 131072,
+          "context": 200000,
           "output": 8192
         },
         "Ornith-1.5-9B-GGUF": {
-          "context": 131072,
+          "context": 200000,
           "output": 8192
         },
         "NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF-UD-Q4_K_XL": {
-          "context": 131072,
+          "context": 200000,
           "output": 8192
         }
       }

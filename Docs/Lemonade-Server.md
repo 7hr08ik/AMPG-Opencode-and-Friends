@@ -49,7 +49,7 @@ lemonade config set llamacpp.vulkan_bin=latest
 # This instead of --fit
 lemonade config set auto_evict=true
 lemonade config set auto_evict_threshold_pct=0.97
-lemonade config set ctx_size=131072
+lemonade config set ctx_size=200000
 lemonade config set global_timeout=1800
 lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on -b 2048 -ub 2048"
 ```
