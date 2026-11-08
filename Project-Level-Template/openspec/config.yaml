@@ -9,15 +9,19 @@ schema: spec-driven-with-adr
 
 rules:
   proposal:
+    - Must use glossary skill
     - Must use grill-me skill
     - Must use adversarial-authoring skill
-    - Must use glossary skill
   specs:
     - Must use spec-as-source skill
   design:
     - Must use c4-diagrams skill
     - Must use glossary skill
+    - Must use tdd skill
   adr:
     - Must use architectural-decision-records skill
+    - Must check current codebase for established style/techniques/decisions
   tasks:
     - Must use spec-as-source skill
+    - Must use tdd skill
+    - Must make each task as small and simple as possible. Unix-like, one task to do one job well.

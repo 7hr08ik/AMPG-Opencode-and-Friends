@@ -20,6 +20,9 @@ Currently this file is in template form. The user must complete this form before
 ## Project Conventions
 
 This project is opensource.
+Utilise all available MCP servers. codegraph, Context7, grep_app, etc.
+Work to the projects current spec, conventions, style. 
+Use workflows and functions that already exist. Build ontop of the program. 
 <ADD PROJECT-SPECIFIC CONVENTIONS HERE: module layout, commit scope, test commands, deploy target, anything an agent cannot infer from the stack rules.>
 
 ## Verification
