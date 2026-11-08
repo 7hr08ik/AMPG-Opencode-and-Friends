@@ -26,10 +26,11 @@
   "media": { "image": { "auto_resize": true } },
   "plugins": [
     "billion-context",
+    "opencode-tps-meter@latest",
     "superpowers@git+https://github.com/obra/superpowers.git",
     "opencode-mem@latest"
   ],
-  "model": "local/Ornith-1.5-35B-A3B-GGUF-Q8_0",
+  "model": "local/Ornith-1.5-35B-A3B-GGUF",
   "providers": {
     "local": {
       "package": "aisdk:@ai-sdk/openai-compatible",
@@ -42,8 +43,33 @@
       "baseURL": "http://127.0.0.1:13305/v1"
       },
       "models": {
-        "Ornith-1.5-35B-A3B-GGUF-Q8_0": {
-          "name": "Ornith-1.5",
+        "Ornith-1.5-35B-A3B-GGUF": {
+          "name": "Ornith-1.5-35B-A3B",
+          "capabilities": {
+            "tools": true,
+          },
+          "limit": {
+            "context": 131072,
+            "output": 8192
+          },
+          "settings": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 8192
+            },
+            "temperature": 0.5,
+            "top_k": 20,
+            "top_p": 0.95,
+            "min_p": 0.00,
+            "presence_penalty": 0.00,
+            "repeat_penalty": 1.00
+          }
+        },
+        "Ornith-1.5-9B-GGUF": {
+          "name": "Ornith-1.5-9B",
+          "capabilities": {
+            "tools": true,
+          },
           "limit": {
             "context": 131072,
             "output": 8192
@@ -55,6 +81,27 @@
             },
             "temperature": 0.6,
             "top_k": 20,
+            "top_p": 0.95,
+            "min_p": 0.00,
+            "presence_penalty": 0.00,
+            "repeat_penalty": 1.00
+          }
+        },
+        "NVIDIA-Nemotron-3.5-Bolt-74B-A9B-GGUF-UD-Q4_K_XL": {
+          "name": "Nemotron-3.5-Bolt-74B-A9B",
+          "capabilities": {
+            "tools": true,
+          },
+          "limit": {
+            "context": 131072,
+            "output": 8192
+          },
+          "settings": {
+            "thinking": {
+              "type": "enabled",
+              "budgetTokens": 8192
+            },
+            "temperature": 1.0,
             "top_p": 0.95
           }
         }
@@ -124,7 +171,7 @@
         "command": [
           "omnisql-mcp"
         ],
-        "env": {
+        "environment": {
           "OMNISQL_WORKSPACE": "/home/rob/.config/omnisql",
           "OMNISQL_READ_ONLY": "false"
         }
@@ -132,6 +179,10 @@
     }
   },
   "experimental": {
-    "policies": [{ "action": "permission", "resource": "shell:sudo *", "effect": "deny" }]
+    "todo": true,
+    "subagent_depth": 2,
+    "background_compaction": true,
+    "image_generate": { "model": "local/SDXL-Turbo" },
+    "location_idle_timeout": "4 hours",
   }
 }
