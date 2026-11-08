@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import pytest
 
-from scripts.grader import ComplianceResult, StepResult, grade
+from scripts.grader import ComplianceResult, grade
 from scripts.parser import ComplianceSpec, Detector, ObservationEvent, Step, parse_spec, parse_trace
 
 FIXTURES = Path(__file__).parent.parent / "fixtures"
@@ -40,8 +40,8 @@ def _mock_compliant_classification(spec, trace, model="haiku"):  # noqa: ARG001
 def _mock_noncompliant_classification(spec, trace, model="haiku"):
     """Simulate LLM classifying a noncompliant trace (impl before test)."""
     return {
-        "write_impl": [0],    # src/fib.py written first
-        "write_test": [1],    # test written second
+        "write_impl": [0],  # src/fib.py written first
+        "write_test": [1],  # test written second
         "run_test_green": [2],  # only a passing test run
     }
 
@@ -64,8 +64,9 @@ class TestGradeCompliant:
     @patch("scripts.grader.classify_events", side_effect=_mock_compliant_classification)
     def test_all_required_steps_detected(self, mock_cls, tdd_spec, compliant_trace) -> None:
         result = grade(tdd_spec, compliant_trace)
-        required_results = [s for s in result.steps if s.step_id in
-                           ("write_test", "run_test_red", "write_impl", "run_test_green")]
+        required_results = [
+            s for s in result.steps if s.step_id in ("write_test", "run_test_red", "write_impl", "run_test_green")
+        ]
         assert all(s.detected for s in required_results)
 
     @patch("scripts.grader.classify_events", side_effect=_mock_compliant_classification)
@@ -134,7 +135,7 @@ class TestGradeEdgeCases:
     @patch("scripts.grader.classify_events", side_effect=_mock_compliant_classification)
     def test_spec_id_in_result(self, mock_cls, tdd_spec, compliant_trace) -> None:
         result = grade(tdd_spec, compliant_trace)
-        assert result.spec_id == "tdd-workflow"
+        assert result.spec_id == "tdd"
 
     @patch("scripts.grader.classify_events")
     def test_after_step_can_reference_later_declared_spec_step(self, mock_cls) -> None:

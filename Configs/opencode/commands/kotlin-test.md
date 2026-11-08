@@ -304,9 +304,9 @@ open build/reports/kover/html/index.html
 
 - `/kotlin-build` - Fix build errors
 - `/kotlin-review` - Review code after implementation
-- `tdd-workflow` skill - Run full verification loop
+- `tdd` skill - Run full verification loop
 
 ## Related
 
 - Skill: `skills/kotlin-testing/`
-- Skill: `skills/tdd-workflow/`
+- Skill: `skills/tdd/`

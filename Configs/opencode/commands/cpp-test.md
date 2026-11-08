@@ -243,9 +243,9 @@ genhtml coverage.info --output-directory coverage_html
 
 - `/cpp-build` - Fix build errors
 - `/cpp-review` - Review code after implementation
-- `tdd-workflow` skill - Run full verification loop
+- `tdd` skill - Run full verification loop
 
 ## Related
 
 - Skill: `skills/cpp-testing/`
-- Skill: `skills/tdd-workflow/`
+- Skill: `skills/tdd/`

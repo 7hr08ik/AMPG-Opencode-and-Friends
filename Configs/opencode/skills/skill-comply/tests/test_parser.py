@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pytest
-
 from scripts.parser import (
     ComplianceSpec,
     Detector,
@@ -55,7 +54,7 @@ class TestParseSpec:
     def test_parses_tdd_spec(self) -> None:
         spec = parse_spec(FIXTURES / "tdd_spec.yaml")
         assert isinstance(spec, ComplianceSpec)
-        assert spec.id == "tdd-workflow"
+        assert spec.id == "tdd"
         assert len(spec.steps) == 5
 
     def test_step_fields(self) -> None:

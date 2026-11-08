@@ -173,7 +173,7 @@ bundle exec rspec spec/models/user_spec.rb
 
 ## Testing Reference
 
-See skill: `tdd-workflow` for the repo-wide RED -> GREEN -> REFACTOR loop.
+See skill: `tdd` for the repo-wide RED -> GREEN -> REFACTOR loop.
 
 
 ## Ruby Hooks

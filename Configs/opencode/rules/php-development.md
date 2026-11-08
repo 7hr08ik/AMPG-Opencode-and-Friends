@@ -137,7 +137,7 @@ If the project uses Inertia.js, prefer `assertInertia` with `AssertableInertia` 
 
 ## Testing Reference
 
-See skill: `tdd-workflow` for the repo-wide RED -> GREEN -> REFACTOR loop.
+See skill: `tdd` for the repo-wide RED -> GREEN -> REFACTOR loop.
 See skill: `laravel-tdd` for Laravel-specific testing patterns (PHPUnit and Pest).
 
 
