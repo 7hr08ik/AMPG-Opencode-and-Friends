@@ -7,6 +7,7 @@
     - git init && codegraph init && openspec init
 3. Opencode
     - /init - To bring it all together
+    - @awesome-agents-md-generator Refresh my agents-md
     - /add-context Build full project context
     - Choose agent:
         - Build: Default Opencode

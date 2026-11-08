@@ -6,16 +6,16 @@
 
 ## Quick basics
 
-- Lemonade has a GUI but thats mainly for chatting from what I can see.
+- Lemonade has a GUI but that's mainly for chatting from what I can see.
 - GUI also used for image gen models.
 - All models listed in the GUI at start, are the recommended/supported models.
 - Other models can be downloaded from huggingface, by simply searching the name in the GUI.
     e.g: Qwopus models work, but not listed. Type in `Qwopus3.6-27B` and find what you want.
 
-- MTP = Newer algorythms. These model versions are faster at token gen, no performance loss, but hosting must support it. (Had varying results on lemonade with models).
-- Quants = level of compression. More compress = Smaller, but less accurate.
-- MoE = Mixture of Experts. This is where the magic happens. Hosting apps, can load ONLY the required/active layers of the model into VRAM.
-        This is how i am running a 37GB q8_0 quant model on my 20GB 7900xt, at ~30-50 tk/s
+- MTP = Newer algorithms. These model versions are faster at token gen, no performance loss, but hosting must support it. (Had varying results on lemonade with models).
+- Quants = level of compression. More compress = Smaller, but less accurate. (q4_k_m is just fine.)
+- MoE = Mixture of Experts. This is where the magic happens. Hosting apps can load ONLY the required/active layers of the model into VRAM.
+        This is how i am running a 37GB q8_0 quant model on my 20GB 7900xt, at ~20-40 tk/s
 
 ## Install
 
@@ -44,11 +44,14 @@ lemonade config
 
 ```bash
 lemonade config set models_dir="/home/rob/Programs/LLM_Models/Lemonade/"
+lemonade config set llamacpp.backend=vulkan
+lemonade config set llamacpp.vulkan_bin=latest
+# This instead of --fit
 lemonade config set auto_evict=true
-lemonade config set auto_evict_threshold_pct=0.98
+lemonade config set auto_evict_threshold_pct=0.97
 lemonade config set ctx_size=131072
 lemonade config set global_timeout=1800
-lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on --parallel 1 -b 2048 -ub 512 --fit on --fit-target 1024 --reasoning-budget 8192"
+lemonade config set llamacpp.args="--cache-type-k q8_0 --cache-type-v q8_0 --flash-attn on -b 2048 -ub 2048"
 ```
 
 [!NOTE] Keep `parallel` at 1. It seems that the server will divide your stated context length by this amount. So a context of 200k with parallel 2 == context of 100k per.
@@ -73,13 +76,9 @@ All of these models can be found in Lemonade simply by typing their name in the 
 These are what are configured in Opencode right now.
 
 Coding BEAST:
- - [Ornith-1.0-35B](https://huggingface.co/deepreinforce-ai/Ornith-1.0-35B-GGUF)
-    - (Q8_0)
-
-Thinking/Reasoning:
- - [Qwen3.6-35B-A3B](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF)
+ - [Ornith-1.5-35B-A3B-GGUF](https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B-GGUF)
     - (Q8_0)
 
 VSCode Completion:
- - [Qwopus3.5-9B-Coder-MTP](https://huggingface.co/Jackrong/Qwopus3.5-9B-Coder-MTP-GGUF)
+ - [Ornith-1.5-9B-GGUF](https://huggingface.co/ornith-ai/Ornith-1.5-9B-GGUF)
     - (Q8_0)
